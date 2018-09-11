@@ -1,83 +1,165 @@
 package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.AccountDAO;
+import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Account;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SqlServerAccountDAO implements AccountDAO {
+
+    private MSSQLHelper MSSQLDatabase;
+
+    public SqlServerAccountDAO() {
+        this.MSSQLDatabase = new MSSQLHelper();
+    }
 
     @Override
     public List<Account> getAllAccounts() {
 
-        List<Account> accounts = new ArrayList<>();
-        List<Map<String, Object>> queryResult =  null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Account");
+       Connection connection =  MSSQLDatabase.getConnection();
+       List<Account> accounts = new ArrayList<Account>();
+       Statement statement = null;
+       ResultSet resultSet = null;
 
-        for (int i = 0; i < queryResult.size(); i++){
-            //Store separately to Map to get values.
-            Map<String, Object> objectMap = queryResult.get(i);
+        try{
+           String sqlQuery = "";
+           statement = connection.createStatement();
+           resultSet = statement.executeQuery(sqlQuery);
 
-            //Case Sensitively retrieving by column name.
-            //Should be by reflection.
-            Account account = new Account(
-                    Integer.parseInt(objectMap.get("subscriptionNumber").toString()),
-                    objectMap.get("name").toString(),
-                    objectMap.get("streetName").toString(),
-                    objectMap.get("postalCode").toString(),
-                    objectMap.get("houseNumber").toString(),
-                    objectMap.get("place").toString()
-                    );
+           while(resultSet.next()){
 
-            accounts.add(account);
-        }
-         return accounts;
+               int subscriptionId = resultSet.getInt("subscriptionId");
+               String name = resultSet.getString("name");
+               String streetName = resultSet.getString("streetName");
+               String postalCode = resultSet.getString("postalCode");
+               String houseNumber = resultSet.getString("houseNumber");
+               String place = resultSet.getString("place");
+
+               //Add our account from db to list.
+               accounts.add(new Account(subscriptionId, name, streetName, postalCode, houseNumber, place));
+           }
+
+       }catch (Exception e){
+            //Print on error.
+           e.printStackTrace();
+       }finally {
+            //Clean our resources.
+           MSSQLDatabase.closeResources(resultSet, statement);
+       }
+
+        return accounts;
     }
 
     @Override
     public Account getAccountById(int id) {
-        return null;
+        Connection connection =  MSSQLDatabase.getConnection();
+        Account account = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            String sqlQuery = "";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+                int subscriptionId = resultSet.getInt("subscriptionId");
+                String name = resultSet.getString("name");
+                String streetName = resultSet.getString("streetName");
+                String postalCode = resultSet.getString("postalCode");
+                String houseNumber = resultSet.getString("houseNumber");
+                String place = resultSet.getString("place");
+
+                //Add our account from db to list.
+                account = new Account(subscriptionId, name, streetName, postalCode, houseNumber, place);
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement);
+        }
+
+        return account;
     }
 
-    //Re-write query.
     @Override
     public void addAccount(Account newAccount) {
+        Connection connection =  MSSQLDatabase.getConnection();
+        PreparedStatement preparedStatement = null;
 
-//        SqlHelperResultSet.getInstance().execCreatebyVal("Account",
-//                 newAccount.getName(),
-//                 newAccount.getStreetName(),
-//                 newAccount.getPostalCode(),
-//                 newAccount.getHouseNumber(),
-//                 newAccount.getPlace());
+        //Finalize query
+        try{
+            String sqlQuery = "INSERT INTO Accounts VALUES ( ?, ?, ?, ?, ? )";
+            preparedStatement = connection.prepareStatement(sqlQuery);
 
+            //Index 1 or 0?
+            preparedStatement.setString(1, newAccount.getName());
+            preparedStatement.setString(2, newAccount.getStreetName());
+            preparedStatement.setString(3, newAccount.getPostalCode());
+            preparedStatement.setString(4, newAccount.getHouseNumber());
+            preparedStatement.setString(5, newAccount.getPlace());
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeStatementResources(preparedStatement);
+        }
     }
 
     @Override
     public void updateAccount(Account oldAccount, Account newAccount) {
+        Connection connection =  MSSQLDatabase.getConnection();
+        PreparedStatement preparedStatement = null;
 
-//        Map<String, Object> changed = new HashMap<>();
-//        changed.put("name", newAccount.getName());
-//        changed.put("streetName", newAccount.getStreetName());
-//        changed.put("postalCode", newAccount.getPostalCode());
-//        changed.put("houseNumber", newAccount.getHouseNumber());
-//        changed.put("place", newAccount.getPlace());
-//
-//        Map<String, Object> old = new HashMap<>();
-//        old.put("name", oldAccount.getName());
-//        old.put("streetName", oldAccount.getStreetName());
-//        old.put("postalCode", oldAccount.getPostalCode());
-//        old.put("houseNumber", oldAccount.getHouseNumber());
-//        old.put("place", oldAccount.getPlace());
-//
-//        SqlHelperResultSet.getInstance().execUpdateByVal("Account", changed, old);
-  }
+        //Finalize query
+        try{
+            String sqlQuery = "UPDATE Accounts SET name = ?, streetName = ?, postalCode = ?, houseNumber = ?, place = ? WHERE subscriptionId = ?";
+            preparedStatement = connection.prepareStatement(sqlQuery);
+
+            //Index 1 or 0?
+            preparedStatement.setString(1, oldAccount.getName());
+            preparedStatement.setString(2, oldAccount.getStreetName());
+            preparedStatement.setString(3, oldAccount.getPostalCode());
+            preparedStatement.setString(4, oldAccount.getHouseNumber());
+            preparedStatement.setString(5, oldAccount.getPlace());
+            preparedStatement.setInt(6, oldAccount.getSubscriptionNumber());
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeStatementResources(preparedStatement);
+        }
+    }
 
     @Override
     public void deleteAccounts( Account deleteAccount) {
-//        Map<String, Object> toDelete = new HashMap<>();
-//        toDelete.put("subscriptionNumber", deleteAccount.getSubscriptionNumber());
-//
-//        SqlHelperResultSet.getInstance().execDeleteByVal("Account", toDelete);
+        Connection connection =  MSSQLDatabase.getConnection();
+        Statement statement = null;
+
+        //Finalize with parameter query
+        try{
+            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteAccount.getSubscriptionNumber();
+            statement = connection.createStatement();
+            statement.execute(sqlQuery);
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeStatementResources(statement);
+        }
     }
 }

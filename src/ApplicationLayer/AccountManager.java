@@ -1,7 +1,6 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.AccountDAO;
-import DataStorageLayer.SqlServer.SqlServerAccountDAO;
 import DomainModelLayer.Account;
 
 import java.util.List;
@@ -31,6 +30,14 @@ public class AccountManager {
         return accountDAO.getAllAccounts();
     }
 
+
+    /**
+     * -Returns Account associated by the provided id, from the storage layer provided.
+     * */
+    public Account getAccountById(int id){
+        return accountDAO.getAccountById(id);
+    }
+
     /**
     * -Adds an account to the data storage layer provided
      * @param newAccount represents the new 'Account' that will be added to the Data storage
@@ -54,7 +61,7 @@ public class AccountManager {
      * "as of type List, it is easier to implement both delete / delete (multiple)
      * then representing both methods as maintainable"
      */
-    public void deleteAccounts(Account deleteAccount){
+    public void deleteAccount(Account deleteAccount){
         accountDAO.deleteAccounts(deleteAccount);
     }
 
