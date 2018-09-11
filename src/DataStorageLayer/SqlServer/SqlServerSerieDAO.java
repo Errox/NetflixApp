@@ -19,7 +19,7 @@ public class SqlServerSerieDAO implements SerieDAO {
     @Override
     public List<Serie> getAllSeries() {
         List<Serie> series = new ArrayList<Serie>();
-        List<Map<String, Object>> queryResult = null;//SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Serie");
+        List<Map<String, Object>> queryResult = null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Serie");
 
         for (int i = 0; i < queryResult.size(); i++){
             //Store separately to Map to get values.
@@ -33,6 +33,11 @@ public class SqlServerSerieDAO implements SerieDAO {
         }
 
         return series;
+    }
+
+    @Override
+    public Serie getSerieById(int id) {
+        return null;
     }
 
     @Override
