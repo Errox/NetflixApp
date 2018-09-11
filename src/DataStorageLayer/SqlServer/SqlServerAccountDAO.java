@@ -36,7 +36,7 @@ public class SqlServerAccountDAO implements AccountDAO {
     }
 
     @Override
-    public Account getById(int id) {
+    public Account getAccountById(int id) {
         return null;
     }
 

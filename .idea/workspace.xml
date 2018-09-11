@@ -42,32 +42,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SqlServerProfileDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerProfileDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="13" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1111#1112#0" expanded="true" />
-                <element signature="e#1138#1139#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SqlServerProgramDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerProgramDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="12" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SqlServerWatchedDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerWatchedDAO.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,11 +78,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SerieDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SerieDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/DAO/SerieDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WatchedDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/DAO/WatchedDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SqlServerAccountDAO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerAccountDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1354#1355#0" expanded="true" />
+                <element signature="e#1381#1382#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,7 +143,6 @@
         <option value="$PROJECT_DIR$/src/DataStorageLayer/DAO/MovieDAO.java" />
         <option value="$PROJECT_DIR$/src/DomainModelLayer/Movie.java" />
         <option value="$PROJECT_DIR$/src/DomainModelLayer/Watched.java" />
-        <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerAccountDAO.java" />
         <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerEpisodeDAO.java" />
         <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerSerieDAOTest.groovy" />
         <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerSerieDAO.java" />
@@ -156,12 +152,13 @@
         <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerWatchedDAO.java" />
         <option value="$PROJECT_DIR$/src/DataStorageLayer/DAO/AccountDAO.java" />
         <option value="$PROJECT_DIR$/src/DataStorageLayer/DAO/SerieDAO.java" />
+        <option value="$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerAccountDAO.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="843" />
-    <option name="y" value="34" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="530" />
+    <option name="y" value="36" />
     <option name="width" value="1400" />
     <option name="height" value="978" />
   </component>
@@ -309,12 +306,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1056" extended-state="6" />
+    <frame x="530" y="36" width="1400" height="978" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="bottom" id="Messages" order="4" visible="true" weight="0.32960895" />
+      <window_info anchor="bottom" id="Messages" order="4" visible="true" weight="0.3610771" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -326,7 +323,7 @@
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.25198728" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.47313434" />
       <window_info anchor="right" id="TMC Project List" order="4" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
@@ -446,16 +443,6 @@
     <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerSerieDAOTest.groovy">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerAccountDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerEpisodeDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -555,7 +542,26 @@
     <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/DAO/SerieDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/DAO/WatchedDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataStorageLayer/SqlServer/SqlServerAccountDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1354#1355#0" expanded="true" />
+            <element signature="e#1381#1382#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
