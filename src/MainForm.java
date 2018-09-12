@@ -1,7 +1,6 @@
 import PresentationLayer.MainPanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MainForm extends JFrame {
 

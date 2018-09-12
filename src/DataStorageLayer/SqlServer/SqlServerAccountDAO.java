@@ -40,7 +40,7 @@ public class SqlServerAccountDAO implements AccountDAO {
                String houseNumber = resultSet.getString("houseNumber");
                String place = resultSet.getString("place");
 
-               //Add our account from db to list.
+               //Add our account from resultSet to list.
                accounts.add(new Account(subscriptionId, name, streetName, postalCode, houseNumber, place));
            }
 
