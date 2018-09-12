@@ -47,7 +47,7 @@ public class AccountManager {
     }
 
      /**
-     * -Updates an account by specifiying the new and old account.
+     * -Updates an account by specifying the new and old account.
       * Old account is used to find the 'old '- account
       * so we can replace those values within the Data storage
      */
