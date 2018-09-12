@@ -1,7 +1,12 @@
 package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.SerieDAO;
+import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Serie;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +20,11 @@ public class SqlServerSerieDAO implements SerieDAO {
     //[Language] [nvarchar](50) NULL,
     //[Genre] [nvarchar](50) NULL,
     //[LooksLike] [int] NULL,
+    private MSSQLHelper MSSQLDatabase;
+
+    public SqlServerSerieDAO() {
+        this.MSSQLDatabase = new MSSQLHelper();
+    }
 
     @Override
     public List<Serie> getAllSeries() {
@@ -37,7 +47,36 @@ public class SqlServerSerieDAO implements SerieDAO {
 
     @Override
     public Serie getSerieById(int id) {
-        return null;
+        Connection connection =  MSSQLDatabase.getConnection();
+        Serie serie = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            String sqlQuery = "";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+                int lenght = resultSet.getInt("lenght");
+                String name = resultSet.getString("name");
+                String language = resultSet.getString("length");
+                String genre = resultSet.getString("language");
+
+                //Add our account from db to list.
+                serie = new Serie(name, lenght,language, genre);
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return serie;
     }
 
 }
