@@ -5,10 +5,10 @@ import DomainModelLayer.Profile;
 import java.util.List;
 
 public interface ProfileDAO {
-    List<Profile> getAllAccounts();
+    List<Profile> getAllProfiles();
     Profile getProfileById(int id);
 
-    void addProfiles(List<Profile> newProfiles);
+    void addProfiles(Profile newProfiles);
     void updateProfile(Profile oldProfile, Profile newProfile);
-    void deleteProfiles(List<Profile> deleteProfiles);
+    void deleteProfiles(Profile deleteProfile);
 }
