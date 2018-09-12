@@ -14,7 +14,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
     //[Birthdate] [date] NULL,
 
     @Override
-    public List<Profile> getAllAccounts() {
+    public List<Profile> getAllProfiles() {
         List<Profile> profiles = new ArrayList<Profile>();
         List<Map<String, Object>> queryResult = null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Profile");
 
@@ -38,9 +38,10 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public void addProfiles(List<Profile> newProfiles) {
+    public void addProfiles(Profile newProfiles) {
 
     }
+
 
     @Override
     public void updateProfile(Profile oldProfile, Profile newProfile) {
@@ -48,7 +49,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public void deleteProfiles(List<Profile> deleteProfiles) {
+    public void deleteProfiles(Profile deleteProfile) {
 
     }
 }
