@@ -27,7 +27,7 @@ public class SqlServerSerieDAO implements SerieDAO {
 
             //Case Sensitively retrieving by column name.
             //Should be by reflection.
-            Serie serie = new Serie(1, "", new Date(), "", "");
+            Serie serie = null;//new Serie(1, "", new Date(), "", "");
 
             series.add(serie);
         }

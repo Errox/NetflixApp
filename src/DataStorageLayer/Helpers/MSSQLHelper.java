@@ -1,6 +1,9 @@
 package DataStorageLayer.Helpers;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class MSSQLHelper {
@@ -17,27 +20,43 @@ public class MSSQLHelper {
         return connection;
     }
 
-    public void closeResources(ResultSet resultSet, Statement statement){
+    public void closeResources(ResultSet resultSet, Statement statement) {
         closeStatementResources(statement);
         closeResultSetResources(resultSet);
     }
 
-    public void closeStatementResources(Statement statement){
-        if(statement != null){
+    public void closeResources(ResultSet resultSet, Statement statement, Connection connection) {
+        closeStatementResources(statement);
+        closeResultSetResources(resultSet);
+        closeConnectionResource(connection);
+    }
+
+    public void closeConnectionResource(Connection connection) {
+        if(connection != null){
             try{
-                statement.close();
+                connection.close();
             }
             catch (Exception ignore){
 
             }
         }
     }
-    public void closeResultSetResources(ResultSet resultSet){
-        if(resultSet != null){
-            try{
-                resultSet.close();
+
+    public void closeStatementResources(Statement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (Exception ignore) {
+
             }
-            catch (Exception ignore){
+        }
+    }
+
+    public void closeResultSetResources(ResultSet resultSet) {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (Exception ignore) {
 
             }
         }

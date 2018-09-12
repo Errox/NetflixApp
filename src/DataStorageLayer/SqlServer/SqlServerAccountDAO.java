@@ -49,7 +49,7 @@ public class SqlServerAccountDAO implements AccountDAO {
            e.printStackTrace();
        }finally {
             //Clean our resources.
-           MSSQLDatabase.closeResources(resultSet, statement);
+           MSSQLDatabase.closeResources(resultSet, statement, connection);
        }
 
         return accounts;
@@ -85,7 +85,7 @@ public class SqlServerAccountDAO implements AccountDAO {
             e.printStackTrace();
         }finally {
             //Clean our resources.
-            MSSQLDatabase.closeResources(resultSet, statement);
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
         return account;
@@ -114,6 +114,7 @@ public class SqlServerAccountDAO implements AccountDAO {
         }finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
+            MSSQLDatabase.closeConnectionResource(connection);
         }
     }
 
@@ -141,6 +142,8 @@ public class SqlServerAccountDAO implements AccountDAO {
         }finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
+            MSSQLDatabase.closeConnectionResource(connection);
+
         }
     }
 
@@ -160,6 +163,7 @@ public class SqlServerAccountDAO implements AccountDAO {
         }finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(statement);
+            MSSQLDatabase.closeConnectionResource(connection);
         }
     }
 }

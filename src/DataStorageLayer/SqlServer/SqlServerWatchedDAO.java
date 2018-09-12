@@ -11,7 +11,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     //[Name] [nvarchar](50) NOT NULL,
     //[Seen] [int] NOT NULL,
     //[Watched] [int] NULL,
-
+  //
 
     @Override
     public List<Watched> getAllWatched() {
