@@ -3,9 +3,10 @@ package ApplicationLayer;
 import DataStorageLayer.DAO.ProfileDAO;
 import DomainModelLayer.Profile;
 
+import java.awt.color.ProfileDataException;
 import java.util.List;
 
-public class ProfileManager {
+public class ProfileManager implements ProfileDAO {
 
     private ProfileDAO profileDAO;
 
@@ -26,7 +27,8 @@ public class ProfileManager {
     /**
      * -Returns all Profiles by the data storage layer provided.
      * */
-    public List<Profile> getAllAccounts(){
+    @Override
+    public List<Profile> getAllProfiles(){
 
         return profileDAO.getAllProfiles();
     }
@@ -34,6 +36,7 @@ public class ProfileManager {
     /**
      * -Returns Profile associated by the provided id, from the storage layer provided.
      * */
+    @Override
     public Profile getProfileById(int id){
         return profileDAO.getProfileById(id);
     }
@@ -42,8 +45,9 @@ public class ProfileManager {
      * -Adds an profile to the data storage layer provided
      * @param newProfile represents the new 'Account' that will be added to the Data storage
      */
-    public void addAccount(Profile newProfile){
-        profileDAO.addProfiles(newProfile);
+    @Override
+    public void addProfile(Profile newProfile){
+        profileDAO.addProfile(newProfile);
     }
 
     /**
@@ -51,14 +55,16 @@ public class ProfileManager {
      * Old profile is used to find the 'old '- profile
      * so we can replace those values within the Data storage
      */
-    public void updateAccount(Profile newProfile, Profile oldProfile){
+    @Override
+    public void updateProfile(Profile newProfile, Profile oldProfile){
         profileDAO.updateProfile(oldProfile, newProfile);
     }
 
     /**
      * -Deletes an Profile by specifying the to be deleted profile.
      */
-    public void deleteAccount(Profile deleteProfile){
-        profileDAO.deleteProfiles(deleteProfile);
+    @Override
+    public void deleteProfile(Profile deleteProfile){
+        profileDAO.deleteProfile(deleteProfile);
     }
 }

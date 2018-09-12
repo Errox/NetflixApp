@@ -5,7 +5,7 @@ import DomainModelLayer.Watched;
 
 import java.util.List;
 
-public class WatchedManager {
+public class WatchedManager implements WatchedDAO {
 
     private WatchedDAO watchedDAO;
 
@@ -26,14 +26,15 @@ public class WatchedManager {
      /**
      * -Returns all watched by the data storage layer provided.
       * */
+     @Override
     public List<Watched> getAllWatched(){
         return watchedDAO.getAllWatched();
     }
 
-
     /**
      * -Returns watched associated by the provided id, from the storage layer provided.
      * */
+    @Override
     public Watched getWatchedById(int id){
         return watchedDAO.getWatchedById(id);
     }
@@ -42,6 +43,7 @@ public class WatchedManager {
     * -Adds an watched to the data storage layer provided
      * @param newWatched represents the new 'watched' that will be added to the Data storage
     */
+    @Override
     public void addWatched(Watched newWatched){
         watchedDAO.addWatched(newWatched);
     }
@@ -51,6 +53,7 @@ public class WatchedManager {
       * Old watched is used to find the 'old '- watched
       * so we can replace those values within the Data storage
      */
+     @Override
     public void updateWatched(Watched newWatched, Watched oldWatched){
         watchedDAO.updateWatched(oldWatched, newWatched);
     }
@@ -61,6 +64,7 @@ public class WatchedManager {
      * "as of type List, it is easier to implement both delete / delete (multiple)
      * then representing both methods as maintainable"
      */
+    @Override
     public void deleteWatched(Watched deleteWatched){
         watchedDAO.deleteWatched(deleteWatched);
     }

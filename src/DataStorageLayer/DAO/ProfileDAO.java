@@ -8,7 +8,7 @@ public interface ProfileDAO {
     List<Profile> getAllProfiles();
     Profile getProfileById(int id);
 
-    void addProfiles(Profile newProfiles);
+    void addProfile(Profile newProfiles);
     void updateProfile(Profile oldProfile, Profile newProfile);
-    void deleteProfiles(Profile deleteProfile);
+    void deleteProfile(Profile deleteProfile);
 }
