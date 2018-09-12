@@ -1,12 +1,24 @@
 package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.ProgramDAO;
+import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Profile;
 import DomainModelLayer.Program;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class SqlServerProgramDAO implements ProgramDAO {
+
+    private MSSQLHelper MSSQLDatabase;
+
+    public SqlServerProgramDAO() {
+        this.MSSQLDatabase = new MSSQLHelper();
+    }
 
     //[ProgramId] [int] IDENTITY(1,1) NOT NULL,
     //[Title] [nvarchar](50) NULL,
@@ -14,26 +26,74 @@ public class SqlServerProgramDAO implements ProgramDAO {
 
     @Override
     public List<Program> getAllPrograms() {
-        List<Program> programs = new ArrayList<Program>();
-        List<Map<String, Object>> queryResult =  null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Profile");
+        Connection connection =  MSSQLDatabase.getConnection();
+        List<Program> prgrams = new ArrayList<Program>();
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-        for (int i = 0; i < queryResult.size(); i++){
-            //Store separately to Map to get values.
-            Map<String, Object> objectMap = queryResult.get(i);
+        try{
+            String sqlQuery = "";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
 
-            //Case Sensitively retrieving by column name.
-            //Should be by reflection.
-            Program program = new Program(1, "", 1);
+            while(resultSet.next()){
 
-            programs.add(program);
+                /*int subscriptionId = resultSet.getInt("subscriptionId");
+                String name = resultSet.getString("name");
+                String streetName = resultSet.getString("streetName");
+                String postalCode = resultSet.getString("postalCode");
+                String houseNumber = resultSet.getString("houseNumber");
+                String place = resultSet.getString("place");
+*/
+                //Add our account from resultSet to list.
+                prgrams.add(null);//new Profile(subscriptionId, name, streetName, postalCode, houseNumber, place));
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
-        return programs;
+        return prgrams;
     }
 
     @Override
     public Program getProgramById(int id) {
-        return null;
-    }
 
+        Connection connection =  MSSQLDatabase.getConnection();
+        Program program = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            String sqlQuery = "";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+//                int subscriptionId = resultSet.getInt("subscriptionId");
+//                String name = resultSet.getString("name");
+//                String streetName = resultSet.getString("streetName");
+//                String postalCode = resultSet.getString("postalCode");
+//                String houseNumber = resultSet.getString("houseNumber");
+//                String place = resultSet.getString("place");
+
+                //Add our account from db to list.
+                program = null;//new Account(subscriptionId, name, streetName, postalCode, houseNumber, place);
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return program;
+    }
 }
