@@ -3,7 +3,7 @@
 
 ## Made by (Add your student nr + full name):
   * Ryan 
-  * Dennis
+  * Dennis Blokland (Student nummer 2136934)
   * Sjoerd Teunisse (Student nummer 2138921)
 
 
