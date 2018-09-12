@@ -23,5 +23,20 @@ public class SqlServerWatchedDAO implements WatchedDAO {
         return null;
     }
 
+    @Override
+    public void addWatched(Watched newWatched) {
+        
+    }
+
+    @Override
+    public void updateWatched(Watched oldWatched, Watched newWatched) {
+
+    }
+
+    @Override
+    public void deleteWatched(Watched deleteWatch) {
+
+    }
+
 
 }
