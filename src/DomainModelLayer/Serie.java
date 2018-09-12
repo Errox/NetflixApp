@@ -6,22 +6,22 @@ public class Serie {
 
     private int serieId;
     private String name;
-    private Date age;
+    private int length;
     private String language;
     private String genre;
     private int looksLike;
 
-    public Serie(int serieId, String name, Date age, String language, String genre){
+    public Serie(int serieId, String name, int length, String language, String genre){
             this.serieId = serieId;
             this.name = name;
-            this.age = age;
+            this.length = length;
             this.language = language;
             this.genre = genre;
     }
 
-    public Serie(String name, Date age, String language, String genre){
+    public Serie(String name, int length, String language, String genre){
         this.name = name;
-        this.age = age;
+        this.length = length;
         this.language = language;
         this.genre = genre;
     }
@@ -35,8 +35,8 @@ public class Serie {
         return name;
     }
 
-    public Date getAge() {
-        return age;
+    public int getLenght() {
+        return length;
     }
 
     public String getLanguage() {

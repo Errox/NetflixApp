@@ -36,18 +36,4 @@ public class SqlServerProgramDAO implements ProgramDAO {
         return null;
     }
 
-    @Override
-    public void addPrograms(List<Program> newPrograms) {
-
-    }
-
-    @Override
-    public void updateProgram(Program oldProgram, Program newProgram) {
-
-    }
-
-    @Override
-    public void deleteProgram(List<Program> deletePrograms) {
-
-    }
 }

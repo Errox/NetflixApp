@@ -36,18 +36,4 @@ public class SqlServerMovieDAO implements MovieDAO {
         return null;
     }
 
-    @Override
-    public void addMovies(List<Movie> newMovies) {
-
-    }
-
-    @Override
-    public void updateMovie(Movie oldMovie, Movie newMovie) {
-
-    }
-
-    @Override
-    public void deleteMovies(List<Movie> deleteMovies) {
-
-    }
 }

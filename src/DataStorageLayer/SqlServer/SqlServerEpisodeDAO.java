@@ -33,34 +33,4 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
         return null;
     }
 
-    @Override
-    public void addEpisodes(List<Episode> newEpisodes) {
-//        for (Episode episode: newEpisodes) {
-//            SqlHelperResultSet.getInstance().execCreatebyVal("Episode",
-//                    episode.getSeason());
-//        }
-    }
-
-    @Override
-    public void updateEpisode(Episode oldEpisode, Episode newEpisode) {
-        Map<String, Object> changed = new HashMap<>();
-
-        changed.put("season", newEpisode.getSeason());
-
-        Map<String, Object> old = new HashMap<>();
-        old.put("season", oldEpisode.getSeason());
-
-//        SqlHelperResultSet.getInstance().execUpdateByVal("Episode", changed, old);
-    }
-
-    @Override
-    public void deleteEpisode(List<Episode> deleteEpisodes) {
-
-//        for(Episode deleteEpisode : deleteEpisodes){
-//            SqlHelperResultSet.getInstance().executeQuery(
-//                    "DELETE Account WHERE season = "
-//                            + deleteEpisodes.getSubscriptionNumber());
-//        }
-
-    }
 }
