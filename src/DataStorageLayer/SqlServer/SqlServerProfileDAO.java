@@ -96,7 +96,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public void addProfiles(Profile newProfiles) {
+    public void addProfile(Profile newProfiles) {
         Connection connection =  MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
 
@@ -153,7 +153,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public void deleteProfiles(Profile deleteProfile) {
+    public void deleteProfile(Profile deleteProfile) {
         Connection connection =  MSSQLDatabase.getConnection();
         Statement statement = null;
 
