@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.AccountDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Account;
 
 import java.util.List;
@@ -16,11 +17,10 @@ public class AccountManager {
      * -Read
      * -Update
      * -Delete
-     * @param  dao the DAO that meets the contract.
      */
 
-    public AccountManager(AccountDAO dao){
-        this.accountDAO = dao;
+    public AccountManager(){
+        this.accountDAO = DAOFactory.getAccountDAOInstance();
     }
 
      /**

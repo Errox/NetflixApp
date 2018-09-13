@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.ProfileDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Profile;
 
 import java.awt.color.ProfileDataException;
@@ -17,11 +18,10 @@ public class ProfileManager implements ProfileDAO {
      * -Read
      * -Update
      * -Delete
-     * @param  dao the DAO that meets the contract.
      */
 
-    public ProfileManager(ProfileDAO dao){
-        this.profileDAO = dao;
+    public ProfileManager(){
+        this.profileDAO = DAOFactory.getProfileDAOInstance();
     }
 
     /**

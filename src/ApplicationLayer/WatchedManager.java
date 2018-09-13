@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.WatchedDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Watched;
 
 import java.util.List;
@@ -16,11 +17,10 @@ public class WatchedManager implements WatchedDAO {
      * -Read
      * -Update
      * -Delete
-     * @param  dao the DAO that meets the contract.
      */
 
-    public WatchedManager(WatchedDAO dao){
-        this.watchedDAO = dao;
+    public WatchedManager(){
+        this.watchedDAO = DAOFactory.getWatchedDAOInstance();
     }
 
      /**

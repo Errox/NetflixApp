@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.SerieDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Serie;
 
 import java.util.List;
@@ -13,11 +14,10 @@ public class SerieManager implements SerieDAO {
      * Creates an instance of the serie Manager,
      * that uses the Dao specified in the constructor to
      * -Read
-     * @param  dao the DAO that meets the contract.
      */
 
-    public SerieManager(SerieDAO dao){
-        this.serieDAO = dao;
+    public SerieManager(){
+        this.serieDAO = DAOFactory.getSerieDAOInstance();
     }
 
      /**

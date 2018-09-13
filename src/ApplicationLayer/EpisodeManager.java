@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.EpisodeDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Episode;
 
 import java.util.List;
@@ -9,8 +10,8 @@ public class EpisodeManager implements EpisodeDAO {
 
     private EpisodeDAO episodeDAO;
 
-    public EpisodeManager(EpisodeDAO episodeDAO){
-        this.episodeDAO = episodeDAO;
+    public EpisodeManager(){
+        this.episodeDAO = DAOFactory.getEpisodeDAOInstance();
     }
 
     @Override

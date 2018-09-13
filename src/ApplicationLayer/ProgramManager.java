@@ -1,6 +1,7 @@
 package ApplicationLayer;
 
 import DataStorageLayer.DAO.ProgramDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Program;
 
 import java.util.List;
@@ -9,8 +10,8 @@ public class ProgramManager implements ProgramDAO {
 
     private ProgramDAO programDAO;
 
-    public ProgramManager(ProgramDAO programDAO){
-        this.programDAO = programDAO;
+    public ProgramManager(){
+        this.programDAO = DAOFactory.getProgramDAOInstance();
     }
 
     @Override
