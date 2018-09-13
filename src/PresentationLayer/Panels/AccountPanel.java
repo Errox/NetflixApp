@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.Panels;
 
 import ApplicationLayer.AccountManager;
 import DataStorageLayer.SqlServer.SqlServerAccountDAO;

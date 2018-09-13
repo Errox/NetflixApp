@@ -1,4 +1,6 @@
-import PresentationLayer.MainPanel;
+package PresentationLayer;
+
+import PresentationLayer.Panels.MainPanel;
 
 import javax.swing.*;
 

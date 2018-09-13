@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.Panels;
 
 import PresentationLayer.EventHandlers.lForManagementButtons;
 
