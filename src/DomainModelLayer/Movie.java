@@ -2,14 +2,14 @@ package DomainModelLayer;
 
 public class Movie {
 
-    private int movieId;
+    private int Id;
     private int ageIndication;
     private String language;
     private String genre;
 
-    public Movie(int movieId, int ageIdication, String language, String genre){
-        this.movieId = movieId;
-        this.ageIndication = ageIdication;
+    public Movie(int Id, int ageIndication, String language, String genre){
+        this.Id = Id;
+        this.ageIndication = ageIndication;
         this.language = language;
         this.genre = genre;
     }
@@ -21,7 +21,7 @@ public class Movie {
     }
 
     public int getMovieId() {
-        return movieId;
+        return Id;
     }
 
     public int getAgeIdication() {

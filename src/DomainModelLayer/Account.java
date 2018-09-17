@@ -2,15 +2,15 @@ package DomainModelLayer;
 
 public class Account {
 
-    private int subscriptionNumber;
+    private int Id;
     private String name;
     private String streetName;
     private String postalCode;
     private String houseNumber;
     private String place;
 
-    public Account(int subscriptionNumber, String name, String streetName, String postalCode, String houseNumber, String place){
-        this.subscriptionNumber = subscriptionNumber;
+    public Account(int Id, String name, String streetName, String postalCode, String houseNumber, String place){
+        this.Id = Id;
         this.name = name;
         this.streetName = streetName;
         this.postalCode = postalCode;
@@ -19,7 +19,6 @@ public class Account {
     }
 
     public Account(String name, String streetName, String postalCode, String houseNumber, String place){
-        //this.subscriptionNumber = subscriptionNumber;
         this.name = name;
         this.streetName = streetName;
         this.postalCode = postalCode;
@@ -27,8 +26,8 @@ public class Account {
         this.place = place;
     }
 
-    public int getSubscriptionNumber() {
-        return subscriptionNumber;
+    public int getId() {
+        return Id;
     }
 
     public String getName() {

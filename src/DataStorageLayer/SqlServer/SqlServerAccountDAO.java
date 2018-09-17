@@ -134,7 +134,7 @@ public class SqlServerAccountDAO implements AccountDAO {
             preparedStatement.setString(3, oldAccount.getPostalCode());
             preparedStatement.setString(4, oldAccount.getHouseNumber());
             preparedStatement.setString(5, oldAccount.getPlace());
-            preparedStatement.setInt(6, oldAccount.getSubscriptionNumber());
+            preparedStatement.setInt(6, oldAccount.getId());
 
         }catch (Exception e){
             //Print on error.
@@ -154,7 +154,7 @@ public class SqlServerAccountDAO implements AccountDAO {
 
         //Finalize with parameter query
         try{
-            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteAccount.getSubscriptionNumber();
+            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteAccount.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         }catch (Exception e){

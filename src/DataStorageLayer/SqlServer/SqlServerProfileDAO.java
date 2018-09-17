@@ -139,7 +139,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
 //            preparedStatement.setString(3, oldAccount.getPostalCode());
 //            preparedStatement.setString(4, oldAccount.getHouseNumber());
 //            preparedStatement.setString(5, oldAccount.getPlace());
-//            preparedStatement.setInt(6, oldAccount.getSubscriptionNumber());
+//            preparedStatement.setInt(6, oldAccount.getId());
 
         }catch (Exception e){
             //Print on error.

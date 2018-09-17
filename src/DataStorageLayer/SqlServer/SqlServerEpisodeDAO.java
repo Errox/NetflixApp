@@ -30,7 +30,7 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
 
             //Case Sensitively retrieving by column name.
             //Should be by reflection.
-            Episode episode = new Episode("");
+            Episode episode = new Episode("", 1, 1 );
 
             episodes.add(episode);
         }
