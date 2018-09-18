@@ -98,6 +98,11 @@ public class SqlServerAccountDAO implements AccountDAO {
 
         //Finalize query
         try{
+            //*INSERT INTO Accounts
+            //(Name, Street, PostalCode, HouseNumber, Place)
+            //VALUES        (,,,,)
+            // *//
+
             String sqlQuery = "INSERT INTO Accounts VALUES ( ?, ?, ?, ?, ? )";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
@@ -125,6 +130,11 @@ public class SqlServerAccountDAO implements AccountDAO {
 
         //Finalize query
         try{
+            /*
+            * UPDATE       Accounts
+              SET  Name =, Street =, HouseNumber =, Place =, PostalCode =
+            */
+
             String sqlQuery = "UPDATE Accounts SET name = ?, streetName = ?, postalCode = ?, houseNumber = ?, place = ? WHERE subscriptionId = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
@@ -154,7 +164,7 @@ public class SqlServerAccountDAO implements AccountDAO {
 
         //Finalize with parameter query
         try{
-            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteAccount.getId();
+            String sqlQuery = "DELETE FROM Accounts WHERE Id =" + deleteAccount.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         }catch (Exception e){

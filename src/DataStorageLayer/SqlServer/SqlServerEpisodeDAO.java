@@ -1,6 +1,7 @@
 package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.EpisodeDAO;
+import DataStorageLayer.Factories.DAOFactory;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Episode;
 
