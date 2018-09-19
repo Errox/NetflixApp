@@ -9,7 +9,6 @@ public class Serie {
     private int length;
     private String language;
     private String genre;
-    private int looksLike;
 
     public Serie(int serieId, String name, int length, String language, String genre){
             this.serieId = serieId;
@@ -20,10 +19,7 @@ public class Serie {
     }
 
     public Serie(String name, int length, String language, String genre){
-        this.name = name;
-        this.length = length;
-        this.language = language;
-        this.genre = genre;
+        this(0, name, length, language, genre);
     }
 
 
@@ -47,7 +43,4 @@ public class Serie {
         return genre;
     }
 
-    public int getLooksLike() {
-        return looksLike;
-    }
 }

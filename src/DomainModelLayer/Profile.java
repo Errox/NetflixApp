@@ -17,9 +17,7 @@ public class Profile {
     }
 
     public Profile(String name, Date birthDate, int accountId){
-        this.name = name;
-        this.birthDate = birthDate;
-        this.accountId = accountId;
+        this(0, name, birthDate, accountId);
     }
 
     public int getAccountId() {

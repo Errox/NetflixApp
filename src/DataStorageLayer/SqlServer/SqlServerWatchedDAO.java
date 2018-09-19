@@ -98,7 +98,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
-            preparedStatement.setInt(1, newWatched.getSubscriptionNumber());
+            preparedStatement.setInt(1, newWatched.getId());
             preparedStatement.setString(2, newWatched.getName());
             preparedStatement.setInt(3, newWatched.getSeen());
             preparedStatement.setInt(4, newWatched.getPercentage());
@@ -127,7 +127,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             preparedStatement.setString(1, newWatched.getName());
             preparedStatement.setInt(2, newWatched.getSeen());
             preparedStatement.setInt(3, newWatched.getPercentage());
-            preparedStatement.setInt(4, newWatched.getSubscriptionNumber());
+            preparedStatement.setInt(4, newWatched.getId());
 
         }catch (Exception e){
             //Print on error.
@@ -145,7 +145,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
         //Finalize with parameter query
         try{
-            String sqlQuery = "DELETE FROM Watched WHERE subscriptionId " + deleteWatch.getSubscriptionNumber();
+            String sqlQuery = "DELETE FROM Watched WHERE subscriptionId " + deleteWatch.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         }catch (Exception e){

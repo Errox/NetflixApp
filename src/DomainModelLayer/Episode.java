@@ -6,9 +6,7 @@ public class Episode {
     private int episodeNr;
     private int seasonNr;
 
-
-    public Episode(String season, int episodeNr, int seasonNr)
-    {
+    public Episode(String season, int episodeNr, int seasonNr) {
         this.season = season;
         this.episodeNr = episodeNr;
         this.seasonNr = seasonNr;

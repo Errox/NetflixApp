@@ -15,9 +15,7 @@ public class Movie {
     }
 
     public Movie(int ageIndication, String language, String genre){
-        this.ageIndication = ageIndication;
-        this.language = language;
-        this.genre = genre;
+        this(0, ageIndication, language, genre);
     }
 
     public int getMovieId() {

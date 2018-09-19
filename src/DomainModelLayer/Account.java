@@ -19,11 +19,7 @@ public class Account {
     }
 
     public Account(String name, String streetName, String postalCode, String houseNumber, String place){
-        this.name = name;
-        this.streetName = streetName;
-        this.postalCode = postalCode;
-        this.houseNumber = houseNumber;
-        this.place = place;
+      this(0, name, streetName, postalCode, houseNumber, place );
     }
 
     public int getId() {

@@ -19,7 +19,6 @@ public class SqlServerSerieDAO implements SerieDAO {
     //[age] [int] NULL,
     //[Language] [nvarchar](50) NULL,
     //[Genre] [nvarchar](50) NULL,
-    //[LooksLike] [int] NULL,
     private MSSQLHelper MSSQLDatabase;
 
     public SqlServerSerieDAO() {
@@ -59,13 +58,13 @@ public class SqlServerSerieDAO implements SerieDAO {
 
             while(resultSet.next()){
 
-                int lenght = resultSet.getInt("lenght");
+                int length = resultSet.getInt("lenght");
                 String name = resultSet.getString("name");
                 String language = resultSet.getString("length");
                 String genre = resultSet.getString("language");
 
                 //Add our account from db to list.
-                serie = new Serie(name, lenght,language, genre);
+                serie = new Serie(name, length,language, genre);
             }
 
         }catch (Exception e){
