@@ -18,11 +18,11 @@ public class Movie {
         this(0, ageIndication, language, genre);
     }
 
-    public int getMovieId() {
+    public int getId() {
         return Id;
     }
 
-    public int getAgeIdication() {
+    public int getAgeIndication() {
         return ageIndication;
     }
 

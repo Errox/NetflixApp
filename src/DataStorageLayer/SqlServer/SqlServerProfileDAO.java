@@ -159,7 +159,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
 
         //Finalize with parameter query
         try{
-            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteProfile.getSubscriptionNumber();
+            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteProfile.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         }catch (Exception e){

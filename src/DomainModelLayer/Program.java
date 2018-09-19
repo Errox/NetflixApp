@@ -1,26 +1,28 @@
 package DomainModelLayer;
 
+import java.util.Date;
+
 public class Program {
 
-    private int programId;
+    private int Id;
     private String title;
-    private int timeSpan;
+    private Date timeSpan;
 
-    public Program(int programId, String title, int timeSpan){
-        this.programId = programId;
+    public Program(int Id, String title, Date timeSpan){
+        this.Id = Id;
         this.title = title;
         this.timeSpan = timeSpan;
     }
 
-    public int getProgramId() {
-        return programId;
+    public int getId() {
+        return Id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public int getTimeSpan() {
+    public Date getTimeSpan() {
         return timeSpan;
     }
 }

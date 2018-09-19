@@ -20,12 +20,8 @@ public class Profile {
         this(0, name, birthDate, accountId);
     }
 
-    public int getAccountId() {
+    public int getId() {
         return accountId;
-    }
-
-    public int getSubscriptionNumber() {
-        return Id;
     }
 
     public String getName() {

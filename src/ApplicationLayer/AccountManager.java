@@ -6,7 +6,7 @@ import DomainModelLayer.Account;
 
 import java.util.List;
 
-public class AccountManager {
+public class AccountManager implements AccountDAO {
 
     private AccountDAO accountDAO;
 
@@ -55,14 +55,17 @@ public class AccountManager {
         accountDAO.updateAccount(oldAccount, newAccount);
     }
 
+
     /**
      * -Deletes an account by specifying the to be deleted account(s).
      *
      * "as of type List, it is easier to implement both delete / delete (multiple)
      * then representing both methods as maintainable"
      */
-    public void deleteAccount(Account deleteAccount){
+    @Override
+    public void deleteAccounts(Account deleteAccount) {
         accountDAO.deleteAccounts(deleteAccount);
     }
+
 
 }

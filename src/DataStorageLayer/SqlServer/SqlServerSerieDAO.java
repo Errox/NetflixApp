@@ -58,7 +58,7 @@ public class SqlServerSerieDAO implements SerieDAO {
 
             while(resultSet.next()){
 
-                int length = resultSet.getInt("lenght");
+                int length = resultSet.getInt("length");
                 String name = resultSet.getString("name");
                 String language = resultSet.getString("length");
                 String genre = resultSet.getString("language");

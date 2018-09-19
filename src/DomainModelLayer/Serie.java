@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Serie {
 
-    private int serieId;
+    private int Id;
     private String name;
     private int length;
     private String language;
     private String genre;
 
-    public Serie(int serieId, String name, int length, String language, String genre){
-            this.serieId = serieId;
+    public Serie(int Id, String name, int length, String language, String genre){
+            this.Id = Id;
             this.name = name;
             this.length = length;
             this.language = language;
@@ -23,8 +23,8 @@ public class Serie {
     }
 
 
-    public int getSerieId() {
-        return serieId;
+    public int getId() {
+        return Id;
     }
 
     public String getName() {
