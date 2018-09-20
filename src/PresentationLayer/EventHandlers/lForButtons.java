@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class lForManagementButtons implements ActionListener {
+public class lForButtons implements ActionListener {
 
     private JPanel managementPanel;
     private JPanel updatePanel;
 
-    public lForManagementButtons(JPanel managementPanel, JPanel updatePanel){
+    public lForButtons(JPanel managementPanel, JPanel updatePanel){
             this.managementPanel = managementPanel;
             this.updatePanel = updatePanel;
     }

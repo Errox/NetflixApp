@@ -1,10 +1,11 @@
 package PresentationLayer.Panels;
 
+import DomainModelLayer.ManageType;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
-
 
     private JTabbedPane tabPane;
 
@@ -12,11 +13,11 @@ public class MainPanel extends JPanel {
         tabPane = new JTabbedPane();
         SetVisualDetails();
 
-        tabPane.addTab("Accounts", new ManagePanel(ManagePanel.ManageType.ACCOUNT));
-        tabPane.addTab("Profiles", new ManagePanel(ManagePanel.ManageType.PROFILE));
-        tabPane.addTab("Watched", new ManagePanel(ManagePanel.ManageType.EDIT));
+        tabPane.addTab("Accounts", new ManagePanel(ManageType.ACCOUNT));
+        tabPane.addTab("Profiles", new ManagePanel(ManageType.PROFILE));
+        tabPane.addTab("Watched", new ManagePanel(ManageType.WATCHED));
 
-        tabPane.addTab("Serie(s) information", new SeriesPanel());
+        tabPane.addTab("Serie information", new SeriesPanel());
         tabPane.addTab("Profile series information", new AccountSeriesPanel());
         tabPane.addTab("Account movie information", new AccountMoviePanel());
         tabPane.addTab("Movie information", new MoviePanel());

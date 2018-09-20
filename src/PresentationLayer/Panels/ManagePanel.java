@@ -1,17 +1,12 @@
 package PresentationLayer.Panels;
 
-import PresentationLayer.EventHandlers.lForManagementButtons;
+import DomainModelLayer.ManageType;
+import PresentationLayer.EventHandlers.lForButtons;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ManagePanel extends JPanel {
-
-    public enum ManageType {
-        ACCOUNT,
-        PROFILE,
-        EDIT
-    }
 
     private ManageType manageType;
     private JPanel updatePanel;
@@ -56,13 +51,15 @@ public class ManagePanel extends JPanel {
         JButton deleteButton = new JButton("Delete");
         panel.add(deleteButton);
 
-        lForManagementButtons managementButtonsEvents =new lForManagementButtons(panel, updatePanel);
+        lForButtons managementButtonsEvents =new lForButtons(panel, updatePanel);
         createButton.addActionListener(managementButtonsEvents);
         updateButton.addActionListener(managementButtonsEvents);
         deleteButton.addActionListener(managementButtonsEvents);
 
         return panel;
     }
+
+    //This needs to be created neatly. Withing another form to edit.
 
     private JPanel createUpdatePanel() {
         JPanel panel = new JPanel(new GridLayout(0, 2));
