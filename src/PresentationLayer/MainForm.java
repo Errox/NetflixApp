@@ -7,6 +7,8 @@ import javax.swing.*;
 public class MainForm extends JFrame {
 
     public MainForm(){
+        new SplashScreen().initialize();
+
         SetVisualDefaults();
 
         MainPanel mainPanel = new MainPanel();
