@@ -2,6 +2,7 @@ package ApplicationLayer;
 
 import DataStorageLayer.DAO.SerieDAO;
 import DataStorageLayer.Factories.DAOFactory;
+import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
 import java.util.List;
@@ -36,5 +37,11 @@ public class SerieManager implements SerieDAO {
     public Serie getSerieById(int id){
         return serieDAO.getSerieById(id);
     }
+
+    @Override
+    public int getAvarageWatchTime(Profile profile, Serie series) {
+        return serieDAO.getAvarageWatchTime(profile, series);
+    }
+
 
 }

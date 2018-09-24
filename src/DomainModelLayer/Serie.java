@@ -1,6 +1,9 @@
 package DomainModelLayer;
 
+import ApplicationLayer.EpisodeManager;
+
 import java.util.Date;
+import java.util.List;
 
 public class Serie {
 
@@ -41,6 +44,11 @@ public class Serie {
 
     public String getGenre() {
         return genre;
+    }
+
+    public List<Episode> getAllEpisodes(){
+        EpisodeManager manager = new EpisodeManager();
+        return manager.getAllEpisodesBySeriesId(this.Id);
     }
 
 }

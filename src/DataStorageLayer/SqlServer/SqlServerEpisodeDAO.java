@@ -74,7 +74,7 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 int ProgramId = resultSet.getInt("ProgramId");
                 int SerieId = resultSet.getInt("SerieId");
 
-                episode = new Episode(id, EpisodeNr, SeasonNr, ProgramId, SerieId);
+                episode = new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId);
             }
 
         }catch (Exception e){
@@ -86,6 +86,39 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
         }
 
         return episode;
+    }
+
+    @Override
+    public List<Episode> getAllEpisodesBySeriesId(int id) {
+        Connection connection =  MSSQLDatabase.getConnection();
+        List<Episode> Episodes = new ArrayList<Episode>();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            statement = connection.prepareStatement("SELECT * FROM Episodes WHERE SerieId = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+
+                int episodeId = resultSet.getInt("Id");
+                int EpisodeNr = resultSet.getInt("EpisodeNr");
+                int SeasonNr = resultSet.getInt("SeasonNr");
+                int ProgramId = resultSet.getInt("ProgramId");
+                int SerieId = resultSet.getInt("SerieId");
+                Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId));
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return Episodes;
     }
 
 }

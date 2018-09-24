@@ -2,6 +2,8 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.SerieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Episode;
+import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
 import java.sql.Connection;
@@ -93,5 +95,39 @@ public class SqlServerSerieDAO implements SerieDAO {
 
         return serie;
     }
+
+    @Override
+    public int getAvarageWatchTime(Profile profile, Serie series) {
+        Connection connection =  MSSQLDatabase.getConnection();
+        int count = 0;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Episode> episodes =  series.getAllEpisodes();
+        try{
+        for (Episode episode: episodes) {
+            try{
+                statement = connection.prepareStatement("SELECT Watched.Percentage as avarage FROM  Episodes INNER JOIN Profiles ON Episodes.Id = Profiles.Id INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Profiles.Id = Watched.ProfileId AND Programs.Id = Watched.ProgramId WHERE Profiles.Id = ? and Episodes.Id = ?");
+                statement.setInt(1, profile.getId());
+                statement.setInt(2, episode.getId());
+                resultSet = statement.executeQuery();
+
+                while(resultSet.next()){
+                    count += resultSet.getInt("avarage");
+                }
+
+            }catch (Exception e) {
+                //Print on error.
+                e.printStackTrace();
+            }
+
+        }
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return count/episodes.size();
+    }
+
 
 }
