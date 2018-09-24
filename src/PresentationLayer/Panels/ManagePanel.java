@@ -1,6 +1,8 @@
 package PresentationLayer.Panels;
 
 import ApplicationLayer.AccountManager;
+import ApplicationLayer.ProfileManager;
+import ApplicationLayer.WatchedManager;
 import DomainModelLayer.ManageType;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.EventHandlers.lForButtons;
@@ -39,10 +41,13 @@ public class ManagePanel extends JPanel {
         if(manageType == ManageType.ACCOUNT) {
             AccountManager acm = new AccountManager();
             comboBox.setModel(new DefaultComboBoxModel(acm.getAllAccounts().toArray()));
+        }else if(manageType == ManageType.PROFILE){
+            ProfileManager pfm = new ProfileManager();
+            comboBox.setModel(new DefaultComboBoxModel(pfm.getAllProfiles().toArray()));
+        }else if(manageType == ManageType.WATCHED){
+            WatchedManager wm = new WatchedManager();
+            comboBox.setModel(new DefaultComboBoxModel(wm.getAllWatched().toArray()));
         }
-
-
-            //comboBox.setModel(new DefaultComboBoxModel(new AccountManager.));
         return panel;
     }
 
@@ -116,6 +121,9 @@ public class ManagePanel extends JPanel {
         panel.add(saveButton);
         panel.add(discardButton);
         return panel;
+
+
+
     }
 
 }
