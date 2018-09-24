@@ -1,32 +1,45 @@
 package PresentationLayer.Panels;
 
+import ApplicationLayer.SerieManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SeriesPanel extends JPanel {
 
-
     public SeriesPanel(){
-        add(SeriesContainer());
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        panel.setSize(1250, 200);
+
+        JScrollPane pane = new JScrollPane(panel);
+
+        for(int i=1; i<11; i++) {
+            pane.add(SeriesContainer(i, "GERMANEESES", "Knetter Kaas", "Pop"));
+        }
+
+
+
     }
 
+    public JPanel SeriesContainer(int Age, String Language, String Title, String Genre){
+        JPanel p = new JPanel();
 
-    public Panel SeriesContainer(){
-        Panel p = new Panel();
-
-        p.setLayout(new BorderLayout());
-        p.setSize(300, 200);
+        p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+        p.setSize(new Dimension(200, 200));
+        p.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
         JLabel imgLabel = new JLabel(new ImageIcon("netflix-icon.png"));
-        JLabel title = new JLabel("Title: Serie");
-        JLabel age = new JLabel("Age : 2");
-        JLabel language = new JLabel("Language : GERMAN");
-        JLabel genre = new JLabel("Genre : POPofzo");
+        JLabel title = new JLabel("Title: " + Title);
+        JLabel age = new JLabel("Age : " + Age);
+        JLabel language = new JLabel("language : " + Language);
+        JLabel genre = new JLabel("Genre : " + Genre);
+        p.add(title);
+        p.add(imgLabel);
+        p.add(age);
+        p.add(language);
+        p.add(genre);
 
-        p.add(title, BorderLayout.NORTH);
-        p.add(imgLabel, BorderLayout.WEST);
-        p.add(age, BorderLayout.CENTER);
-        p.add(language, BorderLayout.EAST);
-        p.add(genre, BorderLayout.SOUTH);
 
         return p;
     }
