@@ -1,9 +1,18 @@
 package PresentationLayer;
 
+import DomainModelLayer.ManageType;
+import PresentationLayer.Controls.ModifyType;
+
 import javax.swing.*;
 
 public class ManageForm {
 
+   private ManageType manageType;
+   private ModifyType modifyType;
+
+   public ManageForm(ManageType manageType,  ModifyType modifyType){
+
+   }
 
     public void ManageAccount(){
         JTextField firstName = new JTextField();
