@@ -31,4 +31,9 @@ public class Profile {
     public Date getBirthDate() {
         return birthDate;
     }
+
+    @Override
+    public String toString() {
+        return "Profile: " + name;
+    }
 }

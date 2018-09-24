@@ -96,13 +96,7 @@ public class SqlServerAccountDAO implements AccountDAO {
         Connection connection =  MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
 
-        //Finalize query
         try{
-            //*INSERT INTO Accounts
-            //(Name, Street, PostalCode, HouseNumber, Place)
-            //VALUES        (,,,,)
-            // *//
-
             String sqlQuery = "INSERT INTO Accounts VALUES ( ?, ?, ?, ?, ? )";
             preparedStatement = connection.prepareStatement(sqlQuery);
 

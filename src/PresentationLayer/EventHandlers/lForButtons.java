@@ -1,6 +1,9 @@
 package PresentationLayer.EventHandlers;
 
+import DomainModelLayer.Account;
+import DomainModelLayer.ManageType;
 import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.Controls.ModifyType;
 import PresentationLayer.ManageForm;
 
 import javax.swing.*;
@@ -9,28 +12,29 @@ import java.awt.event.ActionListener;
 
 public class lForButtons implements ActionListener {
 
-    private JPanel managementPanel;
-    private JPanel updatePanel;
+    private ManageType manageType;
+    private JComboBox selectedItem;
 
-    public lForButtons(JPanel managementPanel, JPanel updatePanel){
-            this.managementPanel = managementPanel;
-            this.updatePanel = updatePanel;
+    public lForButtons(ManageType manageType, JComboBox selected){
+        this.manageType = manageType;
+        this.selectedItem = selected;
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton)e.getSource();
 
         if(button.getName().equals(ControlNames.MANAGE_BUTTON_CREATE)){
-            managementPanel.setVisible(false);
-            updatePanel.setVisible(true);
-
+            new ManageForm(ModifyType.CREATE, manageType);
         }
         else if(button.getName().equals(ControlNames.MANAGE_BUTTON_UPDATE)){
-            //if(ManageType. == ManageType.ACCOUNT)
-                //new ManageForm().ManageAccount();
+            new ManageForm(ModifyType.UPDATE, manageType);
         }
         else if(button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)){
+
+            selectedItem.getSelectedItem();
+
             int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?", "Warning", JOptionPane.YES_NO_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
                 // Saving code here

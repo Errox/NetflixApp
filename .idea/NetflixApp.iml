@@ -9,14 +9,14 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library>
+      <library name="C:\Users\Sjoerd\Documents\enu">
         <CLASSES>
           <root url="jar://$USER_HOME$/enu/mssql-jdbc-6.2.2.jre8.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../enu/mssql-jdbc-6.2.2.jre8.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="mssql-jdbc-6.2.2.jre8" level="project" />
   </component>
 </module>
