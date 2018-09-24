@@ -41,9 +41,9 @@ public class SqlServerProfileDAO implements ProfileDAO {
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 Date BirthDate = resultSet.getDate("BirthDate");
-                int Acoountid = resultSet.getInt("AccountId");
+                int AccountId = resultSet.getInt("AccountId");
                 //Add our account from resultSet to list.
-                profiles.add(new Profile(id,name,BirthDate, Acoountid));
+                profiles.add(new Profile(id,name,BirthDate, AccountId));
             }
 
         }catch (Exception e){
