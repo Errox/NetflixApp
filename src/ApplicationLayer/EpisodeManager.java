@@ -16,11 +16,16 @@ public class EpisodeManager implements EpisodeDAO {
 
     @Override
     public List<Episode> getAllEpisodes() {
-        return null;
+        return episodeDAO.getAllEpisodes();
     }
 
     @Override
     public Episode getEpisodeById(int id) {
-        return null;
+        return episodeDAO.getEpisodeById(id);
+    }
+
+    @Override
+    public List<Episode> getAllEpisodesBySeriesId(int id) {
+        return episodeDAO.getAllEpisodesBySeriesId(id);
     }
 }

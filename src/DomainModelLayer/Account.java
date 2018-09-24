@@ -45,4 +45,9 @@ public class Account {
     public String getPlace() {
         return place;
     }
+
+    @Override
+    public String toString() {
+        return "Account: " + getName();
+    }
 }
