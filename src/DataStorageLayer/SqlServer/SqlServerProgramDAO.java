@@ -5,9 +5,7 @@ import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Profile;
 import DomainModelLayer.Program;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,26 +25,22 @@ public class SqlServerProgramDAO implements ProgramDAO {
     @Override
     public List<Program> getAllPrograms() {
         Connection connection =  MSSQLDatabase.getConnection();
-        List<Program> prgrams = new ArrayList<Program>();
+        List<Program> programs = new ArrayList<Program>();
         Statement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
+            String sqlQuery = "Select * FROM Programs";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
             while(resultSet.next()){
 
-                /*int subscriptionId = resultSet.getInt("subscriptionId");
-                String name = resultSet.getString("name");
-                String streetName = resultSet.getString("streetName");
-                String postalCode = resultSet.getString("postalCode");
-                String houseNumber = resultSet.getString("houseNumber");
-                String place = resultSet.getString("place");
-*/
+                int subscriptionId = resultSet.getInt("Id");
+                String title = resultSet.getString("Title");
+                Time Duration = resultSet.getTime("Duration");
                 //Add our account from resultSet to list.
-                prgrams.add(null);//new Profile(subscriptionId, name, streetName, postalCode, houseNumber, place));
+                programs.add(new Program(subscriptionId,title,Duration));
             }
 
         }catch (Exception e){
@@ -57,7 +51,7 @@ public class SqlServerProgramDAO implements ProgramDAO {
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
-        return prgrams;
+        return programs;
     }
 
     @Override
@@ -65,25 +59,21 @@ public class SqlServerProgramDAO implements ProgramDAO {
 
         Connection connection =  MSSQLDatabase.getConnection();
         Program program = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Programs WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
 
-//                int subscriptionId = resultSet.getInt("subscriptionId");
-//                String name = resultSet.getString("name");
-//                String streetName = resultSet.getString("streetName");
-//                String postalCode = resultSet.getString("postalCode");
-//                String houseNumber = resultSet.getString("houseNumber");
-//                String place = resultSet.getString("place");
-
-                //Add our account from db to list.
-                program = null;//new Account(subscriptionId, name, streetName, postalCode, houseNumber, place);
+                int subscriptionId = resultSet.getInt("Id");
+                String title = resultSet.getString("Title");
+                Time Duration = resultSet.getTime("Duration");
+                //Add our account from resultSet to list.
+                program = new Program(subscriptionId,title,Duration);
             }
 
         }catch (Exception e){

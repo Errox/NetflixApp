@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class MSSQLHelper {
     private static Connection connection;
-    private static final String connectionString = "jdbc:sqlserver://AXR;databaseName=Bibliotheek;integratedSecurity=true;";
+    private static final String connectionString = "jdbc:sqlserver://DESKTOP-947ME72\\SQLEXPRESS;databaseName=NetFlixStats;integratedSecurity=true;";
 
     public Connection getConnection() {
         try {

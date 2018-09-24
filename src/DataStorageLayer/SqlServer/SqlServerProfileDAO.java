@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SqlServerProfileDAO implements ProfileDAO {
@@ -31,21 +32,18 @@ public class SqlServerProfileDAO implements ProfileDAO {
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
+            String sqlQuery = "Select * from Profiles";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
             while(resultSet.next()){
 
-                int subscriptionId = resultSet.getInt("subscriptionId");
-                String name = resultSet.getString("name");
-                String streetName = resultSet.getString("streetName");
-                String postalCode = resultSet.getString("postalCode");
-                String houseNumber = resultSet.getString("houseNumber");
-                String place = resultSet.getString("place");
-
+                int id = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                Date BirthDate = resultSet.getDate("BirthDate");
+                int Acoountid = resultSet.getInt("AccountId");
                 //Add our account from resultSet to list.
-                profiles.add(null);//new Profile(subscriptionId, name, streetName, postalCode, houseNumber, place));
+                profiles.add(new Profile(id,name,BirthDate, Acoountid));
             }
 
         }catch (Exception e){
@@ -63,25 +61,21 @@ public class SqlServerProfileDAO implements ProfileDAO {
     public Profile getProfileById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Profile profile = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Profiles WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
 
-//                int subscriptionId = resultSet.getInt("subscriptionId");
-//                String name = resultSet.getString("name");
-//                String streetName = resultSet.getString("streetName");
-//                String postalCode = resultSet.getString("postalCode");
-//                String houseNumber = resultSet.getString("houseNumber");
-//                String place = resultSet.getString("place");
-
-                //Add our account from db to list.
-                profile = null;//new Account(subscriptionId, name, streetName, postalCode, houseNumber, place);
+                int ProfileId = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                Date BirthDate = resultSet.getDate("BirthDate");
+                int Acoountid = resultSet.getInt("AccountId");
+                profile = new Profile(ProfileId,name,BirthDate, Acoountid);
             }
 
         }catch (Exception e){
@@ -102,15 +96,14 @@ public class SqlServerProfileDAO implements ProfileDAO {
 
         //Finalize query
         try{
-            String sqlQuery = "INSERT INTO Profiles VALUES ( ?, ?, ?, ?, ? )";
+            String sqlQuery = "INSERT INTO Profiles (Name, BirthDate, AccountId) VALUES ( ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
-//            preparedStatement.setString(1, newAccount.getName());
-//            preparedStatement.setString(2, newAccount.getStreetName());
-//            preparedStatement.setString(3, newAccount.getPostalCode());
-//            preparedStatement.setString(4, newAccount.getHouseNumber());
-//            preparedStatement.setString(5, newAccount.getPlace());
+            preparedStatement.setString(1, newProfiles.getName());
+            preparedStatement.setDate(2, new java.sql.Date( newProfiles.getBirthDate().getTime()));
+            preparedStatement.setInt(3, newProfiles.getId());
+            preparedStatement.execute();
 
         }catch (Exception e){
             //Print on error.
@@ -130,16 +123,14 @@ public class SqlServerProfileDAO implements ProfileDAO {
 
         //Finalize query
         try{
-            String sqlQuery = "UPDATE Accounts SET name = ?, streetName = ?, postalCode = ?, houseNumber = ?, place = ? WHERE subscriptionId = ?";
+            String sqlQuery = "UPDATE Profiles SET Name = ?, BirthDate = ?, AccountId = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
-            //Index 1 or 0?
-//            preparedStatement.setString(1, oldAccount.getName());
-//            preparedStatement.setString(2, oldAccount.getStreetName());
-//            preparedStatement.setString(3, oldAccount.getPostalCode());
-//            preparedStatement.setString(4, oldAccount.getHouseNumber());
-//            preparedStatement.setString(5, oldAccount.getPlace());
-//            preparedStatement.setInt(6, oldAccount.getId());
+            preparedStatement.setString(1, newProfile.getName());
+            preparedStatement.setDate(2,  new java.sql.Date( newProfile.getBirthDate().getTime()));
+            preparedStatement.setInt(3, newProfile.getId());
+            preparedStatement.setInt(4, oldProfile.getId());
+            preparedStatement.execute();
 
         }catch (Exception e){
             //Print on error.
@@ -159,7 +150,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
 
         //Finalize with parameter query
         try{
-            String sqlQuery = "DELETE FROM Accounts WHERE subscriptionId " + deleteProfile.getId();
+            String sqlQuery = "DELETE FROM Profiles WHERE Id =" + deleteProfile.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         }catch (Exception e){
