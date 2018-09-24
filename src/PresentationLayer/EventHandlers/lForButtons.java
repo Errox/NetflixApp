@@ -1,5 +1,8 @@
 package PresentationLayer.EventHandlers;
 
+import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.ManageForm;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,15 +21,17 @@ public class lForButtons implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton)e.getSource();
 
-        if(button.getText() == "Create"){
+        if(button.getName().equals(ControlNames.MANAGE_BUTTON_CREATE)){
             managementPanel.setVisible(false);
             updatePanel.setVisible(true);
-        }
-        else if(button.getText() == "Update"){
 
         }
-        else if(button.getText() == "Delete"){
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?","Warning",JOptionPane.YES_NO_OPTION);
+        else if(button.getName().equals(ControlNames.MANAGE_BUTTON_UPDATE)){
+            //if(ManageType. == ManageType.ACCOUNT)
+                new ManageForm().ManageAccount();
+        }
+        else if(button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)){
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?", "Warning", JOptionPane.YES_NO_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
                 // Saving code here
             }
