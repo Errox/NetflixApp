@@ -31,17 +31,17 @@ public class SqlServerWatchedDAO implements WatchedDAO {
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
+            String sqlQuery = "SELECT * FROM Watched";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
             while(resultSet.next()){
 
-                int subscriptionId = resultSet.getInt("subscriptionNumber");
-                String name = resultSet.getString("name");
-                int seen = resultSet.getInt("seen");
-                int watchedper = resultSet.getInt("watched");
-                watched.add(new Watched(subscriptionId, name, seen, watchedper));
+                int id = resultSet.getInt("Id");
+                int Percentage = resultSet.getInt("Percentage");
+                int ProfileId = resultSet.getInt("ProfileId");
+                int ProgramId = resultSet.getInt("ProgramId");
+                watched.add(new Watched(id, Percentage, ProfileId, ProgramId));
             }
 
         }catch (Exception e){
@@ -59,21 +59,23 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     public Watched getWatchedById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Watched watched = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Watched WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
 
             while(resultSet.next()){
 
-                int subscriptionId = resultSet.getInt("subscriptionNumber");
-                String name = resultSet.getString("name");
-                int seen = resultSet.getInt("seen");
-                int watchedper = resultSet.getInt("watched");
-                watched = new Watched(subscriptionId, name, seen, watchedper);
+                int watchedId = resultSet.getInt("Id");
+                int Percentage = resultSet.getInt("Percentage");
+                int ProfileId = resultSet.getInt("ProfileId");
+                int ProgramId = resultSet.getInt("ProgramId");
+
+                watched = new Watched(watchedId, Percentage, ProfileId, ProgramId);
             }
 
         }catch (Exception e){
@@ -94,15 +96,14 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
         //Finalize query
         try{
-            String sqlQuery = "INSERT INTO Watched VALUES ( ?, ?, ?, ?)";
+            String sqlQuery = "INSERT INTO Watched VALUES (?, ?, ?)";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
-            preparedStatement.setInt(1, newWatched.getId());
-            preparedStatement.setString(2, newWatched.getName());
-            preparedStatement.setInt(3, newWatched.getSeen());
-            preparedStatement.setInt(4, newWatched.getPercentage());
-
+            preparedStatement.setInt(1, newWatched.getPercentage());
+            preparedStatement.setInt(2, newWatched.getProfileId());
+            preparedStatement.setInt(3, newWatched.getProgramId());
+            preparedStatement.execute();
         }catch (Exception e){
             //Print on error.
             e.printStackTrace();
@@ -119,16 +120,16 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
         //Finalize query
         try{
-            String sqlQuery = "UPDATE Accounts SET  name = ?, seen = ?, percentage = ? WHERE subscriptionId = ?";
+            String sqlQuery = "UPDATE Watched SET  Percentage = ?, ProfileId = ?, ProgramId = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
 
-            preparedStatement.setString(1, newWatched.getName());
-            preparedStatement.setInt(2, newWatched.getSeen());
-            preparedStatement.setInt(3, newWatched.getPercentage());
-            preparedStatement.setInt(4, newWatched.getId());
-
+            preparedStatement.setInt(1, newWatched.getPercentage());
+            preparedStatement.setInt(2, newWatched.getProfileId());
+            preparedStatement.setInt(3, newWatched.getProgramId());
+            preparedStatement.setInt(4, oldWatched.getId());
+            preparedStatement.execute();
         }catch (Exception e){
             //Print on error.
             e.printStackTrace();

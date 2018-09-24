@@ -5,6 +5,7 @@ import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Movie;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,45 +27,58 @@ public class SqlServerMovieDAO implements MovieDAO {
 
     @Override
     public List<Movie> getAllMovies() {
-        List<Movie> accounts = new ArrayList<Movie>();
-        List<Map<String, Object>> queryResult = null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Movies");
+        Connection connection =  MSSQLDatabase.getConnection();
+        List<Movie> Movies = new ArrayList<Movie>();
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-        for (int i = 0; i < queryResult.size(); i++){
-            //Store separately to Map to get values.
-            Map<String, Object> objectMap = queryResult.get(i);
+        try{
+            String sqlQuery = "SELECT * FROM Series";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
 
-            //Case Sensitively retrieving by column name.
-            //Should be by reflection.
-            Movie movie = new Movie(1, "", "");
+            while(resultSet.next()){
 
-            accounts.add(movie);
+                int id = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                int Age = resultSet.getInt("AgeIndication");
+                String Language = resultSet.getString("ProgramId");
+                String Genre = resultSet.getString("Genre");
+                Movies.add(new Movie(id, Age, Language, Genre));
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement);
         }
-        return accounts;
+
+        return Movies;
     }
 
     @Override
     public Movie getMovieById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Movie movie = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Movies WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
-//
-//                int subscriptionId = resultSet.getInt("subscriptionId");
-//                String name = resultSet.getString("name");
-//                String streetName = resultSet.getString("streetName");
-//                String postalCode = resultSet.getString("postalCode");
-//                String houseNumber = resultSet.getString("houseNumber");
-//                String place = resultSet.getString("place");
 
-                //Add our account from db to list.
-                movie =null;//new Episode(subscriptionId, name, streetName, postalCode, houseNumber, place);
+                int movieId = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                int Age = resultSet.getInt("AgeIndication");
+                String Language = resultSet.getString("ProgramId");
+                String Genre = resultSet.getString("Genre");
+
+                movie =new Movie(id, Age, Language, Genre);
             }
 
         }catch (Exception e){

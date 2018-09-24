@@ -5,6 +5,7 @@ import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Serie;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -27,44 +28,59 @@ public class SqlServerSerieDAO implements SerieDAO {
 
     @Override
     public List<Serie> getAllSeries() {
-        List<Serie> series = new ArrayList<Serie>();
-        List<Map<String, Object>> queryResult = null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Serie");
+        Connection connection =  MSSQLDatabase.getConnection();
+        List<Serie> Series = new ArrayList<Serie>();
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-        for (int i = 0; i < queryResult.size(); i++) {
-            //Store separately to Map to get values.
-            Map<String, Object> objectMap = queryResult.get(i);
+        try{
+            String sqlQuery = "SELECT * FROM Series";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
 
-            //Case Sensitively retrieving by column name.
-            //Should be by reflection.
-            Serie serie = null;//new Serie(1, "", new Date(), "", "");
+            while(resultSet.next()){
 
-            series.add(serie);
+                int id = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                int Age = resultSet.getInt("Age");
+                String Language = resultSet.getString("Language");
+                String Genre = resultSet.getString("Genre");
+                Series.add(new Serie(id, name, Age, Language, Genre));
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement);
         }
 
-        return series;
+        return Series;
     }
 
     @Override
     public Serie getSerieById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Serie serie = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Series WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
 
-                int length = resultSet.getInt("length");
-                String name = resultSet.getString("name");
-                String language = resultSet.getString("length");
-                String genre = resultSet.getString("language");
+                int SerieId = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                int Age = resultSet.getInt("Age");
+                String Language = resultSet.getString("Language");
+                String Genre = resultSet.getString("Genre");
 
                 //Add our account from db to list.
-                serie = new Serie(name, length,language, genre);
+                serie = new Serie(id, name, Age, Language, Genre);
             }
 
         }catch (Exception e){

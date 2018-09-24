@@ -16,11 +16,11 @@ public class ProgramManager implements ProgramDAO {
 
     @Override
     public List<Program> getAllPrograms() {
-        return null;
+        return programDAO.getAllPrograms();
     }
 
     @Override
     public Program getProgramById(int id) {
-        return null;
+        return programDAO.getProgramById(id);
     }
 }

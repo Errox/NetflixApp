@@ -27,18 +27,18 @@ public class SqlServerAccountDAO implements AccountDAO {
        ResultSet resultSet = null;
 
         try{
-           String sqlQuery = "";
+           String sqlQuery = "SELECT * FROM Accounts";
            statement = connection.createStatement();
            resultSet = statement.executeQuery(sqlQuery);
 
            while(resultSet.next()){
 
-               int subscriptionId = resultSet.getInt("subscriptionId");
-               String name = resultSet.getString("name");
-               String streetName = resultSet.getString("streetName");
-               String postalCode = resultSet.getString("postalCode");
-               String houseNumber = resultSet.getString("houseNumber");
-               String place = resultSet.getString("place");
+               int subscriptionId = resultSet.getInt("Id");
+               String name = resultSet.getString("Name");
+               String streetName = resultSet.getString("Street");
+               String postalCode = resultSet.getString("PostalCode");
+               String houseNumber = resultSet.getString("HouseNumber");
+               String place = resultSet.getString("Place");
 
                //Add our account from resultSet to list.
                accounts.add(new Account(subscriptionId, name, streetName, postalCode, houseNumber, place));
@@ -59,22 +59,22 @@ public class SqlServerAccountDAO implements AccountDAO {
     public Account getAccountById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Account account = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Accounts WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
 
-                int subscriptionId = resultSet.getInt("subscriptionId");
-                String name = resultSet.getString("name");
-                String streetName = resultSet.getString("streetName");
-                String postalCode = resultSet.getString("postalCode");
-                String houseNumber = resultSet.getString("houseNumber");
-                String place = resultSet.getString("place");
+                int subscriptionId = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                String streetName = resultSet.getString("Street");
+                String postalCode = resultSet.getString("PostalCode");
+                String houseNumber = resultSet.getString("HouseNumber");
+                String place = resultSet.getString("Place");
 
                 //Add our account from db to list.
                 account = new Account(subscriptionId, name, streetName, postalCode, houseNumber, place);
@@ -112,6 +112,7 @@ public class SqlServerAccountDAO implements AccountDAO {
             preparedStatement.setString(3, newAccount.getPostalCode());
             preparedStatement.setString(4, newAccount.getHouseNumber());
             preparedStatement.setString(5, newAccount.getPlace());
+            preparedStatement.execute();
 
         }catch (Exception e){
             //Print on error.
@@ -135,16 +136,17 @@ public class SqlServerAccountDAO implements AccountDAO {
               SET  Name =, Street =, HouseNumber =, Place =, PostalCode =
             */
 
-            String sqlQuery = "UPDATE Accounts SET name = ?, streetName = ?, postalCode = ?, houseNumber = ?, place = ? WHERE subscriptionId = ?";
+            String sqlQuery = "UPDATE Accounts SET Name = ?, Street = ?, PostalCode = ?, HouseNumber = ?, Place = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
-            preparedStatement.setString(1, oldAccount.getName());
-            preparedStatement.setString(2, oldAccount.getStreetName());
-            preparedStatement.setString(3, oldAccount.getPostalCode());
-            preparedStatement.setString(4, oldAccount.getHouseNumber());
-            preparedStatement.setString(5, oldAccount.getPlace());
+            preparedStatement.setString(1, newAccount.getName());
+            preparedStatement.setString(2, newAccount.getStreetName());
+            preparedStatement.setString(3, newAccount.getPostalCode());
+            preparedStatement.setString(4, newAccount.getHouseNumber());
+            preparedStatement.setString(5, newAccount.getPlace());
             preparedStatement.setInt(6, oldAccount.getId());
+            preparedStatement.execute();
 
         }catch (Exception e){
             //Print on error.

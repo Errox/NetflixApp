@@ -6,6 +6,7 @@ import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Episode;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -22,46 +23,58 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
 
     @Override
     public List<Episode> getAllEpisodes() {
-        List<Episode> episodes = new ArrayList<Episode>();
-        List<Map<String, Object>> queryResult =  null; //SqlHelperResultSet.getInstance().execRawQuery("SELECT * FROM Episode");
+        Connection connection =  MSSQLDatabase.getConnection();
+        List<Episode> Episodes = new ArrayList<Episode>();
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-        for (int i = 0; i < queryResult.size(); i++){
-            //Store separately to Map to get values.
-            Map<String, Object> objectMap = queryResult.get(i);
+        try{
+            String sqlQuery = "SELECT * FROM Episodes";
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
 
-            //Case Sensitively retrieving by column name.
-            //Should be by reflection.
-            Episode episode = new Episode("", 1, 1 );
+            while(resultSet.next()){
 
-            episodes.add(episode);
+                int id = resultSet.getInt("Id");
+                int EpisodeNr = resultSet.getInt("EpisodeNr");
+                int SeasonNr = resultSet.getInt("SeasonNr");
+                int ProgramId = resultSet.getInt("ProgramId");
+                int SerieId = resultSet.getInt("SerieId");
+                Episodes.add(new Episode(id, EpisodeNr, SeasonNr, ProgramId, SerieId));
+            }
+
+        }catch (Exception e){
+            //Print on error.
+            e.printStackTrace();
+        }finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement);
         }
 
-        return episodes;
+        return Episodes;
     }
 
     @Override
     public Episode getEpisodeById(int id) {
         Connection connection =  MSSQLDatabase.getConnection();
         Episode episode = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try{
-            String sqlQuery = "";
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sqlQuery);
+            statement = connection.prepareStatement("SELECT * FROM Episodes WHERE Id = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
-//
-//                int subscriptionId = resultSet.getInt("subscriptionId");
-//                String name = resultSet.getString("name");
-//                String streetName = resultSet.getString("streetName");
-//                String postalCode = resultSet.getString("postalCode");
-//                String houseNumber = resultSet.getString("houseNumber");
-//                String place = resultSet.getString("place");
 
-                //Add our account from db to list.
-                episode =null;//new Episode(subscriptionId, name, streetName, postalCode, houseNumber, place);
+                int episodeId = resultSet.getInt("Id");
+                int EpisodeNr = resultSet.getInt("EpisodeNr");
+                int SeasonNr = resultSet.getInt("SeasonNr");
+                int ProgramId = resultSet.getInt("ProgramId");
+                int SerieId = resultSet.getInt("SerieId");
+
+                episode = new Episode(id, EpisodeNr, SeasonNr, ProgramId, SerieId);
             }
 
         }catch (Exception e){

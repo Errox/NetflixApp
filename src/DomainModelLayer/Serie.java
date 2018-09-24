@@ -6,20 +6,20 @@ public class Serie {
 
     private int Id;
     private String name;
-    private int length;
+    private int age;
     private String language;
     private String genre;
 
-    public Serie(int Id, String name, int length, String language, String genre){
+    public Serie(int Id, String name, int age, String language, String genre){
             this.Id = Id;
             this.name = name;
-            this.length = length;
+            this.age = age;
             this.language = language;
             this.genre = genre;
     }
 
-    public Serie(String name, int length, String language, String genre){
-        this(0, name, length, language, genre);
+    public Serie(String name, int age, String language, String genre){
+        this(0, name, age, language, genre);
     }
 
 
@@ -31,8 +31,8 @@ public class Serie {
         return name;
     }
 
-    public int getLenght() {
-        return length;
+    public int getAge() {
+        return age;
     }
 
     public String getLanguage() {
