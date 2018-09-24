@@ -28,7 +28,7 @@ public class lForButtons implements ActionListener {
         }
         else if(button.getName().equals(ControlNames.MANAGE_BUTTON_UPDATE)){
             //if(ManageType. == ManageType.ACCOUNT)
-                new ManageForm().ManageAccount();
+                //new ManageForm().ManageAccount();
         }
         else if(button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)){
             int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?", "Warning", JOptionPane.YES_NO_OPTION);
