@@ -3,8 +3,8 @@ package PresentationLayer.Panels;
 import ApplicationLayer.AccountManager;
 import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
-import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.Controls.ManageType;
 import PresentationLayer.EventHandlers.lForCreate;
 import PresentationLayer.EventHandlers.lForDelete;
 import PresentationLayer.EventHandlers.lForUpdate;
@@ -17,7 +17,7 @@ public class ManagePanel extends JPanel {
     private ManageType manageType;
     private JComboBox accounts, profiles, watched;
 
-    public ManagePanel(ManageType manageType){
+    public ManagePanel(ManageType manageType) {
         this.manageType = manageType;
 
         //JPanel related.
@@ -36,15 +36,15 @@ public class ManagePanel extends JPanel {
         JLabel underManage = new JLabel("Selecteer een " + manageType.toString().toLowerCase() + " en druk selecteer onderaan de knop om te een nieuwe aan te maken, bijwerken of verwijderen");
         panel.add(underManage);
 
-        if(manageType == ManageType.ACCOUNT) {
+        if (manageType == ManageType.ACCOUNT) {
             accounts = new JComboBox<>(new AccountManager().getAllAccounts().toArray());
             panel.add(accounts);
 
-        }else if(manageType == ManageType.PROFILE){
-             profiles = new JComboBox<>(new ProfileManager().getAllProfiles().toArray());
-             panel.add(profiles);
+        } else if (manageType == ManageType.PROFILE) {
+            profiles = new JComboBox<>(new ProfileManager().getAllProfiles().toArray());
+            panel.add(profiles);
 
-        }else if(manageType == ManageType.WATCHED){
+        } else if (manageType == ManageType.WATCHED) {
             watched = new JComboBox<>(new WatchedManager().getAllWatched().toArray());
             panel.add(watched);
 

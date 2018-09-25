@@ -2,13 +2,11 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.ProgramDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
-import DomainModelLayer.Profile;
 import DomainModelLayer.Program;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SqlServerProgramDAO implements ProgramDAO {
 
@@ -24,29 +22,29 @@ public class SqlServerProgramDAO implements ProgramDAO {
 
     @Override
     public List<Program> getAllPrograms() {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Program> programs = new ArrayList<Program>();
         Statement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             String sqlQuery = "Select * FROM Programs";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int subscriptionId = resultSet.getInt("Id");
                 String title = resultSet.getString("Title");
                 Time Duration = resultSet.getTime("Duration");
                 //Add our account from resultSet to list.
-                programs.add(new Program(subscriptionId,title,Duration));
+                programs.add(new Program(subscriptionId, title, Duration));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
@@ -57,29 +55,29 @@ public class SqlServerProgramDAO implements ProgramDAO {
     @Override
     public Program getProgramById(int id) {
 
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Program program = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Programs WHERE Id = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int subscriptionId = resultSet.getInt("Id");
                 String title = resultSet.getString("Title");
                 Time Duration = resultSet.getTime("Duration");
                 //Add our account from resultSet to list.
-                program = new Program(subscriptionId,title,Duration);
+                program = new Program(subscriptionId, title, Duration);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }

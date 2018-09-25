@@ -9,7 +9,7 @@ public class MainPanel extends JPanel {
 
     private JTabbedPane tabPane;
 
-    public MainPanel(){
+    public MainPanel() {
         tabPane = new JTabbedPane();
         SetVisualDetails();
 
@@ -31,7 +31,7 @@ public class MainPanel extends JPanel {
         add(new InfoPanel(), BorderLayout.SOUTH);
     }
 
-    private void SetVisualDetails(){
+    private void SetVisualDetails() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(1280, 720));
     }

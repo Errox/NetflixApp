@@ -11,9 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class SqlServerSerieDAO implements SerieDAO {
 
@@ -30,17 +28,17 @@ public class SqlServerSerieDAO implements SerieDAO {
 
     @Override
     public List<Serie> getAllSeries() {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Serie> Series = new ArrayList<Serie>();
         Statement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             String sqlQuery = "SELECT * FROM Series";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
@@ -50,10 +48,10 @@ public class SqlServerSerieDAO implements SerieDAO {
                 Series.add(new Serie(id, name, Age, Language, Genre));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
@@ -63,17 +61,17 @@ public class SqlServerSerieDAO implements SerieDAO {
 
     @Override
     public Serie getSerieById(int id) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Serie serie = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Series WHERE Id = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int SerieId = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
@@ -85,10 +83,10 @@ public class SqlServerSerieDAO implements SerieDAO {
                 serie = new Serie(id, name, Age, Language, Genre);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
@@ -98,35 +96,35 @@ public class SqlServerSerieDAO implements SerieDAO {
 
     @Override
     public int getAvarageWatchTime(Profile profile, Serie series) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         int count = 0;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        List<Episode> episodes =  series.getAllEpisodes();
-        try{
-        for (Episode episode: episodes) {
-            try{
-                statement = connection.prepareStatement("SELECT Watched.Percentage as avarage FROM  Episodes INNER JOIN Profiles ON Episodes.Id = Profiles.Id INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Profiles.Id = Watched.ProfileId AND Programs.Id = Watched.ProgramId WHERE Profiles.Id = ? and Episodes.Id = ?");
-                statement.setInt(1, profile.getId());
-                statement.setInt(2, episode.getId());
-                resultSet = statement.executeQuery();
+        List<Episode> episodes = series.getAllEpisodes();
+        try {
+            for (Episode episode : episodes) {
+                try {
+                    statement = connection.prepareStatement("SELECT Watched.Percentage as avarage FROM  Episodes INNER JOIN Profiles ON Episodes.Id = Profiles.Id INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Profiles.Id = Watched.ProfileId AND Programs.Id = Watched.ProgramId WHERE Profiles.Id = ? and Episodes.Id = ?");
+                    statement.setInt(1, profile.getId());
+                    statement.setInt(2, episode.getId());
+                    resultSet = statement.executeQuery();
 
-                while(resultSet.next()){
-                    count += resultSet.getInt("avarage");
+                    while (resultSet.next()) {
+                        count += resultSet.getInt("avarage");
+                    }
+
+                } catch (Exception e) {
+                    //Print on error.
+                    e.printStackTrace();
                 }
 
-            }catch (Exception e) {
-                //Print on error.
-                e.printStackTrace();
             }
-
-        }
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
-        return count/episodes.size();
+        return count / episodes.size();
     }
 
 

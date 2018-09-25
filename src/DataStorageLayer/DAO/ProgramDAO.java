@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ProgramDAO {
     List<Program> getAllPrograms();
+
     Program getProgramById(int id);
 }

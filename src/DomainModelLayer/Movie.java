@@ -7,14 +7,14 @@ public class Movie {
     private String language;
     private String genre;
 
-    public Movie(int Id, int ageIndication, String language, String genre){
+    public Movie(int Id, int ageIndication, String language, String genre) {
         this.Id = Id;
         this.ageIndication = ageIndication;
         this.language = language;
         this.genre = genre;
     }
 
-    public Movie(int ageIndication, String language, String genre){
+    public Movie(int ageIndication, String language, String genre) {
         this(0, ageIndication, language, genre);
     }
 

@@ -9,7 +9,7 @@ public class AccountMoviePanel extends JPanel {
 //Op deze panel kan er een account worden gekozen er word dan weergegeven welke films er door dit account zijn bekeken
 
 
-    public AccountMoviePanel(){
+    public AccountMoviePanel() {
         AccountManager accountManager = new AccountManager();
 
         add(new JComboBox<>(new AccountManager().getAllAccounts().toArray()));

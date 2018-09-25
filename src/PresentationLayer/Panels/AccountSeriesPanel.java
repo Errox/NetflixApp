@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class AccountSeriesPanel extends JPanel {
 
-    public AccountSeriesPanel(){
+    public AccountSeriesPanel() {
 
         AccountManager accountManager = new AccountManager();
 

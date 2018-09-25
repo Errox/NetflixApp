@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class MSSQLHelper {
     private static Connection connection;
-    private static final String connectionString =  "jdbc:sqlserver://AXR;databaseName=NetFlixStats;integratedSecurity=true;";
+    private static final String connectionString = "jdbc:sqlserver://AXR;databaseName=NetFlixStats;integratedSecurity=true;";
 
     public Connection getConnection() {
         try {
@@ -32,11 +32,10 @@ public class MSSQLHelper {
     }
 
     public void closeConnectionResource(Connection connection) {
-        if(connection != null){
-            try{
+        if (connection != null) {
+            try {
                 connection.close();
-            }
-            catch (Exception ignore){
+            } catch (Exception ignore) {
 
             }
         }

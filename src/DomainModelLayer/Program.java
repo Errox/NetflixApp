@@ -8,7 +8,7 @@ public class Program {
     private String title;
     private Date timeSpan;
 
-    public Program(int Id, String title, Date timeSpan){
+    public Program(int Id, String title, Date timeSpan) {
         this.Id = Id;
         this.title = title;
         this.timeSpan = timeSpan;

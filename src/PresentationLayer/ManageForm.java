@@ -3,35 +3,32 @@ package PresentationLayer;
 import ApplicationLayer.AccountManager;
 import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
-import DomainModelLayer.Account;
 import PresentationLayer.Controls.JCalendar;
 import PresentationLayer.Controls.ManageType;
-import PresentationLayer.Controls.ModifyType;
-import javafx.scene.control.DatePicker;
 
 import javax.swing.*;
 
 public class ManageForm {
 
-   private ManageType manageType;
+    private ManageType manageType;
 
-   private AccountManager accountManager;
-   private WatchedManager watchedManager;
-   private ProfileManager profileManager;
+    private AccountManager accountManager;
+    private WatchedManager watchedManager;
+    private ProfileManager profileManager;
 
-   public ManageForm(ManageType manageType){
-       if(manageType == ManageType.ACCOUNT){
+    public ManageForm(ManageType manageType) {
+        if (manageType == ManageType.ACCOUNT) {
             ManageAccount();
-       }
-       if(manageType == ManageType.PROFILE){
+        }
+        if (manageType == ManageType.PROFILE) {
             ManageProfile();
-       }
-       if(manageType == ManageType.WATCHED){
-           ManageWatched();
-       }
-   }
+        }
+        if (manageType == ManageType.WATCHED) {
+            ManageWatched();
+        }
+    }
 
-    public void ManageAccount(){
+    public void ManageAccount() {
         this.accountManager = new AccountManager();
 
         JTextField fullName = new JTextField("", 8);
@@ -40,7 +37,7 @@ public class ManageForm {
         JTextField houseNumber = new JTextField();
         JTextField place = new JTextField();
 
-        final JComponent[] inputs = new JComponent[] {
+        final JComponent[] inputs = new JComponent[]{
                 new JLabel("Full name"),
                 fullName,
                 new JLabel("Street name"),
@@ -70,7 +67,7 @@ public class ManageForm {
         }
     }
 
-    public void ManageProfile(){
+    public void ManageProfile() {
         this.profileManager = new ProfileManager();
 //        private int Id;
 //        private String name;
@@ -83,8 +80,7 @@ public class ManageForm {
         JCalendar birthDate = new JCalendar(10);
 
 
-
-        final JComponent[] inputs = new JComponent[] {
+        final JComponent[] inputs = new JComponent[]{
                 new JLabel("FullName"),
                 fullName,
                 new JLabel("Birthdate (dd-mm-yyyy)"),
@@ -105,7 +101,7 @@ public class ManageForm {
         }
     }
 
-    public void ManageWatched(){
+    public void ManageWatched() {
         this.watchedManager = new WatchedManager();
 
         JTextField firstName = new JTextField();
@@ -113,7 +109,7 @@ public class ManageForm {
         JPasswordField password = new JPasswordField();
 
 
-        final JComponent[] inputs = new JComponent[] {
+        final JComponent[] inputs = new JComponent[]{
                 new JLabel("First"),
                 firstName,
                 new JLabel("Last"),

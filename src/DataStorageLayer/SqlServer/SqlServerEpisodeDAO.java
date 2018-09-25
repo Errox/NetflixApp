@@ -1,7 +1,6 @@
 package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.EpisodeDAO;
-import DataStorageLayer.Factories.DAOFactory;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Episode;
 
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SqlServerEpisodeDAO implements EpisodeDAO {
 
@@ -23,17 +21,17 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
 
     @Override
     public List<Episode> getAllEpisodes() {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Episode> Episodes = new ArrayList<Episode>();
         Statement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             String sqlQuery = "SELECT * FROM Episodes";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
                 int EpisodeNr = resultSet.getInt("EpisodeNr");
@@ -43,10 +41,10 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 Episodes.add(new Episode(id, EpisodeNr, SeasonNr, ProgramId, SerieId));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
@@ -56,17 +54,17 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
 
     @Override
     public Episode getEpisodeById(int id) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Episode episode = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Episodes WHERE Id = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int episodeId = resultSet.getInt("Id");
                 int EpisodeNr = resultSet.getInt("EpisodeNr");
@@ -77,10 +75,10 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 episode = new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
@@ -90,17 +88,17 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
 
     @Override
     public List<Episode> getAllEpisodesBySeriesId(int id) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Episode> Episodes = new ArrayList<Episode>();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Episodes WHERE SerieId = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int episodeId = resultSet.getInt("Id");
                 int EpisodeNr = resultSet.getInt("EpisodeNr");
@@ -110,10 +108,10 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }

@@ -2,7 +2,6 @@ package DomainModelLayer;
 
 import ApplicationLayer.EpisodeManager;
 
-import java.util.Date;
 import java.util.List;
 
 public class Serie {
@@ -13,15 +12,15 @@ public class Serie {
     private String language;
     private String genre;
 
-    public Serie(int Id, String name, int age, String language, String genre){
-            this.Id = Id;
-            this.name = name;
-            this.age = age;
-            this.language = language;
-            this.genre = genre;
+    public Serie(int Id, String name, int age, String language, String genre) {
+        this.Id = Id;
+        this.name = name;
+        this.age = age;
+        this.language = language;
+        this.genre = genre;
     }
 
-    public Serie(String name, int age, String language, String genre){
+    public Serie(String name, int age, String language, String genre) {
         this(0, name, age, language, genre);
     }
 
@@ -46,7 +45,7 @@ public class Serie {
         return genre;
     }
 
-    public List<Episode> getAllEpisodes(){
+    public List<Episode> getAllEpisodes() {
         EpisodeManager manager = new EpisodeManager();
         return manager.getAllEpisodesBySeriesId(this.Id);
     }

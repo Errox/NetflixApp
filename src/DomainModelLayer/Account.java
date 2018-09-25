@@ -9,7 +9,7 @@ public class Account {
     private String houseNumber;
     private String place;
 
-    public Account(int Id, String name, String streetName, String postalCode, String houseNumber, String place){
+    public Account(int Id, String name, String streetName, String postalCode, String houseNumber, String place) {
         this.Id = Id;
         this.name = name;
         this.streetName = streetName;
@@ -18,8 +18,8 @@ public class Account {
         this.place = place;
     }
 
-    public Account(String name, String streetName, String postalCode, String houseNumber, String place){
-      this(0, name, streetName, postalCode, houseNumber, place );
+    public Account(String name, String streetName, String postalCode, String houseNumber, String place) {
+        this(0, name, streetName, postalCode, houseNumber, place);
     }
 
     public int getId() {

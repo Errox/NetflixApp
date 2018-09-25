@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class InfoPanel extends JPanel {
 
-    public InfoPanel(){
+    public InfoPanel() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(1280, 25));
 

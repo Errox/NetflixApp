@@ -13,9 +13,11 @@ public class Watched {
         this.programId = programId;
         this.profileId = profileId;
     }
+
     public Watched(int percentage, int programId, int profileId) {
-        this(0, percentage,programId,profileId);
+        this(0, percentage, programId, profileId);
     }
+
     public int getId() {
         return Id;
     }
@@ -24,8 +26,12 @@ public class Watched {
         return percentage;
     }
 
-    public int getProfileId(){return profileId;}
+    public int getProfileId() {
+        return profileId;
+    }
 
-    public int getProgramId(){return programId;}
+    public int getProgramId() {
+        return programId;
+    }
 
 }

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SqlServerMovieDAO implements MovieDAO {
 
@@ -27,17 +26,17 @@ public class SqlServerMovieDAO implements MovieDAO {
 
     @Override
     public List<Movie> getAllMovies() {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Movie> Movies = new ArrayList<Movie>();
         Statement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             String sqlQuery = "SELECT * FROM Series";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
@@ -47,10 +46,10 @@ public class SqlServerMovieDAO implements MovieDAO {
                 Movies.add(new Movie(id, Age, Language, Genre));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
@@ -60,17 +59,17 @@ public class SqlServerMovieDAO implements MovieDAO {
 
     @Override
     public Movie getMovieById(int id) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Movie movie = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Movies WHERE Id = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int movieId = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
@@ -78,13 +77,13 @@ public class SqlServerMovieDAO implements MovieDAO {
                 String Language = resultSet.getString("ProgramId");
                 String Genre = resultSet.getString("Genre");
 
-                movie =new Movie(id, Age, Language, Genre);
+                movie = new Movie(id, Age, Language, Genre);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }

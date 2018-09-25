@@ -1,7 +1,6 @@
 package PresentationLayer.Panels;
 
 import ApplicationLayer.AccountManager;
-import DataStorageLayer.SqlServer.SqlServerAccountDAO;
 import DomainModelLayer.Account;
 
 import javax.swing.*;
@@ -14,8 +13,7 @@ public class AccountPanel extends JPanel {
 
     //Op deze pagina worden alle accounts weergegeven met maar 1 profiel
 
-    public AccountPanel(){
-
+    public AccountPanel() {
 
 
     }

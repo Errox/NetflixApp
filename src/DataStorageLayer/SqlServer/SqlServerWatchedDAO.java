@@ -25,17 +25,17 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
     @Override
     public List<Watched> getAllWatched() {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         List<Watched> watched = new ArrayList<Watched>();
         Statement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             String sqlQuery = "SELECT * FROM Watched";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
                 int Percentage = resultSet.getInt("Percentage");
@@ -44,10 +44,10 @@ public class SqlServerWatchedDAO implements WatchedDAO {
                 watched.add(new Watched(id, Percentage, ProfileId, ProgramId));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
@@ -57,18 +57,18 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
     @Override
     public Watched getWatchedById(int id) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Watched watched = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             statement = connection.prepareStatement("SELECT * FROM Watched WHERE Id = ?");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 int watchedId = resultSet.getInt("Id");
                 int Percentage = resultSet.getInt("Percentage");
@@ -78,10 +78,10 @@ public class SqlServerWatchedDAO implements WatchedDAO {
                 watched = new Watched(watchedId, Percentage, ProfileId, ProgramId);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
@@ -91,11 +91,11 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
     @Override
     public void addWatched(Watched newWatched) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
 
         //Finalize query
-        try{
+        try {
             String sqlQuery = "INSERT INTO Watched VALUES (?, ?, ?)";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
@@ -104,10 +104,10 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             preparedStatement.setInt(2, newWatched.getProfileId());
             preparedStatement.setInt(3, newWatched.getProgramId());
             preparedStatement.execute();
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
         }
@@ -115,11 +115,11 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
     @Override
     public void updateWatched(Watched oldWatched, Watched newWatched) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
 
         //Finalize query
-        try{
+        try {
             String sqlQuery = "UPDATE Watched SET  Percentage = ?, ProfileId = ?, ProgramId = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
@@ -130,10 +130,10 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             preparedStatement.setInt(3, newWatched.getProgramId());
             preparedStatement.setInt(4, oldWatched.getId());
             preparedStatement.execute();
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
         }
@@ -141,18 +141,18 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
     @Override
     public void deleteWatched(Watched deleteWatch) {
-        Connection connection =  MSSQLDatabase.getConnection();
+        Connection connection = MSSQLDatabase.getConnection();
         Statement statement = null;
 
         //Finalize with parameter query
-        try{
+        try {
             String sqlQuery = "DELETE FROM Watched WHERE subscriptionId " + deleteWatch.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
-        }finally {
+        } finally {
             //Clean our resources.
             MSSQLDatabase.closeStatementResources(statement);
         }
