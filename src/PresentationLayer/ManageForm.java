@@ -12,8 +12,10 @@ import javafx.scene.control.DatePicker;
 import javax.swing.*;
 
 public class ManageForm {
+
    private ManageType manageType;
    private ModifyType modifyType;
+
    private AccountManager accountManager;
    private WatchedManager watchedManager;
    private ProfileManager profileManager;
@@ -22,6 +24,7 @@ public class ManageForm {
 
        this.manageType = type;
        this.modifyType = modifyType;
+
 
        if(manageType == ManageType.ACCOUNT){
             ManageAccount();
@@ -90,13 +93,15 @@ public class ManageForm {
         final JComponent[] inputs = new JComponent[] {
                 new JLabel("FullName"),
                 fullName,
-                new JLabel("Birthdate"),
+                new JLabel("Birthdate (dd-mm-yyyy)"),
                 birthDate
         };
 
         int result = JOptionPane.showConfirmDialog(null, inputs, "Fill in the fields", JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
+
+            System.out.println(birthDate.getValue());
             //System.out.println("You entered " +
 //                    firstName.getText() + ", " +
 //                    lastName.getText() + ", " +

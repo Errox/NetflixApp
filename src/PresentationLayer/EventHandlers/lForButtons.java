@@ -19,7 +19,6 @@ public class lForButtons implements ActionListener {
         this.selectedItem = selected;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton)e.getSource();
@@ -36,7 +35,7 @@ public class lForButtons implements ActionListener {
 
             int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?", "Warning", JOptionPane.YES_NO_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
-                // Saving code here
+                // Delete code here
             }
         }
     }
