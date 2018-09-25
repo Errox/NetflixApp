@@ -1,4 +1,4 @@
-package DomainModelLayer;
+package PresentationLayer.Controls;
 
 public enum ManageType {
     ACCOUNT,

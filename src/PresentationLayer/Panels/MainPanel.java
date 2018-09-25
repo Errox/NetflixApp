@@ -1,6 +1,6 @@
 package PresentationLayer.Panels;
 
-import DomainModelLayer.ManageType;
+import PresentationLayer.Controls.ManageType;
 
 import javax.swing.*;
 import java.awt.*;

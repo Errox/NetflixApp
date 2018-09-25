@@ -1,7 +1,6 @@
 package PresentationLayer.EventHandlers;
 
-import DomainModelLayer.Account;
-import DomainModelLayer.ManageType;
+import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.Controls.ModifyType;
 import PresentationLayer.ManageForm;

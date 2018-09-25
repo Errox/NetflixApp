@@ -3,7 +3,7 @@ package PresentationLayer.Panels;
 import ApplicationLayer.AccountManager;
 import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
-import DomainModelLayer.ManageType;
+import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.EventHandlers.lForButtons;
 

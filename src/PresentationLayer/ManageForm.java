@@ -4,7 +4,7 @@ import ApplicationLayer.AccountManager;
 import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Account;
-import DomainModelLayer.ManageType;
+import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ModifyType;
 
 import javax.swing.*;
