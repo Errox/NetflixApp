@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-import static com.sun.glass.ui.Cursor.setVisible;
-
 public class MainForm implements Runnable {
     private JFrame f;
 

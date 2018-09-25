@@ -17,24 +17,24 @@ public class SerieManager implements SerieDAO {
      * -Read
      */
 
-    public SerieManager(){
+    public SerieManager() {
         this.serieDAO = DAOFactory.getSerieDAOInstance();
     }
 
-     /**
+    /**
      * -Returns all serie by the data storage layer provided.
-      * */
-     @Override
-    public List<Serie> getAllSeries(){
+     */
+    @Override
+    public List<Serie> getAllSeries() {
         return serieDAO.getAllSeries();
     }
 
 
     /**
      * -Returns serie associated by the provided id, from the storage layer provided.
-     * */
+     */
     @Override
-    public Serie getSerieById(int id){
+    public Serie getSerieById(int id) {
         return serieDAO.getSerieById(id);
     }
 

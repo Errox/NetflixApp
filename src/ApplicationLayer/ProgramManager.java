@@ -10,7 +10,7 @@ public class ProgramManager implements ProgramDAO {
 
     private ProgramDAO programDAO;
 
-    public ProgramManager(){
+    public ProgramManager() {
         this.programDAO = DAOFactory.getProgramDAOInstance();
     }
 

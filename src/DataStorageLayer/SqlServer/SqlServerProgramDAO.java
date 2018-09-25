@@ -16,9 +16,6 @@ public class SqlServerProgramDAO implements ProgramDAO {
         this.MSSQLDatabase = new MSSQLHelper();
     }
 
-    //[ProgramId] [int] IDENTITY(1,1) NOT NULL,
-    //[Title] [nvarchar](50) NULL,
-    //[Duration] [time](7) NULL,
 
     @Override
     public List<Program> getAllPrograms() {

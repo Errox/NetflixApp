@@ -19,46 +19,47 @@ public class AccountManager implements AccountDAO {
      * -Delete
      */
 
-    public AccountManager(){
+    public AccountManager() {
         this.accountDAO = DAOFactory.getAccountDAOInstance();
     }
 
-     /**
+    /**
      * -Returns all Accounts by the data storage layer provided.
-      * */
-    public List<Account> getAllAccounts(){
+     */
+    public List<Account> getAllAccounts() {
         return accountDAO.getAllAccounts();
     }
 
 
     /**
      * -Returns Account associated by the provided id, from the storage layer provided.
-     * */
-    public Account getAccountById(int id){
+     */
+    public Account getAccountById(int id) {
         return accountDAO.getAccountById(id);
     }
 
     /**
-    * -Adds an account to the data storage layer provided
+     * -Adds an account to the data storage layer provided
+     *
      * @param newAccount represents the new 'Account' that will be added to the Data storage
-    */
-    public void addAccount(Account newAccount){
+     */
+    public void addAccount(Account newAccount) {
         accountDAO.addAccount(newAccount);
     }
 
-     /**
+    /**
      * -Updates an account by specifying the new and old account.
-      * Old account is used to find the 'old '- account
-      * so we can replace those values within the Data storage
+     * Old account is used to find the 'old '- account
+     * so we can replace those values within the Data storage
      */
-    public void updateAccount(Account newAccount, Account oldAccount){
+    public void updateAccount(Account newAccount, Account oldAccount) {
         accountDAO.updateAccount(oldAccount, newAccount);
     }
 
 
     /**
      * -Deletes an account by specifying the to be deleted account(s).
-     *
+     * <p>
      * "as of type List, it is easier to implement both delete / delete (multiple)
      * then representing both methods as maintainable"
      */

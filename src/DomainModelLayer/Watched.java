@@ -34,4 +34,9 @@ public class Watched {
         return programId;
     }
 
+
+    @Override
+    public String toString() {
+        return getProgramId() + " Watched for " + getPercentage() + "";
+    }
 }

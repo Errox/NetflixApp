@@ -11,14 +11,14 @@ public class JCalendar extends JTextField {
     private String input;
     private int maxLenght;
 
-    public JCalendar(int maxLenght){
+    public JCalendar(int maxLenght) {
         this.maxLenght = maxLenght;
         this.addKeyListener(new onChange(this));
 
     }
 
-    public Date getValue(){
-        String input =  this.getText();
+    public Date getValue() {
+        String input = this.getText();
         Date d = new Date();
 
 
@@ -32,7 +32,7 @@ public class JCalendar extends JTextField {
     public class onChange implements KeyListener {
         private JTextField textField;
 
-        public onChange(JTextField tf){
+        public onChange(JTextField tf) {
             this.textField = tf;
         }
 
@@ -46,15 +46,15 @@ public class JCalendar extends JTextField {
 
                 e.consume();
             }
-            if (textField.getText().length() == 2 || textField.getText().length() == 5)
-            {textField.setText(textField.getText() + "-");}
+            if (textField.getText().length() == 2 || textField.getText().length() == 5) {
+                textField.setText(textField.getText() + "-");
+            }
 
 
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-
 
 
         }

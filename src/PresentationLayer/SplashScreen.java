@@ -7,7 +7,7 @@ public class SplashScreen {
 
     private JWindow jWindow;
 
-    public void initialize(){
+    public void initialize() {
         jWindow = new JWindow();
         jWindow.setSize(680, 316);
         jWindow.setLocationRelativeTo(null);
@@ -20,7 +20,7 @@ public class SplashScreen {
         jWindow.setVisible(true);
         try {
             //Maybe warm up the database connection / cache in this time?
-            Thread.sleep(5000);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

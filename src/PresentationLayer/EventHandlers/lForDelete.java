@@ -1,28 +1,62 @@
 package PresentationLayer.EventHandlers;
 
-import PresentationLayer.Controls.ManageType;
+import ApplicationLayer.AccountManager;
+import ApplicationLayer.ProfileManager;
+import ApplicationLayer.WatchedManager;
+import DomainModelLayer.Account;
+import DomainModelLayer.Profile;
+import DomainModelLayer.Watched;
 import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.Controls.ManageType;
+import PresentationLayer.Panels.ManagePanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class lForDelete implements ActionListener {
 
-    private ManageType manageType;
+    private ManagePanel managePanel;
 
-    public lForDelete(ManageType manageType){
-        this.manageType = manageType;
+    public lForDelete(ManagePanel managePanel) {
+        this.managePanel = managePanel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton)e.getSource();
+        JButton button = (JButton) e.getSource();
 
-        if(button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)){
+        if (button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)) {
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u het record wilt verwijderen?", "Warning", JOptionPane.YES_NO_OPTION);
 
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the selected record?", "Warning", JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                // Delete code here
+
+            if (managePanel.getManageType() == ManageType.ACCOUNT) {
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    Account w = (Account) managePanel.getSelectedObject();
+                    System.out.println(w.getId());
+
+                    AccountManager accountManager = new AccountManager();
+                    accountManager.deleteAccounts(w);
+                    managePanel.updateCombobox();
+                }
+            } else if (managePanel.getManageType() == ManageType.PROFILE) {
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    Profile w = (Profile) managePanel.getSelectedObject();
+                    System.out.println(w.getId());
+
+                    ProfileManager profileManager = new ProfileManager();
+                    profileManager.deleteProfile(w);
+                    managePanel.updateCombobox();
+                }
+            } else if (managePanel.getManageType() == ManageType.WATCHED) {
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    Watched w = (Watched) managePanel.getSelectedObject();
+                    System.out.println(w.getId());
+
+                    WatchedManager watchedManager = new WatchedManager();
+                    watchedManager.deleteWatched(w);
+                    managePanel.updateCombobox();
+                }
             }
         }
     }

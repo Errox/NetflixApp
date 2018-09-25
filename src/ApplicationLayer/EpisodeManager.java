@@ -10,7 +10,7 @@ public class EpisodeManager implements EpisodeDAO {
 
     private EpisodeDAO episodeDAO;
 
-    public EpisodeManager(){
+    public EpisodeManager() {
         this.episodeDAO = DAOFactory.getEpisodeDAOInstance();
     }
 

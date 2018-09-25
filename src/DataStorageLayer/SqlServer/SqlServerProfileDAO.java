@@ -2,6 +2,7 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.ProfileDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
 
 import java.sql.Connection;
@@ -58,6 +59,40 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
+    public List<Profile> getProfilesFromOwner(Account owner) {
+        Connection connection = MSSQLDatabase.getConnection();
+        List<Profile> profiles = new ArrayList<Profile>();
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            //Should be prepared statement.
+            String sqlQuery = "Select * from Profiles WHERE AccountId= " + owner.getId();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("Id");
+                String name = resultSet.getString("Name");
+                Date BirthDate = resultSet.getDate("BirthDate");
+                int AccountId = resultSet.getInt("AccountId");
+                //Add our account from resultSet to list.
+                profiles.add(new Profile(id, name, BirthDate, AccountId));
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return profiles;
+    }
+
+    @Override
     public Profile getProfileById(int id) {
         Connection connection = MSSQLDatabase.getConnection();
         Profile profile = null;
@@ -74,8 +109,8 @@ public class SqlServerProfileDAO implements ProfileDAO {
                 int ProfileId = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 Date BirthDate = resultSet.getDate("BirthDate");
-                int Acoountid = resultSet.getInt("AccountId");
-                profile = new Profile(ProfileId, name, BirthDate, Acoountid);
+                int AccountId = resultSet.getInt("AccountId");
+                profile = new Profile(ProfileId, name, BirthDate, AccountId);
             }
 
         } catch (Exception e) {
@@ -87,6 +122,35 @@ public class SqlServerProfileDAO implements ProfileDAO {
         }
 
         return profile;
+    }
+
+    @Override
+    public int getProfileCount(Account owner) {
+        Connection connection = MSSQLDatabase.getConnection();
+        Profile profile = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int buffer = 0;
+
+        try {
+            statement = connection.prepareStatement("SELECT COUNT(*) as Total FROM Profiles where AccountId = ?");
+            statement.setInt(1, owner.getId());
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                buffer = resultSet.getInt("Total");
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return buffer;
     }
 
     @Override
@@ -102,7 +166,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
             //Index 1 or 0?
             preparedStatement.setString(1, newProfiles.getName());
             preparedStatement.setDate(2, new java.sql.Date(newProfiles.getBirthDate().getTime()));
-            preparedStatement.setInt(3, newProfiles.getId());
+            preparedStatement.setInt(3, newProfiles.getAccountId());
             preparedStatement.execute();
 
         } catch (Exception e) {
@@ -123,13 +187,13 @@ public class SqlServerProfileDAO implements ProfileDAO {
 
         //Finalize query
         try {
-            String sqlQuery = "UPDATE Profiles SET Name = ?, BirthDate = ?, AccountId = ? WHERE Id = ?";
+            String sqlQuery = "UPDATE Profiles SET Name = ?, BirthDate = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             preparedStatement.setString(1, newProfile.getName());
             preparedStatement.setDate(2, new java.sql.Date(newProfile.getBirthDate().getTime()));
-            preparedStatement.setInt(3, newProfile.getId());
-            preparedStatement.setInt(4, oldProfile.getId());
+            //preparedStatement.setInt(3, newProfile.getId());
+            preparedStatement.setInt(3, oldProfile.getId());
             preparedStatement.execute();
 
         } catch (Exception e) {

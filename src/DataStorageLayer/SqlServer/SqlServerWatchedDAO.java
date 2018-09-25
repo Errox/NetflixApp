@@ -2,6 +2,7 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.WatchedDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Profile;
 import DomainModelLayer.Watched;
 
 import java.sql.Connection;
@@ -13,10 +14,6 @@ import java.util.List;
 
 public class SqlServerWatchedDAO implements WatchedDAO {
 
-    //[SubscriptionNumber] [int] NOT NULL,
-    //[Name] [nvarchar](50) NOT NULL,
-    //[Seen] [int] NOT NULL,
-    //[Watched] [int] NULL,
     private MSSQLHelper MSSQLDatabase;
 
     public SqlServerWatchedDAO() {
@@ -76,6 +73,39 @@ public class SqlServerWatchedDAO implements WatchedDAO {
                 int ProgramId = resultSet.getInt("ProgramId");
 
                 watched = new Watched(watchedId, Percentage, ProfileId, ProgramId);
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement);
+        }
+
+        return watched;
+    }
+
+    @Override
+    public List<Watched> getAllWatchedForProfile(Profile profile) {
+        Connection connection = MSSQLDatabase.getConnection();
+        List<Watched> watched = new ArrayList<Watched>();
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            //TO PARAMATERS
+            String sqlQuery = "SELECT * FROM Watched WHERE ProfileId= " + profile.getId();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("Id");
+                int Percentage = resultSet.getInt("Percentage");
+                int ProfileId = resultSet.getInt("ProfileId");
+                int ProgramId = resultSet.getInt("ProgramId");
+                watched.add(new Watched(id, Percentage, ProfileId, ProgramId));
             }
 
         } catch (Exception e) {

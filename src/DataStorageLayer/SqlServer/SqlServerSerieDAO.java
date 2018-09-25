@@ -15,11 +15,6 @@ import java.util.List;
 
 public class SqlServerSerieDAO implements SerieDAO {
 
-    //[SerieId] [int] IDENTITY(1,1) NOT NULL,
-    //[Name] [nvarchar](50) NULL,
-    //[age] [int] NULL,
-    //[Language] [nvarchar](50) NULL,
-    //[Genre] [nvarchar](50) NULL,
     private MSSQLHelper MSSQLDatabase;
 
     public SqlServerSerieDAO() {

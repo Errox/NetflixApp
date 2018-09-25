@@ -10,7 +10,7 @@ public class MovieManager implements MovieDAO {
 
     private MovieDAO movieDAO;
 
-    public MovieManager(){
+    public MovieManager() {
         this.movieDAO = DAOFactory.getMovieDAOInstance();
     }
 

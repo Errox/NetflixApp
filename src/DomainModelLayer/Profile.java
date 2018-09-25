@@ -21,6 +21,10 @@ public class Profile {
     }
 
     public int getId() {
+        return Id;
+    }
+
+    public int getAccountId() {
         return accountId;
     }
 
