@@ -3,25 +3,28 @@ package PresentationLayer;
 import javax.swing.*;
 import java.net.URL;
 
-public class SplashScreen extends JWindow{
+public class SplashScreen {
+
+    private JWindow jWindow;
 
     public void initialize(){
-        setSize(680, 316);
-        setLocationRelativeTo(null);
-        requestFocus();
+        jWindow = new JWindow();
+        jWindow.setSize(680, 316);
+        jWindow.setLocationRelativeTo(null);
+        jWindow.requestFocus();
 
         URL imageURL = getClass().getClassLoader().getResource("netflix-logo.png");
 
-        getContentPane().add(new JLabel("", new ImageIcon(imageURL), SwingConstants.CENTER));
+        jWindow.getContentPane().add(new JLabel("", new ImageIcon(imageURL), SwingConstants.CENTER));
 
-        setVisible(true);
+        jWindow.setVisible(true);
         try {
             //Maybe warm up the database connection / cache in this time?
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        setVisible(false);
-        dispose();
+        jWindow.setVisible(false);
+        jWindow.dispose();
     }
 }

@@ -4,8 +4,10 @@ import ApplicationLayer.AccountManager;
 import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Account;
+import PresentationLayer.Controls.JCalendar;
 import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ModifyType;
+import javafx.scene.control.DatePicker;
 
 import javax.swing.*;
 
@@ -73,28 +75,32 @@ public class ManageForm {
 
     public void ManageProfile(){
         this.profileManager = new ProfileManager();
+//        private int Id;
+//        private String name;
+//        private Date birthDate;
+//        private int accountId;
 
-        JTextField firstName = new JTextField();
-        JTextField lastName = new JTextField();
-        JPasswordField password = new JPasswordField();
+
+        JTextField fullName = new JTextField();
+        //04-08-2017
+        JCalendar birthDate = new JCalendar(10);
+
 
 
         final JComponent[] inputs = new JComponent[] {
-                new JLabel("First"),
-                firstName,
-                new JLabel("Last"),
-                lastName,
-                new JLabel("Password"),
-                password
+                new JLabel("FullName"),
+                fullName,
+                new JLabel("Birthdate"),
+                birthDate
         };
 
         int result = JOptionPane.showConfirmDialog(null, inputs, "Fill in the fields", JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
-            System.out.println("You entered " +
-                    firstName.getText() + ", " +
-                    lastName.getText() + ", " +
-                    password.getPassword());
+            //System.out.println("You entered " +
+//                    firstName.getText() + ", " +
+//                    lastName.getText() + ", " +
+//                    password.getPassword());
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
