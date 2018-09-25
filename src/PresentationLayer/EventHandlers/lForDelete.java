@@ -14,6 +14,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static PresentationLayer.Controls.ControlNames.CONFIRM_REMOVE;
+import static PresentationLayer.Controls.ControlNames.CONFIRM_TITLE_WARNING;
+
 public class lForDelete implements ActionListener {
 
     private ManagePanel managePanel;
@@ -27,8 +30,7 @@ public class lForDelete implements ActionListener {
         JButton button = (JButton) e.getSource();
 
         if (button.getName().equals(ControlNames.MANAGE_BUTTON_DELETE)) {
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u het record wilt verwijderen?", "Warning", JOptionPane.YES_NO_OPTION);
-
+            int dialogResult = JOptionPane.showConfirmDialog(null, CONFIRM_REMOVE, CONFIRM_TITLE_WARNING, JOptionPane.YES_NO_OPTION);
 
             if (managePanel.getManageType() == ManageType.ACCOUNT) {
                 if (dialogResult == JOptionPane.YES_OPTION) {
@@ -41,10 +43,12 @@ public class lForDelete implements ActionListener {
                 }
             } else if (managePanel.getManageType() == ManageType.PROFILE) {
                 if (dialogResult == JOptionPane.YES_OPTION) {
+
                     Profile w = (Profile) managePanel.getSelectedObject();
                     System.out.println(w.getId());
 
                     ProfileManager profileManager = new ProfileManager();
+
                     profileManager.deleteProfile(w);
                     managePanel.updateCombobox();
                 }

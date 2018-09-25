@@ -1,5 +1,7 @@
 package PresentationLayer.Panels;
 
+import PresentationLayer.Controls.ControlNames;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,8 +11,8 @@ public class InfoPanel extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(1280, 25));
 
-        JLabel title = new JLabel("Netflix Statistix");
-        JLabel info = new JLabel("Informatica 2018/2019 Klas: 23VK  Ryan Groenewold, Dennis Blokland, Sjoerd Teunisse");
+        JLabel title = new JLabel(ControlNames.APPLICATION_NAME);
+        JLabel info = new JLabel(ControlNames.INFO_WIDGET_TEXT);
 
         add(title, BorderLayout.WEST);
         add(info, BorderLayout.EAST);

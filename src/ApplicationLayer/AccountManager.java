@@ -42,9 +42,10 @@ public class AccountManager implements AccountDAO {
      * -Adds an account to the data storage layer provided
      *
      * @param newAccount represents the new 'Account' that will be added to the Data storage
+     * returns the Id from the newly inserted Record;
      */
-    public void addAccount(Account newAccount) {
-        accountDAO.addAccount(newAccount);
+    public int addAccount(Account newAccount) {
+        return accountDAO.addAccount(newAccount);
     }
 
     /**

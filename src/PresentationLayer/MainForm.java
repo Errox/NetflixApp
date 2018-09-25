@@ -8,25 +8,24 @@ import java.awt.*;
 import java.net.URL;
 
 public class MainForm implements Runnable {
-    private JFrame f;
+    private JFrame jFrame;
 
     public void SetVisualDefaults() {
-        f = new JFrame();
+        jFrame = new JFrame();
 
-        f.setSize(1280, 720);
-        f.setLocationRelativeTo(null);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        URL imageURL = getClass().getClassLoader().getResource("netflix-icon.png");
-        f.setIconImage(Toolkit.getDefaultToolkit().getImage(imageURL));
-        f.setTitle(ControlNames.APPLICATION_NAME);
+        jFrame.setSize(1280, 720);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        URL imageURL = getClass().getClassLoader().getResource(ControlNames.APPLICATION_ICON);
+        jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(imageURL));
+        jFrame.setTitle(ControlNames.APPLICATION_NAME);
     }
 
     @Override
     public void run() {
-
         SetVisualDefaults();
         MainPanel mainPanel = new MainPanel();
-        f.setVisible(true);
-        f.add(mainPanel);
+        jFrame.setVisible(true);
+        jFrame.add(mainPanel);
     }
 }

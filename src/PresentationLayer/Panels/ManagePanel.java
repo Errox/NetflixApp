@@ -7,6 +7,7 @@ import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.Controls.JCalendar;
+import PresentationLayer.Controls.JMaxLengthTextBox;
 import PresentationLayer.Controls.ManageType;
 import PresentationLayer.EventHandlers.*;
 
@@ -30,11 +31,11 @@ public class ManagePanel extends JPanel {
     private JPanel createContentPanel() {
         JPanel panel = new JPanel(new GridLayout(5, 1));
 
-        JLabel manageLabel = new JLabel("Managing " + manageType.toString().toLowerCase());
+        JLabel manageLabel = new JLabel(ControlNames.MANAGE_LABEL + manageType.toString().toLowerCase());
         panel.add(manageLabel);
 
-        JLabel underManage = new JLabel("Selecteer een " + manageType.toString().toLowerCase() + " en druk onderaan de knop om te een nieuwe aan te maken, bijwerken of verwijderen");
-        panel.add(underManage);
+        //JLabel underManage = new JLabel("Selecteer een " + manageType.toString().toLowerCase() + " en druk onderaan de knop om te een nieuwe aan te maken, bijwerken of verwijderen");
+      //  panel.add(underManage);
 
         if (manageType == ManageType.ACCOUNT) {
             accounts = new JComboBox<>();
@@ -125,9 +126,14 @@ public class ManagePanel extends JPanel {
     }
 
     public void ManageProfile(boolean update) {
+        if( update && profiles.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
+            return;
+        }
+
         ProfileManager profileManager = new ProfileManager();
 
-        JTextField fullName = new JTextField();
+        JMaxLengthTextBox fullName = new JMaxLengthTextBox(50);
         JCalendar birthDate = new JCalendar(10);
 
 
@@ -141,13 +147,13 @@ public class ManagePanel extends JPanel {
         }
 
         final JComponent[] inputs = new JComponent[]{
-                new JLabel("FullName"),
+                new JLabel(ControlNames.FULL_NAME),
                 fullName,
-                new JLabel("Birthdate (dd-mm-yyyy)"),
+                new JLabel(ControlNames.BIRTHDAY),
                 birthDate
         };
 
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Fill in the fields", JOptionPane.DEFAULT_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
 
@@ -165,14 +171,15 @@ public class ManagePanel extends JPanel {
 
 
             } else {
-                if (profileManager.getProfileCount((Account) accounts.getSelectedItem()) <= 4) {
+                int p = profileManager.getProfileCount((Account) accounts.getSelectedItem());
+                if ( p <= 4 ) {
                     System.out.println(profileManager.getProfileCount((Account) accounts.getSelectedItem()));
                     profileManager.addProfile(new Profile(0, fullName.getText(), birthDate.getValue(), ((Account) accounts.getSelectedItem()).getId()));
                     updateCombobox();
                     System.out.println(birthDate.getValue());
 
                 } else
-                    JOptionPane.showMessageDialog(this, "Een account mag maximaal 5 profielen bevatten", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, ControlNames.MAX_ACCOUNT_MESSAGE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.ERROR_MESSAGE);
             }
 
 
@@ -184,11 +191,13 @@ public class ManagePanel extends JPanel {
     public void ManageAccount(boolean update) {
         AccountManager accountManager = new AccountManager();
 
-        JTextField fullName = new JTextField("", 8);
-        JTextField streetName = new JTextField();
-        JTextField postalCode = new JTextField();
-        JTextField houseNumber = new JTextField();
-        JTextField place = new JTextField();
+        JMaxLengthTextBox fullName = new JMaxLengthTextBox(50);
+        JMaxLengthTextBox streetName = new JMaxLengthTextBox(50);
+        JMaxLengthTextBox postalCode = new JMaxLengthTextBox(6);
+        JMaxLengthTextBox houseNumber = new JMaxLengthTextBox(5);
+        JMaxLengthTextBox place = new JMaxLengthTextBox(50);
+
+        JCalendar birthdate = new JCalendar(10);
 
         if (update && accounts.getSelectedItem() != null) {
             Account account = accountManager.getAccountById(((Account) accounts.getSelectedItem()).getId());
@@ -202,33 +211,38 @@ public class ManagePanel extends JPanel {
         }
 
         final JComponent[] inputs = new JComponent[]{
-                new JLabel("Full name"),
+                new JLabel(ControlNames.FULL_NAME),
                 fullName,
-                new JLabel("Street name"),
+                new JLabel(ControlNames.STREET_NAME),
                 streetName,
-                new JLabel("Postal code"),
+                new JLabel(ControlNames.POSTAL_CODE),
                 postalCode,
-                new JLabel("House number"),
+                new JLabel(ControlNames.HOUSE_NUMBER),
                 houseNumber,
-                new JLabel("Place"),
-                place
+                new JLabel(ControlNames.PLACE),
+                place,
+                new JLabel(ControlNames.BIRTHDAY),
+                birthdate
         };
 
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Fill in the fields", JOptionPane.DEFAULT_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
 
-            Account parseObj = new Account(0, fullName.getText(), streetName.getText(), postalCode.getText(), houseNumber.getText(), place.getText());
+            Account parsedObj = new Account(0, fullName.getText(), streetName.getText(), postalCode.getText(), houseNumber.getText(), place.getText());
 
             if (update)
-                accountManager.updateAccount(parseObj, (Account) accounts.getSelectedItem());
-            else
-                accountManager.addAccount(parseObj);
+                accountManager.updateAccount(parsedObj, (Account) accounts.getSelectedItem());
+            else {
+                ProfileManager pfm = new ProfileManager();
+                int id = accountManager.addAccount(parsedObj);
+
+                pfm.addProfile(new Profile(0, fullName.getText(), birthdate.getValue() , id));
+            }
 
             updateCombobox();
 
-
-            accounts.setSelectedItem(parseObj);
+            accounts.setSelectedItem(parsedObj);
 
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
@@ -236,6 +250,11 @@ public class ManagePanel extends JPanel {
     }
 
     public void ManageWatched() {
+        if(profiles.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE_WATCHED, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
+            return;
+        }
+
         WatchedManager watchedManager = new WatchedManager();
 
         JTextField firstName = new JTextField();
@@ -252,7 +271,7 @@ public class ManagePanel extends JPanel {
                 password
         };
 
-        int result = JOptionPane.showConfirmDialog(null, inputs, "Fill in the fields", JOptionPane.DEFAULT_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             System.out.println("You entered " +

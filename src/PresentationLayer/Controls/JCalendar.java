@@ -3,6 +3,9 @@ package PresentationLayer.Controls;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JCalendar extends JTextField {
@@ -19,13 +22,16 @@ public class JCalendar extends JTextField {
 
     public Date getValue() {
         String input = this.getText();
-        Date d = new Date();
+        Date date = new Date();
 
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            date =  df.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        //d.setMonth();
-        //d.setYear();
-        return d;
-        //return date;
+        return date;
     }
 
 
@@ -39,9 +45,16 @@ public class JCalendar extends JTextField {
         @Override
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
+
+            if((c == KeyEvent.VK_BACK_SPACE)) {
+                textField.setText(textField.getText().substring(0, textField.getText().length()));
+                return;
+            }
+
             if (textField.getText().length() >= maxLenght ||
                     !(Character.isDigit(c) ||
                             (c == KeyEvent.VK_BACK_SPACE) ||
+                            (c == KeyEvent.VK_DELETE)     ||
                             (c == KeyEvent.VK_DELETE))) {
 
                 e.consume();

@@ -9,7 +9,7 @@ public interface AccountDAO {
 
     Account getAccountById(int id);
 
-    void addAccount(Account newAccount);
+    int addAccount(Account newAccount);
 
     void updateAccount(Account oldAccount, Account newAccount);
 

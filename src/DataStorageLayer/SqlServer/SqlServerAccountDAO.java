@@ -93,13 +93,14 @@ public class SqlServerAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void addAccount(Account newAccount) {
+    public int addAccount(Account newAccount) {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
+        int accountId = 0;
 
         try {
             String sqlQuery = "INSERT INTO Accounts VALUES ( ?, ?, ?, ?, ? )";
-            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 
             //Index 1 or 0?
             preparedStatement.setString(1, newAccount.getName());
@@ -109,6 +110,11 @@ public class SqlServerAccountDAO implements AccountDAO {
             preparedStatement.setString(5, newAccount.getPlace());
             preparedStatement.execute();
 
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()){
+                accountId = rs.getInt(1);
+            }
+
         } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
@@ -117,6 +123,7 @@ public class SqlServerAccountDAO implements AccountDAO {
             MSSQLDatabase.closeStatementResources(preparedStatement);
             MSSQLDatabase.closeConnectionResource(connection);
         }
+        return accountId;
     }
 
     @Override
