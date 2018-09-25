@@ -12,6 +12,8 @@ public class AccountPanel extends JPanel {
     private List<Account> accountList;
     private AccountManager accountManager = new AccountManager();
 
+    //Op deze pagina worden alle accounts weergegeven met maar 1 profiel
+
     public AccountPanel(){
 
 

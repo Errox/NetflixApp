@@ -5,7 +5,9 @@ import ApplicationLayer.ProfileManager;
 import ApplicationLayer.WatchedManager;
 import PresentationLayer.Controls.ManageType;
 import PresentationLayer.Controls.ControlNames;
-import PresentationLayer.EventHandlers.lForButtons;
+import PresentationLayer.EventHandlers.lForCreate;
+import PresentationLayer.EventHandlers.lForDelete;
+import PresentationLayer.EventHandlers.lForUpdate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,9 +33,8 @@ public class ManagePanel extends JPanel {
         JLabel manageLabel = new JLabel("Managing " + manageType.toString().toLowerCase());
         panel.add(manageLabel);
 
-        JLabel underManage = new JLabel("test");
+        JLabel underManage = new JLabel("Selecteer een " + manageType.toString().toLowerCase() + " en druk selecteer onderaan de knop om te een nieuwe aan te maken, bijwerken of verwijderen");
         panel.add(underManage);
-
 
         if(manageType == ManageType.ACCOUNT) {
             accounts = new JComboBox<>(new AccountManager().getAllAccounts().toArray());
@@ -48,7 +49,6 @@ public class ManagePanel extends JPanel {
             panel.add(watched);
 
         }
-
 
         return panel;
     }
@@ -69,10 +69,9 @@ public class ManagePanel extends JPanel {
         deleteButton.setName(ControlNames.MANAGE_BUTTON_DELETE);
         panel.add(deleteButton);
 
-        lForButtons managementButtonsEvents = new lForButtons(manageType, accounts);
-        createButton.addActionListener(managementButtonsEvents);
-        updateButton.addActionListener(managementButtonsEvents);
-        deleteButton.addActionListener(managementButtonsEvents);
+        createButton.addActionListener(new lForCreate(manageType));
+        updateButton.addActionListener(new lForUpdate(manageType));
+        deleteButton.addActionListener(new lForDelete(manageType));
 
         return panel;
     }

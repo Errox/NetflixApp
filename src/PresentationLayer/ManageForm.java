@@ -14,18 +14,12 @@ import javax.swing.*;
 public class ManageForm {
 
    private ManageType manageType;
-   private ModifyType modifyType;
 
    private AccountManager accountManager;
    private WatchedManager watchedManager;
    private ProfileManager profileManager;
 
-   public ManageForm(ModifyType modifyType, ManageType type){
-
-       this.manageType = type;
-       this.modifyType = modifyType;
-
-
+   public ManageForm(ManageType manageType){
        if(manageType == ManageType.ACCOUNT){
             ManageAccount();
        }
@@ -63,14 +57,14 @@ public class ManageForm {
 
         if (result == JOptionPane.OK_OPTION) {
 
-            if(modifyType == ModifyType.UPDATE){
-                accountManager.updateAccount(null, null);
-            }
-
-            if(modifyType == ModifyType.CREATE){
-                accountManager.addAccount(new Account(0, fullName.getText(), streetName.getText(), postalCode.getText(), houseNumber.getText(), place.getText() ));
-
-            }
+//            if(modifyType == ModifyType.UPDATE){
+//                accountManager.updateAccount(null, null);
+//            }
+//
+//            if(modifyType == ModifyType.CREATE){
+//                accountManager.addAccount(new Account(0, fullName.getText(), streetName.getText(), postalCode.getText(), houseNumber.getText(), place.getText() ));
+//
+//            }
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
