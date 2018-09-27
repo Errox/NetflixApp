@@ -24,6 +24,8 @@ public class SqlServerMovieDAO implements MovieDAO {
     //[Language] [nvarchar](50) NULL,
     //[Genre] [nvarchar](50) NULL,
 
+    //ToDO; Redudant code to seperate methods.
+
     @Override
     public List<Movie> getAllMovies() {
         Connection connection = MSSQLDatabase.getConnection();
@@ -39,7 +41,6 @@ public class SqlServerMovieDAO implements MovieDAO {
             while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
-                String name = resultSet.getString("Name");
                 int Age = resultSet.getInt("AgeIndication");
                 String Language = resultSet.getString("ProgramId");
                 String Genre = resultSet.getString("Genre");
@@ -72,12 +73,11 @@ public class SqlServerMovieDAO implements MovieDAO {
             while (resultSet.next()) {
 
                 int movieId = resultSet.getInt("Id");
-                String name = resultSet.getString("Name");
                 int Age = resultSet.getInt("AgeIndication");
                 String Language = resultSet.getString("ProgramId");
                 String Genre = resultSet.getString("Genre");
 
-                movie = new Movie(id, Age, Language, Genre);
+                movie = new Movie(movieId, Age, Language, Genre);
             }
 
         } catch (Exception e) {
@@ -89,6 +89,48 @@ public class SqlServerMovieDAO implements MovieDAO {
         }
 
         return movie;
+    }
+
+    @Override
+    public Movie getLongestMovieForAge(int age) {
+        Connection connection = MSSQLDatabase.getConnection();
+        Movie movie = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            //statement = connection.prepareStatement("SELECT * FROM Movies WHERE Id = ?");
+            statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Duration   FROM Programs JOIN Movies ON Movies.Id = Programs.Id  " +
+                    " WHERE AgeIndication < ? " +
+                    " ORDER BY Duration DESC; ");
+
+            statement.setInt(1, age);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                int movieId = resultSet.getInt("Id");
+                int Age = resultSet.getInt("AgeIndication");
+                String Language = resultSet.getString("ProgramId");
+                String Genre = resultSet.getString("Genre");
+
+                movie = new Movie(movieId, Age, Language, Genre);
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return movie;
+
+       // "SELECT TOP 1 Programma.Titel,Tijdsduur\n" +
+        //                        "FROM Programma JOIN Film ON Film.FilmID = Programma.ProgrammaID\n" +
+        //                        "WHERE Leeftijdsindicatie < 16\n" +
+        //                        "ORDER BY Tijdsduur DESC;");
     }
 
 }

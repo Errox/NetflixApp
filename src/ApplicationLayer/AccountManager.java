@@ -57,7 +57,6 @@ public class AccountManager implements AccountDAO {
         accountDAO.updateAccount(oldAccount, newAccount);
     }
 
-
     /**
      * -Deletes an account by specifying the to be deleted account(s).
      * <p>

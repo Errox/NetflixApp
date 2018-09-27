@@ -33,6 +33,9 @@ public class ProfileManager implements ProfileDAO {
         return profileDAO.getAllProfiles();
     }
 
+    /**
+     * -Returns all profiles from the owners account.
+     */
     @Override
     public List<Profile> getProfilesFromOwner(Account owner) {
         return profileDAO.getProfilesFromOwner(owner);

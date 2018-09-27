@@ -16,6 +16,9 @@ import java.awt.*;
 
 public class ManagePanel extends JPanel {
 
+    //todo; split to three seperate panels.
+    //Les code.
+    
     private ManageType manageType;
     private JComboBox accounts, profiles, watched;
 
@@ -197,7 +200,7 @@ public class ManagePanel extends JPanel {
         JMaxLengthTextBox houseNumber = new JMaxLengthTextBox(5);
         JMaxLengthTextBox place = new JMaxLengthTextBox(50);
 
-        JCalendar birthdate = new JCalendar(10);
+        JCalendar birthday = new JCalendar(10);
 
         if (update && accounts.getSelectedItem() != null) {
             Account account = accountManager.getAccountById(((Account) accounts.getSelectedItem()).getId());
@@ -222,7 +225,7 @@ public class ManagePanel extends JPanel {
                 new JLabel(ControlNames.PLACE),
                 place,
                 new JLabel(ControlNames.BIRTHDAY),
-                birthdate
+                birthday
         };
 
         int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
@@ -237,7 +240,7 @@ public class ManagePanel extends JPanel {
                 ProfileManager pfm = new ProfileManager();
                 int id = accountManager.addAccount(parsedObj);
 
-                pfm.addProfile(new Profile(0, fullName.getText(), birthdate.getValue() , id));
+                pfm.addProfile(new Profile(0, fullName.getText(), birthday.getValue() , id));
             }
 
             updateCombobox();

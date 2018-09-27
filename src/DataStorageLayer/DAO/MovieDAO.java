@@ -8,4 +8,6 @@ public interface MovieDAO {
     List<Movie> getAllMovies();
 
     Movie getMovieById(int id);
+
+    Movie getLongestMovieForAge(int age);
 }

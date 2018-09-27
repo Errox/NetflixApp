@@ -10,20 +10,36 @@ public class EpisodeManager implements EpisodeDAO {
 
     private EpisodeDAO episodeDAO;
 
+    /**
+     * Creates an instance of the Episode Manager,
+     * that uses the Dao specified in the constructor to
+     * -Read all
+     * -Read  by ID
+     * -Read all By Serie Id
+     */
     public EpisodeManager() {
         this.episodeDAO = DAOFactory.getEpisodeDAOInstance();
     }
 
+    /**
+     * -Returns all Episodes, from the storage layer provided.
+     */
     @Override
     public List<Episode> getAllEpisodes() {
         return episodeDAO.getAllEpisodes();
     }
 
+    /**
+     * -Returns the Episode associated by the provided id, from the storage layer provided.
+     */
     @Override
     public Episode getEpisodeById(int id) {
         return episodeDAO.getEpisodeById(id);
     }
 
+    /**
+     * -Returns get All Episodes By Series Id , from the storage layer provided.
+     */
     @Override
     public List<Episode> getAllEpisodesBySeriesId(int id) {
         return episodeDAO.getAllEpisodesBySeriesId(id);

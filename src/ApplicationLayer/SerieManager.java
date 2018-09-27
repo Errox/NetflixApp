@@ -12,9 +12,12 @@ public class SerieManager implements SerieDAO {
     private SerieDAO serieDAO;
 
     /**
-     * Creates an instance of the serie Manager,
+     * Creates an instance of the Serie Manager,
      * that uses the Dao specified in the constructor to
-     * -Read
+     * -Read all
+     * -Read by ID
+     * -Get avg watch time ( for profile and serie )
+     *
      */
 
     public SerieManager() {
@@ -38,6 +41,12 @@ public class SerieManager implements SerieDAO {
         return serieDAO.getSerieById(id);
     }
 
+    /**
+     * -Get avg watch time ( for profile and serie )
+     * @param profile profile,
+     * @param series serie
+     * @return int as watch time. in minutes
+     */
     @Override
     public int getAvarageWatchTime(Profile profile, Serie series) {
         return serieDAO.getAvarageWatchTime(profile, series);
