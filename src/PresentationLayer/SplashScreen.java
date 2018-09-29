@@ -10,7 +10,9 @@ public class SplashScreen {
     public void initialize() {
         jWindow = new JWindow();
         jWindow.setSize(680, 316);
+        //Center
         jWindow.setLocationRelativeTo(null);
+        //Force front
         jWindow.requestFocus();
 
         URL imageURL = getClass().getClassLoader().getResource("netflix-logo.png");
@@ -20,11 +22,13 @@ public class SplashScreen {
         jWindow.setVisible(true);
         try {
             //Maybe warm up the database connection / cache in this time?
-            Thread.sleep(1);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //Hide
         jWindow.setVisible(false);
+        //Dispose resource.
         jWindow.dispose();
     }
 }
