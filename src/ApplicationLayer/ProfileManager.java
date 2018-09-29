@@ -60,8 +60,8 @@ public class ProfileManager implements ProfileDAO {
      * @param newProfile represents the new 'Account' that will be added to the Data storage
      */
     @Override
-    public void addProfile(Profile newProfile) {
-        profileDAO.addProfile(newProfile);
+    public int addProfile(Profile newProfile) {
+        return profileDAO.addProfile(newProfile);
     }
 
     /**

@@ -14,7 +14,7 @@ public interface ProfileDAO {
 
     int getProfileCount(Account owner);
 
-    void addProfile(Profile newProfiles);
+    int addProfile(Profile newProfiles);
 
     void updateProfile(Profile oldProfile, Profile newProfile);
 

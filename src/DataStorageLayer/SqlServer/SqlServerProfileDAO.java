@@ -154,9 +154,10 @@ public class SqlServerProfileDAO implements ProfileDAO {
     }
 
     @Override
-    public void addProfile(Profile newProfiles) {
+    public int addProfile(Profile newProfiles) {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
+        int profileId = 0;
 
         //Finalize query
         try {
@@ -169,6 +170,11 @@ public class SqlServerProfileDAO implements ProfileDAO {
             preparedStatement.setInt(3, newProfiles.getAccountId());
             preparedStatement.execute();
 
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()){
+                profileId = rs.getInt(1);
+            }
+
         } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
@@ -177,6 +183,8 @@ public class SqlServerProfileDAO implements ProfileDAO {
             MSSQLDatabase.closeStatementResources(preparedStatement);
             MSSQLDatabase.closeConnectionResource(connection);
         }
+
+        return profileId;
     }
 
 
