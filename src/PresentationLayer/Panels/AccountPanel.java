@@ -12,7 +12,6 @@ import java.util.List;
 
 public class AccountPanel extends JPanel {
 
-    private List<Account> accountList;
     private AccountManager accountManager = new AccountManager();
 
     //Done, Fine tune code. remove the double list, and priv variable.
@@ -22,10 +21,10 @@ public class AccountPanel extends JPanel {
 
         ProfileManager profileManager = new ProfileManager();
 
-        List<Account> accountList = new ArrayList<Account>();
+        List<Account> accountList = new ArrayList<>();
         accountList.addAll(accountManager.getAllAccounts());
 
-        List<Account> accountsWithOneProfile = new ArrayList<Account>();
+        List<Account> accountsWithOneProfile = new ArrayList<>();
 
         for(int i = 0; i < accountList.size(); i++){
             if(profileManager.getProfileCount(accountList.get(i)) == 1)
