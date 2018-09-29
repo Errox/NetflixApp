@@ -37,17 +37,18 @@ public class SqlServerSerieDAO implements SerieDAO {
 
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
-                int Age = resultSet.getInt("Age");
-                String Language = resultSet.getString("Language");
-                String Genre = resultSet.getString("Genre");
-                Series.add(new Serie(id, name, Age, Language, Genre));
+                int age = resultSet.getInt("Age");
+                String language = resultSet.getString("Language");
+                String genre = resultSet.getString("Genre");
+
+                Series.add(new Serie(id, name, age, language, genre));
             }
 
         } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
 
@@ -68,21 +69,21 @@ public class SqlServerSerieDAO implements SerieDAO {
 
             while (resultSet.next()) {
 
-                int SerieId = resultSet.getInt("Id");
+                int serieId = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
-                int Age = resultSet.getInt("Age");
-                String Language = resultSet.getString("Language");
-                String Genre = resultSet.getString("Genre");
+                int age = resultSet.getInt("Age");
+                String language = resultSet.getString("Language");
+                String genre = resultSet.getString("Genre");
 
                 //Add our account from db to list.
-                serie = new Serie(id, name, Age, Language, Genre);
+                serie = new Serie(serieId, name, age, language, genre);
             }
 
         } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
@@ -90,7 +91,7 @@ public class SqlServerSerieDAO implements SerieDAO {
     }
 
     @Override
-    public int getAvarageWatchTime(Profile profile, Serie series) {
+    public int getAverageWatchTime(Profile profile, Serie series) {
         Connection connection = MSSQLDatabase.getConnection();
         int count = 0;
         PreparedStatement statement = null;
@@ -99,13 +100,15 @@ public class SqlServerSerieDAO implements SerieDAO {
         try {
             for (Episode episode : episodes) {
                 try {
-                    statement = connection.prepareStatement("SELECT Watched.Percentage as avarage FROM  Episodes INNER JOIN Profiles ON Episodes.Id = Profiles.Id INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Profiles.Id = Watched.ProfileId AND Programs.Id = Watched.ProgramId WHERE Profiles.Id = ? and Episodes.Id = ?");
+                    statement = connection.prepareStatement("SELECT Watched.Percentage as average FROM  Episodes " +
+                                                                 "INNER JOIN Profiles ON Episodes.Id = Profiles.Id INNER JOIN Programs ON Episodes.ProgramId = Programs.Id " +
+                                                                 "INNER JOIN Watched ON Profiles.Id = Watched.ProfileId AND Programs.Id = Watched.ProgramId WHERE Profiles.Id = ? and Episodes.Id = ?");
                     statement.setInt(1, profile.getId());
                     statement.setInt(2, episode.getId());
                     resultSet = statement.executeQuery();
 
                     while (resultSet.next()) {
-                        count += resultSet.getInt("avarage");
+                        count += resultSet.getInt("average");
                     }
 
                 } catch (Exception e) {
@@ -115,7 +118,7 @@ public class SqlServerSerieDAO implements SerieDAO {
 
             }
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
