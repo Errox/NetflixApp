@@ -10,23 +10,21 @@ import java.util.Date;
 
 public class JCalendar extends JTextField {
 
-    //private JTextField field;
-    private String input;
-    private int maxLenght;
+    private int maxLength;
 
-    public JCalendar(int maxLenght) {
-        this.maxLenght = maxLenght;
+    public JCalendar(int maxLength) {
+        this.maxLength = maxLength;
         this.addKeyListener(new onChange(this));
 
     }
 
-    public Date getValue() {
+    public Date getDateValue() {
         String input = this.getText();
         Date date = new Date();
 
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            date =  df.parse(input);
+            date = df.parse(input);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -46,24 +44,18 @@ public class JCalendar extends JTextField {
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
 
-            if((c == KeyEvent.VK_BACK_SPACE)) {
+            if ((c == KeyEvent.VK_BACK_SPACE)) {
                 textField.setText(textField.getText().substring(0, textField.getText().length()));
                 return;
             }
 
-            if (textField.getText().length() >= maxLenght ||
-                    !(Character.isDigit(c) ||
-                            (c == KeyEvent.VK_BACK_SPACE) ||
-                            (c == KeyEvent.VK_DELETE)     ||
-                            (c == KeyEvent.VK_DELETE))) {
-
+            if (textField.getText().length() >= maxLength || !(Character.isDigit(c)
+                    || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_DELETE))) {
                 e.consume();
             }
             if (textField.getText().length() == 2 || textField.getText().length() == 5) {
                 textField.setText(textField.getText() + "-");
             }
-
-
         }
 
         @Override

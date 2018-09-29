@@ -168,18 +168,18 @@ public class ManagePanel extends JPanel {
 
             if (update) {
                 System.out.println(profileManager.getProfileCount((Account) accounts.getSelectedItem()));
-                profileManager.updateProfile(new Profile(0, fullName.getText(), birthDate.getValue(), ((Account) accounts.getSelectedItem()).getId()), (Profile) profiles.getSelectedItem());
+                profileManager.updateProfile(new Profile(0, fullName.getText(), birthDate.getDateValue(), ((Account) accounts.getSelectedItem()).getId()), (Profile) profiles.getSelectedItem());
                 updateCombobox();
-                System.out.println(birthDate.getValue());
+                System.out.println(birthDate.getDateValue());
 
 
             } else {
                 int p = profileManager.getProfileCount((Account) accounts.getSelectedItem());
                 if ( p <= 4 ) {
                     System.out.println(profileManager.getProfileCount((Account) accounts.getSelectedItem()));
-                    profileManager.addProfile(new Profile(0, fullName.getText(), birthDate.getValue(), ((Account) accounts.getSelectedItem()).getId()));
+                    profileManager.addProfile(new Profile(0, fullName.getText(), birthDate.getDateValue(), ((Account) accounts.getSelectedItem()).getId()));
                     updateCombobox();
-                    System.out.println(birthDate.getValue());
+                    System.out.println(birthDate.getDateValue());
 
                 } else
                     JOptionPane.showMessageDialog(this, ControlNames.MAX_ACCOUNT_MESSAGE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.ERROR_MESSAGE);
@@ -240,7 +240,7 @@ public class ManagePanel extends JPanel {
                 ProfileManager pfm = new ProfileManager();
                 int id = accountManager.addAccount(parsedObj);
 
-                pfm.addProfile(new Profile(0, fullName.getText(), birthday.getValue() , id));
+                pfm.addProfile(new Profile(0, fullName.getText(), birthday.getDateValue() , id));
             }
 
             updateCombobox();
