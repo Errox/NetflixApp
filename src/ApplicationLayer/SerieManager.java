@@ -48,9 +48,7 @@ public class SerieManager implements SerieDAO {
      * @return int as watch time. in minutes
      */
     @Override
-    public int getAvarageWatchTime(Profile profile, Serie series) {
-        return serieDAO.getAvarageWatchTime(profile, series);
+    public int getAverageWatchTime(Profile profile, Serie series) {
+        return serieDAO.getAverageWatchTime(profile, series);
     }
-
-
 }

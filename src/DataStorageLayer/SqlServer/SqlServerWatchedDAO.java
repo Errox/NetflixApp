@@ -45,7 +45,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
 
@@ -79,7 +79,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
 
@@ -94,7 +94,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
         ResultSet resultSet = null;
 
         try {
-            //TO PARAMATERS
+            //TO PARAMS.
             String sqlQuery = "SELECT * FROM Watched WHERE ProfileId= " + profile.getId();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
@@ -112,7 +112,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement);
         }
 
@@ -138,7 +138,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
         }
     }
@@ -164,7 +164,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
         }
     }
@@ -183,10 +183,8 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeStatementResources(statement);
         }
     }
-
-
 }

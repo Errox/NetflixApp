@@ -15,7 +15,7 @@ public class EpisodeManager implements EpisodeDAO {
      * that uses the Dao specified in the constructor to
      * -Read all
      * -Read  by ID
-     * -Read all By Serie Id
+     * -Read all by serie Id
      */
     public EpisodeManager() {
         this.episodeDAO = DAOFactory.getEpisodeDAOInstance();
@@ -38,7 +38,7 @@ public class EpisodeManager implements EpisodeDAO {
     }
 
     /**
-     * -Returns get All Episodes By Series Id , from the storage layer provided.
+     * -Returns get All Episodes by series id , from the storage layer provided.
      */
     @Override
     public List<Episode> getAllEpisodesBySeriesId(int id) {

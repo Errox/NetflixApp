@@ -20,7 +20,7 @@ public class SqlServerProgramDAO implements ProgramDAO {
     @Override
     public List<Program> getAllPrograms() {
         Connection connection = MSSQLDatabase.getConnection();
-        List<Program> programs = new ArrayList<Program>();
+        List<Program> programs = new ArrayList<>();
         Statement statement = null;
         ResultSet resultSet = null;
 
@@ -34,6 +34,7 @@ public class SqlServerProgramDAO implements ProgramDAO {
                 int subscriptionId = resultSet.getInt("Id");
                 String title = resultSet.getString("Title");
                 Time Duration = resultSet.getTime("Duration");
+
                 //Add our account from resultSet to list.
                 programs.add(new Program(subscriptionId, title, Duration));
             }
@@ -42,7 +43,7 @@ public class SqlServerProgramDAO implements ProgramDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
@@ -51,7 +52,6 @@ public class SqlServerProgramDAO implements ProgramDAO {
 
     @Override
     public Program getProgramById(int id) {
-
         Connection connection = MSSQLDatabase.getConnection();
         Program program = null;
         PreparedStatement statement = null;
@@ -75,7 +75,7 @@ public class SqlServerProgramDAO implements ProgramDAO {
             //Print on error.
             e.printStackTrace();
         } finally {
-            //Clean our resources.
+            //Release our resources.
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
