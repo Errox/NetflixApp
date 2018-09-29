@@ -15,7 +15,7 @@ public class ControlNames {
     public static final String TAB_ACCOUNT_MOVIE_INFO = "Account movie information";
 
     public static final String TAB_MOVIE_INFO = "Movie information";
-    public static final String TAB_ACCOUINT_INFO= "Account information";
+    public static final String TAB_ACCOUNT_INFO = "Account information";
     public static final String TAB_MOVIE_WATCHED_INFO = "Movie watcher(s) information";
 
 

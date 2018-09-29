@@ -21,7 +21,7 @@ public class MainPanel extends JPanel {
         tabPane.addTab(ControlNames.TAB_PROFILE_SERIE_INFO, new AccountSeriesPanel());
         tabPane.addTab(ControlNames.TAB_ACCOUNT_MOVIE_INFO, new AccountMoviePanel());
         tabPane.addTab(ControlNames.TAB_MOVIE_INFO, new MoviePanel());
-        tabPane.addTab(ControlNames.TAB_ACCOUINT_INFO, new AccountPanel());
+        tabPane.addTab(ControlNames.TAB_ACCOUNT_INFO, new AccountPanel());
         tabPane.addTab(ControlNames.TAB_MOVIE_WATCHED_INFO, new MovieWatchedPanel());
 
         tabPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
