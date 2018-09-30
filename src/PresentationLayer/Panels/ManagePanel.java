@@ -48,6 +48,8 @@ public class ManagePanel extends JPanel {
             profiles = new JComboBox<>();
 
             accounts = new JComboBox<>();
+            accounts.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+            profiles.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
             accounts.addActionListener(new lForProfileBox(accounts, profiles));
             panel.add(accounts);
 
@@ -55,19 +57,20 @@ public class ManagePanel extends JPanel {
 
         } else if (manageType == ManageType.WATCHED) {
 
-            profiles = new JComboBox<>();
-
             accounts = new JComboBox<>();
+            profiles = new JComboBox<>();
+            watched = new JComboBox<>();
+
             accounts.addActionListener(new lForProfileBox(accounts, profiles));
             panel.add(accounts);
-
-            watched = new JComboBox<>();
+            accounts.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
             profiles.addActionListener(new lForWatchedBox(profiles, watched));
             panel.add(profiles);
-
+            profiles.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
             panel.add(watched);
+            watched.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         }
 
 
