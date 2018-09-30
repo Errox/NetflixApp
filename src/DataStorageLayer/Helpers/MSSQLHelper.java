@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 
 public class MSSQLHelper {
-    private static final String connectionString = "jdbc:sqlserver://AXR;databaseName=NetFlixStats;integratedSecurity=true;";
+    private static final String connectionString = "jdbc:sqlserver://DESKTOP-947ME72\\SQLEXPRESS;databaseName=NetFlixStats;integratedSecurity=true;";
     private static Connection connection;
 
     public Connection getConnection() {
