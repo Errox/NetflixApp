@@ -3,6 +3,7 @@ package ApplicationLayer;
 import DataStorageLayer.DAO.MovieDAO;
 import DataStorageLayer.Factories.DAOFactory;
 import DomainModelLayer.Movie;
+import DomainModelLayer.MovieProgram;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class MovieManager implements MovieDAO {
      * -Returns Profile associated by the provided id, from the storage layer provided.
      */
     @Override
-    public Movie getLongestMovieForAge(int age) {
+    public MovieProgram getLongestMovieForAge(int age) {
        return movieDAO.getLongestMovieForAge(age);
     }
 }

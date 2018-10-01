@@ -1,6 +1,7 @@
 package DataStorageLayer.DAO;
 
 import DomainModelLayer.Movie;
+import DomainModelLayer.MovieProgram;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface MovieDAO {
 
     Movie getMovieById(int id);
 
-    Movie getLongestMovieForAge(int age);
+    MovieProgram getLongestMovieForAge(int age);
 }

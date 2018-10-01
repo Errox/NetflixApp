@@ -3,12 +3,18 @@ package DataStorageLayer.SqlServer;
 import DataStorageLayer.DAO.MovieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Movie;
+import DomainModelLayer.MovieProgram;
+import DomainModelLayer.Program;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SqlServerMovieDAO implements MovieDAO {
@@ -92,29 +98,46 @@ public class SqlServerMovieDAO implements MovieDAO {
     }
 
     @Override
-    public Movie getLongestMovieForAge(int age) {
+    public MovieProgram getLongestMovieForAge(int age) {
         Connection connection = MSSQLDatabase.getConnection();
-        Movie movie = null;
+        MovieProgram movieProgram = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
-            //statement = connection.prepareStatement("SELECT * FROM Movies WHERE Id = ?");
-            statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Duration FROM Programs JOIN Movies ON Movies.ProgramId = Programs.Id  " +
-                    " WHERE AgeIndication <= ? " +
-                    " ORDER BY Duration DESC; ");
+            statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Programs.Duration, Programs.Id as ProgramId, Movies.AgeIndication, Movies.Genre, Movies.Id as MovieId, Movies.Language FROM Programs JOIN Movies ON Movies.ProgramId = Programs.Id " +
+                    " WHERE AgeIndication <= ?" +
+                    " ORDER BY Duration DESC");
 
             statement.setInt(1, age);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
 
-                int movieId = resultSet.getInt("Id");
+                int movieId = resultSet.getInt("MovieId");
                 int ageIndication = resultSet.getInt("AgeIndication");
-                String language = resultSet.getString("ProgramId");
+                String language = resultSet.getString("Language");
                 String genre = resultSet.getString("Genre");
 
-                movie = new Movie(movieId, ageIndication, language, genre);
+                int programId = resultSet.getInt("ProgramId");
+                String programTitle = resultSet.getString("Title");
+                String programTimeSpan = resultSet.getString("Duration");
+
+
+                Date date = new Date();
+
+                DateFormat df = new SimpleDateFormat("HH:mm:ss");
+                try {
+                    date = df.parse(programTimeSpan);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Movie movie = new Movie(movieId, ageIndication, language, genre);
+                Program program = new Program(programId, programTitle, date);
+
+                movieProgram = new MovieProgram(movie, program);
+
             }
 
         } catch (Exception e) {
@@ -125,7 +148,7 @@ public class SqlServerMovieDAO implements MovieDAO {
             MSSQLDatabase.closeResources(resultSet, statement, connection);
         }
 
-        return movie;
+        return movieProgram;
     }
 
 }
