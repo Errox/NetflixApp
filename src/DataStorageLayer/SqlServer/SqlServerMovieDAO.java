@@ -110,11 +110,11 @@ public class SqlServerMovieDAO implements MovieDAO {
             while (resultSet.next()) {
 
                 int movieId = resultSet.getInt("Id");
-                int Age = resultSet.getInt("AgeIndication");
-                String Language = resultSet.getString("ProgramId");
-                String Genre = resultSet.getString("Genre");
+                int ageIndication = resultSet.getInt("AgeIndication");
+                String language = resultSet.getString("ProgramId");
+                String genre = resultSet.getString("Genre");
 
-                movie = new Movie(movieId, Age, Language, Genre);
+                movie = new Movie(movieId, ageIndication, language, genre);
             }
 
         } catch (Exception e) {
@@ -127,10 +127,7 @@ public class SqlServerMovieDAO implements MovieDAO {
 
         return movie;
 
-       // "SELECT TOP 1 Programma.Titel,Tijdsduur\n" +
-        //                        "FROM Programma JOIN Film ON Film.FilmID = Programma.ProgrammaID\n" +
-        //                        "WHERE Leeftijdsindicatie < 16\n" +
-        //                        "ORDER BY Tijdsduur DESC;");
+
     }
 
 }
