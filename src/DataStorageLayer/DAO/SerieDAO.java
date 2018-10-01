@@ -1,5 +1,6 @@
 package DataStorageLayer.DAO;
 
+import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
@@ -11,4 +12,6 @@ public interface SerieDAO {
     Serie getSerieById(int id);
 
     int getAverageWatchTime(Profile profile, Serie series);
+
+    int getWatchedTimeForSerie(Account account);
 }

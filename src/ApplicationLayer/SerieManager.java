@@ -2,6 +2,7 @@ package ApplicationLayer;
 
 import DataStorageLayer.DAO.SerieDAO;
 import DataStorageLayer.Factories.DAOFactory;
+import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
@@ -50,5 +51,10 @@ public class SerieManager implements SerieDAO {
     @Override
     public int getAverageWatchTime(Profile profile, Serie series) {
         return serieDAO.getAverageWatchTime(profile, series);
+    }
+
+    @Override
+    public int getWatchedTimeForSerie(Account account) {
+        return serieDAO.getWatchedTimeForSerie(account);
     }
 }

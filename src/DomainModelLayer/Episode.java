@@ -35,4 +35,9 @@ public class Episode {
     public int getSeasonNr() {
         return seasonNr;
     }
+
+    @Override
+    public String toString() {
+        return "Season " + seasonNr + ", Epsiode: " + episodeNr;
+    }
 }

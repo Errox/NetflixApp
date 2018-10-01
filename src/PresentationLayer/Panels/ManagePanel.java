@@ -17,8 +17,7 @@ import java.awt.*;
 public class ManagePanel extends JPanel {
 
     //todo; split to three seperate panels.
-    //Les code.
-    
+
     private ManageType manageType;
     private JComboBox accounts, profiles, watched;
 

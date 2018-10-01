@@ -18,6 +18,6 @@ public class MovieProgram {
 
     @Override
     public String toString() {
-        return "Suited for age "+ movie.getAgeIndication() + " , Title: " + program.getTitle() + " Duration: " + dateFormat.format(program.getTimeSpan());
+        return "Suited for age "+ movie.getAgeIndication() + " and up , Title: " + program.getTitle() + ", Duration: " + dateFormat.format(program.getTimeSpan());
     }
 }

@@ -50,4 +50,8 @@ public class Serie {
         return manager.getAllEpisodesBySeriesId(this.Id);
     }
 
+    @Override
+    public String toString() {
+        return this.name + " Genre: " + this.genre + " Language:" + this.language;
+    }
 }

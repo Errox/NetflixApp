@@ -2,6 +2,7 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.MovieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Account;
 import DomainModelLayer.Movie;
 import DomainModelLayer.MovieProgram;
 import DomainModelLayer.Program;
@@ -103,6 +104,9 @@ public class SqlServerMovieDAO implements MovieDAO {
         MovieProgram movieProgram = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+
 
         try {
             statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Programs.Duration, Programs.Id as ProgramId, Movies.AgeIndication, Movies.Genre, Movies.Id as MovieId, Movies.Language FROM Programs JOIN Movies ON Movies.ProgramId = Programs.Id " +
@@ -123,10 +127,6 @@ public class SqlServerMovieDAO implements MovieDAO {
                 String programTitle = resultSet.getString("Title");
                 String programTimeSpan = resultSet.getString("Duration");
 
-
-                Date date = new Date();
-
-                DateFormat df = new SimpleDateFormat("HH:mm:ss");
                 try {
                     date = df.parse(programTimeSpan);
                 } catch (ParseException e) {
@@ -150,5 +150,6 @@ public class SqlServerMovieDAO implements MovieDAO {
 
         return movieProgram;
     }
+
 
 }

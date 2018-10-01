@@ -9,6 +9,8 @@ public class SeriesWatchedPanel extends JPanel {
         // (Als een aflevering nooit is bekeken staat deze niet in de lijst)
 
 
+        //Denis
+
 
     }
 }
