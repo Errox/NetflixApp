@@ -100,8 +100,8 @@ public class SqlServerMovieDAO implements MovieDAO {
 
         try {
             //statement = connection.prepareStatement("SELECT * FROM Movies WHERE Id = ?");
-            statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Duration   FROM Programs JOIN Movies ON Movies.Id = Programs.Id  " +
-                    " WHERE AgeIndication < ? " +
+            statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Duration FROM Programs JOIN Movies ON Movies.ProgramId = Programs.Id  " +
+                    " WHERE AgeIndication <= ? " +
                     " ORDER BY Duration DESC; ");
 
             statement.setInt(1, age);
@@ -126,8 +126,6 @@ public class SqlServerMovieDAO implements MovieDAO {
         }
 
         return movie;
-
-
     }
 
 }
