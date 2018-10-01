@@ -1,0 +1,307 @@
+
+CREATE DATABASE [NetFlixStats]
+GO
+
+USE [NetFlixStats]
+GO
+/****** Object:  Table [dbo].[Accounts]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Accounts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Street] [nvarchar](50) NULL,
+	[PostalCode] [nvarchar](6) NULL,
+	[HouseNumber] [nvarchar](5) NULL,
+	[Place] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Accounts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Episodes]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Episodes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[EpisodeNr] [int] NULL,
+	[SeasonNr] [int] NULL,
+	[SerieId] [int] NULL,
+	[ProgramId] [int] NOT NULL,
+ CONSTRAINT [PK_Episodes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[ProgramId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Movies]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Movies](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AgeIndication] [int] NULL,
+	[Language] [nvarchar](50) NULL,
+	[Genre] [nvarchar](50) NULL,
+	[ProgramId] [int] NOT NULL,
+ CONSTRAINT [PK_Movies] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[ProgramId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Profiles]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Profiles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[BirthDate] [date] NULL,
+	[AccountId] [int] NULL,
+ CONSTRAINT [PK_Profiles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Programs]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Programs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+	[Duration] [time](7) NULL,
+ CONSTRAINT [PK_Programs_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Series]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Series](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Age] [int] NULL,
+	[Language] [nvarchar](50) NULL,
+	[Genre] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Series] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Watched]    Script Date: 24/09/2018 12:42:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Watched](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Percentage] [int] NULL,
+	[ProfileId] [int] NULL,
+	[ProgramId] [int] NULL,
+ CONSTRAINT [PK_Watched_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Episodes]  WITH CHECK ADD  CONSTRAINT [FK_Episodes_Programs1] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+GO
+ALTER TABLE [dbo].[Episodes] CHECK CONSTRAINT [FK_Episodes_Programs1]
+GO
+ALTER TABLE [dbo].[Episodes]  WITH CHECK ADD  CONSTRAINT [FK_Episodes_Series] FOREIGN KEY([SerieId])
+REFERENCES [dbo].[Series] ([Id])
+GO
+ALTER TABLE [dbo].[Episodes] CHECK CONSTRAINT [FK_Episodes_Series]
+GO
+ALTER TABLE [dbo].[Movies]  WITH CHECK ADD  CONSTRAINT [FK_Movies_Programs] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+GO
+ALTER TABLE [dbo].[Movies] CHECK CONSTRAINT [FK_Movies_Programs]
+GO
+ALTER TABLE [dbo].[Profiles]  WITH CHECK ADD  CONSTRAINT [FK_Profiles_Accounts] FOREIGN KEY([AccountId])
+REFERENCES [dbo].[Accounts] ([Id])
+GO
+ALTER TABLE [dbo].[Profiles] CHECK CONSTRAINT [FK_Profiles_Accounts]
+GO
+ALTER TABLE [dbo].[Watched]  WITH CHECK ADD  CONSTRAINT [FK_Watched_Profiles] FOREIGN KEY([ProfileId])
+REFERENCES [dbo].[Profiles] ([Id])
+GO
+ALTER TABLE [dbo].[Watched] CHECK CONSTRAINT [FK_Watched_Profiles]
+GO
+ALTER TABLE [dbo].[Watched]  WITH CHECK ADD  CONSTRAINT [FK_Watched_Programs] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+GO
+ALTER TABLE [dbo].[Watched] CHECK CONSTRAINT [FK_Watched_Programs]
+GO
+
+/* Accounts */
+
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Valérie', '14216 Rusk Avenue', null, '1633', 'Haixing'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-ève', '572 Transport Point', '337 01', '9', 'Rokycany'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Rébecca', '1 Mesta Drive', null, '2175', 'Menzel Jemil'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Estève', '7 Lakeland Hill', '4600-757', '4718', 'Casal'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-hélène', '92159 David Lane', null, '4', 'Garawati'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Görel', '2 Dakota Way', null, '2034', 'Bykhaw'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Laurélie', '7252 Schlimgen Drive', null, '754', 'Astanajapura'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('André', '7600 Ronald Regan Drive', null, '76', 'Pacaraos'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Léandre', '7538 Troy Place', null, '71', 'Makiv'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Néhémie', '77 Brickson Park Circle', '200018', '3', 'Valledupar');
+
+/* Profiles */
+
+insert into Profiles (Name, BirthDate, AccountId) values ('Karrie', '08/18/1997', 2); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Tammi', '10/07/1998', 7); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Matilda', '04/04/1996', 9); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Peria', '09/13/1991', 9); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Neddie', '12/17/1992', 5); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Monika', '05/19/1994', 4); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Annabela', '09/02/1993', 5); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Happy', '08/07/1998', 1); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Mil', '08/26/1993', 10); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Codee', '03/26/1992', 3); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Elga', '11/29/1996', 5); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Rosamund', '05/30/1997', 9); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Debi', '10/11/1990', 8); 
+insert into Profiles (Name, BirthDate, AccountId) values ('Kristien', '05/23/1992', 10);
+insert into Profiles (Name, BirthDate, AccountId) values ('Corby', '10/06/1990', 1);
+
+/* Programs */
+
+insert into Programs (Title, Duration) values ('Our Modern Maidens', '4:30'); 
+insert into Programs (Title, Duration) values ('Mighty Joe Young', '11:19'); 
+insert into Programs (Title, Duration) values ('Return of Django (Son of Django) (Figlio di Django, Il)', '22:24'); 
+insert into Programs (Title, Duration) values ('Come Undone (Presque Rien)', '9:20'); 
+insert into Programs (Title, Duration) values ('Year One', '21:25'); 
+insert into Programs (Title, Duration) values ('Ambassador, The (Ambassadøren)', '8:43'); 
+insert into Programs (Title, Duration) values ('Eat', '12:48'); 
+insert into Programs (Title, Duration) values ('Mrs. Pollifax-Spy', '13:52');
+insert into Programs (Title, Duration) values ('StreetDance 3D', '9:06'); 
+insert into Programs (Title, Duration) values ('Casanova Brown', '21:32'); 
+insert into Programs (Title, Duration) values ('Hireling, The', '16:31'); 
+insert into Programs (Title, Duration) values ('Aces: Iron Eagle III', '18:28'); 
+insert into Programs (Title, Duration) values ('Genius Within: The Inner Life of Glenn Gould', '12:00'); 
+insert into Programs (Title, Duration) values ('Average Italian', '15:37'); 
+insert into Programs (Title, Duration) values ('Babette''s Feast (Babettes gæstebud)', '4:00'); 
+insert into Programs (Title, Duration) values ('Two Brothers (Deux frères)', '22:59'); 
+insert into Programs (Title, Duration) values ('Far Out Isn''t Far Enough: The Tomi Ungerer Story', '15:26'); 
+insert into Programs (Title, Duration) values ('Frankie and Johnny', '18:59'); 
+insert into Programs (Title, Duration) values ('The Little Fox', '12:15'); 
+insert into Programs (Title, Duration) values ('Bitter Feast', '0:06');
+
+/* Movies */
+
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Kannada', 'Horror|Sci-Fi', 6);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Amharic', 'Horror', 4);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Tetum', 'Children|Western', 1);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'New Zealand Sign Language', 'Action|Drama', 10);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Tswana', 'Documentary', 7);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Albanian', 'Adventure|Animation', 2);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Estonian', 'Drama|Thriller', 8);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Malayalam', 'Action|Comedy|Crime', 3);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Pashto', 'Children|Comedy|Sci-Fi', 1);
+insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Kurdish', 'Documentary', 3);
+
+/* Series */
+
+insert into Series (Name, Age, Genre, Language) values ('Mega Shark vs. Giant Octopus', 16, 'Action|Horror', 'Amharic');
+insert into Series (Name, Age, Genre, Language) values ('Summertime', 16, 'Comedy', 'Dutch');
+insert into Series (Name, Age, Genre, Language) values ('Scorpion King 2: Rise of a Warrior, The', 16, 'Action|Adventure|Fantasy', 'Estonian');
+insert into Series (Name, Age, Genre, Language) values ('a/k/a Tommy Chong', 16, 'Documentary', 'Guaraní');
+insert into Series (Name, Age, Genre, Language) values ('Water', 16, 'Drama|Romance', 'New Zealand Sign Language');
+insert into Series (Name, Age, Genre, Language) values ('President''s Man: A Line in the Sand, The', 16, 'Action|Drama|Thriller', 'Arabic');
+insert into Series (Name, Age, Genre, Language) values ('Nothing Lasts Forever ', 16, 'Comedy|Fantasy|Sci-Fi', 'Northern Sotho');
+insert into Series (Name, Age, Genre, Language) values ('Hang ''Em High', 16, 'Crime|Drama|Western', 'Luxembourgish');
+insert into Series (Name, Age, Genre, Language) values ('Bloody Mama', 16, 'Crime|Drama', 'Romanian');
+insert into Series (Name, Age, Genre, Language) values ('Jönssonligans största kupp', 16, 'Comedy|Crime', 'Malayalam');
+
+/* Episodes */
+
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (7, 5, 5, 12);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (10, 3, 6, 16);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (1, 1, 10, 18);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (6, 5, 10, 11);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (7, 1, 5, 14);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (1, 2, 9, 17);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (6, 5, 10, 18);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (8, 4, 2, 14);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (4, 3, 3, 16);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (1, 2, 7, 12);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (7, 1, 8, 10);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (6, 1, 10, 12);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (5, 3, 7, 19);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (5, 2, 10, 20);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (8, 4, 6, 18);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (3, 5, 9, 19);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (3, 4, 2, 11);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (5, 5, 8, 12);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (6, 2, 1, 14);
+insert into Episodes (EpisodeNr, SeasonNr, SerieId, ProgramId) values (5, 4, 10, 20);
+
+/* Watched */
+
+insert into Watched (Percentage, ProfileId, ProgramId) values (32, 2, 9);
+insert into Watched (Percentage, ProfileId, ProgramId) values (65, 8, 3);
+insert into Watched (Percentage, ProfileId, ProgramId) values (17, 9, 12);
+insert into Watched (Percentage, ProfileId, ProgramId) values (20, 7, 14);
+insert into Watched (Percentage, ProfileId, ProgramId) values (32, 5, 19);
+insert into Watched (Percentage, ProfileId, ProgramId) values (54, 14, 16);
+insert into Watched (Percentage, ProfileId, ProgramId) values (92, 5, 10);
+insert into Watched (Percentage, ProfileId, ProgramId) values (9, 18, 20);
+insert into Watched (Percentage, ProfileId, ProgramId) values (7, 12, 7);
+insert into Watched (Percentage, ProfileId, ProgramId) values (91, 11, 3);
+insert into Watched (Percentage, ProfileId, ProgramId) values (71, 17, 13);
+insert into Watched (Percentage, ProfileId, ProgramId) values (57, 6, 9);
+insert into Watched (Percentage, ProfileId, ProgramId) values (84, 10, 4);
+insert into Watched (Percentage, ProfileId, ProgramId) values (90, 2, 14);
+insert into Watched (Percentage, ProfileId, ProgramId) values (54, 5, 17);
+insert into Watched (Percentage, ProfileId, ProgramId) values (70, 2, 5);
+insert into Watched (Percentage, ProfileId, ProgramId) values (57, 11, 5);
+insert into Watched (Percentage, ProfileId, ProgramId) values (48, 11, 7);
+insert into Watched (Percentage, ProfileId, ProgramId) values (43, 1, 17);
+insert into Watched (Percentage, ProfileId, ProgramId) values (20, 20, 9);
+insert into Watched (Percentage, ProfileId, ProgramId) values (25, 18, 16);
+insert into Watched (Percentage, ProfileId, ProgramId) values (84, 2, 15);
+insert into Watched (Percentage, ProfileId, ProgramId) values (81, 5, 20);
+insert into Watched (Percentage, ProfileId, ProgramId) values (43, 15, 16);
+insert into Watched (Percentage, ProfileId, ProgramId) values (32, 6, 14);
+insert into Watched (Percentage, ProfileId, ProgramId) values (21, 3, 11);
+insert into Watched (Percentage, ProfileId, ProgramId) values (58, 18, 12);
+insert into Watched (Percentage, ProfileId, ProgramId) values (67, 18, 4);
+insert into Watched (Percentage, ProfileId, ProgramId) values (78, 16, 20);
+insert into Watched (Percentage, ProfileId, ProgramId) values (41, 2, 19);
+insert into Watched (Percentage, ProfileId, ProgramId) values (6, 5, 18);
+insert into Watched (Percentage, ProfileId, ProgramId) values (36, 17, 20);
+insert into Watched (Percentage, ProfileId, ProgramId) values (35, 6, 14);
+insert into Watched (Percentage, ProfileId, ProgramId) values (52, 18, 1);
+insert into Watched (Percentage, ProfileId, ProgramId) values (13, 19, 9);
+insert into Watched (Percentage, ProfileId, ProgramId) values (3, 8, 9);
+insert into Watched (Percentage, ProfileId, ProgramId) values (97, 14, 2);
+insert into Watched (Percentage, ProfileId, ProgramId) values (41, 15, 3);
+insert into Watched (Percentage, ProfileId, ProgramId) values (88, 2, 19);
+insert into Watched (Percentage, ProfileId, ProgramId) values (53, 1, 12);
+
