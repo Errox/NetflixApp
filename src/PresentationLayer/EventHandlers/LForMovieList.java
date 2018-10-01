@@ -1,20 +1,19 @@
 package PresentationLayer.EventHandlers;
 
 import ApplicationLayer.MovieManager;
-import DomainModelLayer.Movie;
 import DomainModelLayer.MovieProgram;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LForMovieList implements ActionListener {
+public class lForMovieList implements ActionListener {
 
     private JComboBox comboBox;
     private JList list;
 
     //To Interface
-    public LForMovieList(JComboBox comboBox, JList list){
+    public lForMovieList(JComboBox comboBox, JList list){
         this.comboBox = comboBox;
         this.list = list;
     }

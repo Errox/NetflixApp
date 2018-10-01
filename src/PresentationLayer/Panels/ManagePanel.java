@@ -32,7 +32,7 @@ public class ManagePanel extends JPanel {
     }
 
     private JPanel createContentPanel() {
-        JPanel panel = new JPanel(new GridLayout(5, 1));
+        JPanel panel = new JPanel(new GridLayout(5, 1, 0, 10));
 
         JLabel manageLabel = new JLabel(ControlNames.MANAGE_LABEL + manageType.toString().toLowerCase());
         panel.add(manageLabel);
@@ -43,16 +43,12 @@ public class ManagePanel extends JPanel {
         if (manageType == ManageType.ACCOUNT) {
             accounts = new JComboBox<>();
             panel.add(accounts);
-
         } else if (manageType == ManageType.PROFILE) {
             profiles = new JComboBox<>();
 
             accounts = new JComboBox<>();
-            accounts.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-            profiles.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
             accounts.addActionListener(new lForProfileBox(accounts, profiles));
             panel.add(accounts);
-
             panel.add(profiles);
 
         } else if (manageType == ManageType.WATCHED) {
@@ -63,16 +59,11 @@ public class ManagePanel extends JPanel {
 
             accounts.addActionListener(new lForProfileBox(accounts, profiles));
             panel.add(accounts);
-            accounts.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
             profiles.addActionListener(new lForWatchedBox(profiles, watched));
             panel.add(profiles);
-            profiles.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-
             panel.add(watched);
-            watched.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         }
-
 
         updateCombobox();
 
