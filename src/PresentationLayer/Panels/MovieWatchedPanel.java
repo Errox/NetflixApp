@@ -22,5 +22,4 @@ public class MovieWatchedPanel extends JPanel {
         add(movie);
         add(label);
     }
-
 }

@@ -10,8 +10,4 @@ public interface SerieDAO {
     List<Serie> getAllSeries();
 
     Serie getSerieById(int id);
-
-    int getAverageWatchTime(Profile profile, Serie series);
-
-    int getWatchedTimeForSerie(Account account);
 }

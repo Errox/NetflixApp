@@ -9,15 +9,17 @@ public class MovieProgram {
     private Movie movie;
     private Program program;
 
-    private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private DateFormat dateFormat;
 
     public MovieProgram(Movie movie, Program program){
         this.movie = movie;
-        this.program =program;
+        this.program = program;
+
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
     }
 
     @Override
     public String toString() {
-        return "Suited for age "+ movie.getAgeIndication() + " and up , Title: " + program.getTitle() + ", Duration: " + dateFormat.format(program.getTimeSpan());
+        return "Suited for age " + movie.getAgeIndication() + " and up , Title: " + program.getTitle() + ", Duration: " + dateFormat.format(program.getTimeSpan());
     }
 }

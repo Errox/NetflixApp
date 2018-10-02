@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SqlServerSerieDAO implements SerieDAO {
@@ -127,51 +128,6 @@ public class SqlServerSerieDAO implements SerieDAO {
         return count / episodes.size();
     }
 
-    @Override
-    public int getWatchedTimeForSerie(Account account) {
-        Connection connection = MSSQLDatabase.getConnection();
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        int totalDuration = 0;
 
-
-        try {
-//            statement = connection.prepareStatement("SELECT Profiles.Id, Programs.Title,Programs.Duration," +
-//                    "Programs.Id as ProgramId, Movies.AgeIndication, Movies.Genre, Movies.Id as MovieId, Movies.Language FROM " +
-//                    "Programs " +
-//                    "JOIN Movies ON Movies.ProgramId = Programs.Id " +
-//                    "JOIN Profiles on AccountId = Profiles.AccountId" +
-//                    "JOIN Watched on Watched.ProgramId = Programs.Id" +
-//                    "                   WHERE Profiles.AccountId = ?");
-
-            statement = connection.prepareStatement("SELECT Programs.Duration, Watched.Percentage FROM Programs" +
-                    "JOIN Episodes ON Episodes.ProgramId = Programs.Id" +
-                    "JOIN Profiles on AccountId = Profiles.AccountId" +
-                    "JOIN Watched on Watched.ProgramId = Programs.Id" +
-                    "WHERE Profiles.AccountId = ?");
-
-            statement.setInt(1, account.getId());
-            resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-                //LocalTime localTime = new LocalTime();
-                //localTime.plusHours(resultSet.getInt("Duration"));
-
-                int duration = resultSet.getInt("Duration");
-                totalDuration += duration;
-
-            }
-
-        } catch (Exception e) {
-            //Print on error.
-            e.printStackTrace();
-        } finally {
-            //Clean our resources.
-            MSSQLDatabase.closeResources(resultSet, statement, connection);
-        }
-
-        return totalDuration;
-    }
 
 }

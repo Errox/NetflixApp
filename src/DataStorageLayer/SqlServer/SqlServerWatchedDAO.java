@@ -2,15 +2,16 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.WatchedDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
+import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
+import DomainModelLayer.Serie;
 import DomainModelLayer.Watched;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SqlServerWatchedDAO implements WatchedDAO {
 
@@ -187,5 +188,44 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Release our resources.
             MSSQLDatabase.closeStatementResources(statement);
         }
+    }
+
+    @Override
+    public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
+        Connection connection = MSSQLDatabase.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Integer> watchedList = new ArrayList<>();
+
+
+        try {
+
+            statement = connection.prepareStatement(
+                    "SELECT Watched.Percentage FROM Programs" +
+                    " JOIN Episodes ON Episodes.ProgramId = Programs.Id" +
+                    " JOIN Profiles ON AccountId = Profiles.AccountId" +
+                    " JOIN Watched ON Watched.ProgramId = Programs.Id" +
+                    " WHERE Profiles.AccountId = ? AND SerieId = ?");
+
+            statement.setInt(1, account.getId());
+            statement.setInt(2, serie.getId());
+
+            resultSet = statement.executeQuery();
+
+
+
+            while (resultSet.next()) {
+                watchedList.add(resultSet.getInt("Percentage"));
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return watchedList;
     }
 }
