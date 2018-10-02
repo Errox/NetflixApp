@@ -89,6 +89,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     @Override
     public List<Watched> getAllWatchedForProfile(Profile profile) {
         Connection connection = MSSQLDatabase.getConnection();
+
         List<Watched> watched = new ArrayList<Watched>();
         Statement statement = null;
         ResultSet resultSet = null;

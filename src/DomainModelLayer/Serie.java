@@ -52,6 +52,6 @@ public class Serie {
 
     @Override
     public String toString() {
-        return this.name + " Genre: " + this.genre + " Language:" + this.language;
+        return this.name + ", Genre: " + this.genre + ", Language: " + this.language;
     }
 }

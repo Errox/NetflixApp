@@ -144,12 +144,11 @@ public class SqlServerSerieDAO implements SerieDAO {
 //                    "JOIN Watched on Watched.ProgramId = Programs.Id" +
 //                    "                   WHERE Profiles.AccountId = ?");
 
-            statement = connection.prepareStatement("SELECT Programs.Duration" +
-                    "FROM Programs " +
-                    "JOIN Movies ON Series.ProgramId = Programs.Id " +
+            statement = connection.prepareStatement("SELECT Programs.Duration, Watched.Percentage FROM Programs" +
+                    "JOIN Episodes ON Episodes.ProgramId = Programs.Id" +
                     "JOIN Profiles on AccountId = Profiles.AccountId" +
                     "JOIN Watched on Watched.ProgramId = Programs.Id" +
-                    " WHERE Profiles.AccountId = ?");
+                    "WHERE Profiles.AccountId = ?");
 
             statement.setInt(1, account.getId());
             resultSet = statement.executeQuery();

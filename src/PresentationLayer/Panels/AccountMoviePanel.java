@@ -20,6 +20,5 @@ public class AccountMoviePanel extends JPanel {
 
         JList list = new JList();
         add(list);
-
     }
 }
