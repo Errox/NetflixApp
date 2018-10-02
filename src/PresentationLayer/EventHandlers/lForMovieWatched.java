@@ -34,7 +34,7 @@ public class lForMovieWatched implements ActionListener {
         ProgramManager programManager = new ProgramManager();
         List<Movie> movies = new ArrayList<Movie>();
         for (Watched watch: watched) {
-            movies.add( movieManager.getMovieByProgramId(watch.getProgramId()));
+          //  movies.add( movieManager.getMovieByProgramId(watch.getProgramId()));
         }
 
 

@@ -2,10 +2,7 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.MovieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
-import DomainModelLayer.Account;
-import DomainModelLayer.Movie;
-import DomainModelLayer.MovieProgram;
-import DomainModelLayer.Program;
+import DomainModelLayer.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +38,7 @@ public class SqlServerMovieDAO implements MovieDAO {
         ResultSet resultSet = null;
 
         try {
-            String sqlQuery = "SELECT * FROM Series";
+            String sqlQuery = "SELECT * FROM Movies";
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sqlQuery);
 
@@ -49,9 +46,10 @@ public class SqlServerMovieDAO implements MovieDAO {
 
                 int id = resultSet.getInt("Id");
                 int Age = resultSet.getInt("AgeIndication");
-                String Language = resultSet.getString("ProgramId");
+                int progamId = resultSet.getInt("ProgramId");
                 String Genre = resultSet.getString("Genre");
-                Movies.add(new Movie(id, Age, Language, Genre));
+                String language = resultSet.getString("Language");
+                Movies.add(new Movie(id, Age, progamId, Genre,language));
             }
 
         } catch (Exception e) {
@@ -81,10 +79,10 @@ public class SqlServerMovieDAO implements MovieDAO {
 
                 int movieId = resultSet.getInt("Id");
                 int Age = resultSet.getInt("AgeIndication");
-                String Language = resultSet.getString("ProgramId");
+                int programId = resultSet.getInt("ProgramId");
                 String Genre = resultSet.getString("Genre");
-
-                movie = new Movie(movieId, Age, Language, Genre);
+                String language = resultSet.getString("Language");
+                movie = new Movie(movieId, Age, programId, Genre, language);
             }
 
         } catch (Exception e) {
@@ -133,7 +131,7 @@ public class SqlServerMovieDAO implements MovieDAO {
                     e.printStackTrace();
                 }
 
-                Movie movie = new Movie(movieId, ageIndication, language, genre);
+                Movie movie = new Movie(movieId, ageIndication, programId, genre, language);
                 Program program = new Program(programId, programTitle, date);
 
                 movieProgram = new MovieProgram(movie, program);
@@ -152,4 +150,30 @@ public class SqlServerMovieDAO implements MovieDAO {
     }
 
 
+    @Override
+    public int getFinishedCount(Movie movie) {
+        Connection connection = MSSQLDatabase.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int count =0;
+        try {
+            statement = connection.prepareStatement("SELECT count(Watched.Id) as count FROM  Movies INNER JOIN Programs ON Movies.ProgramId = Programs.Id INNER JOIN Watched ON Programs.Id = Watched.ProgramId AND Programs.Id = Watched.ProgramId WHERE Watched.Percentage = 100 and Movies.Id =?");
+            statement.setInt(1, movie.getId());
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                count = resultSet.getInt("count");
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return count;
+    }
 }

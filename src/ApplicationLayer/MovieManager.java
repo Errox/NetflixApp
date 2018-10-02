@@ -38,4 +38,11 @@ public class MovieManager implements MovieDAO {
     public MovieProgram getLongestMovieForAge(int age) {
        return movieDAO.getLongestMovieForAge(age);
     }
+
+    @Override
+    public int getFinishedCount(Movie movie) {
+        return movieDAO.getFinishedCount(movie);
+    }
+
+
 }

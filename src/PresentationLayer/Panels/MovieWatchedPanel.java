@@ -1,10 +1,26 @@
 package PresentationLayer.Panels;
 
+import ApplicationLayer.MovieManager;
+import PresentationLayer.EventHandlers.lForMovieWatchedTotal;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class MovieWatchedPanel extends JPanel {
 
-    //Op deze panel kan er een film worden gekozen en er word dan weergegeven hoe vaak deze 100% is bekeken
+    public MovieWatchedPanel(){
+        this.setLayout(new GridLayout(10, 1, 10, 10));
+        MovieManager movieManager = new MovieManager();
+        JComboBox movie = new JComboBox();
+        JLabel label = new JLabel();
+        movie.addActionListener(new lForMovieWatchedTotal(movie, label));
 
-    //Denis
+
+        movie.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
+
+        movie.setSelectedIndex(0);
+        add(movie);
+        add(label);
+    }
+
 }
