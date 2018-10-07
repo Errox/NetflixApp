@@ -83,5 +83,4 @@ public class WatchedManager implements WatchedDAO {
     public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
         return watchedDAO.getWatchedTimeForEpisodesBySerie(account, serie);
     }
-
 }
