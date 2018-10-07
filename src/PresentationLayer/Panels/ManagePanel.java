@@ -1,18 +1,18 @@
 package PresentationLayer.Panels;
 
-import ApplicationLayer.AccountManager;
-import ApplicationLayer.ProfileManager;
-import ApplicationLayer.WatchedManager;
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
+import ApplicationLayer.*;
+import DomainModelLayer.*;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.Controls.JCalendar;
 import PresentationLayer.Controls.JMaxLengthTextBox;
 import PresentationLayer.Controls.ManageType;
 import PresentationLayer.EventHandlers.*;
+import com.sun.deploy.util.ArrayUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ManagePanel extends JPanel {
 
@@ -152,9 +152,6 @@ public class ManagePanel extends JPanel {
         int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
-
-            //Implement Update <<<<  MAX 5 PROFILE, AND MIN 1
-
             //Insert
             //FIX DATE TIME FROM CUSTOM BOX AND ITS VALUE WITH DELETE KEY
 
@@ -245,35 +242,118 @@ public class ManagePanel extends JPanel {
         }
     }
 
-    public void ManageWatched() {
+    public void ManageWatched(boolean update) {
         if(profiles.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE_WATCHED, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
             return;
         }
 
-        WatchedManager watchedManager = new WatchedManager();
+        //Todo, make jcomponent array a list, and convert it back in the panel segment.
+        // Do this so we can have a non-final element array
 
-        JTextField firstName = new JTextField();
-        JTextField lastName = new JTextField();
+        JComponent[] inputs = new JComponent[8];
+        JComboBox movieOrSerie = new JComboBox();
+        JComboBox SerieOrMovieBox = new JComboBox();
+        JComboBox EpisodeBox = new JComboBox();
+
+        if(update){
+            //resolve this;
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
+            defaultComboBoxModel.addElement("Movie");
+            defaultComboBoxModel.addElement("Serie");
+            movieOrSerie.setModel(defaultComboBoxModel);
+
+
+                Watched c = (Watched) watched.getSelectedItem();
+
+                MovieManager movieManager = new MovieManager();
+                movieManager.getMovieById(c.getProgramId());
+
+
+
+        }else{
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
+            defaultComboBoxModel.addElement("Movie");
+            defaultComboBoxModel.addElement("Serie");
+            movieOrSerie.setModel(defaultComboBoxModel);
+        }
+
+        //Move to Class and use interface to use loos coupling
+        movieOrSerie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(movieOrSerie.getSelectedItem().equals("Movie")){
+                    MovieManager movieManager = new MovieManager();
+                    SerieOrMovieBox.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
+
+                }else{
+                    SerieManager serieManager = new SerieManager();
+                    SerieOrMovieBox.setModel(new DefaultComboBoxModel(serieManager.getAllSeries().toArray()));
+
+                }
+            }
+        });
+
+        SerieOrMovieBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                if(movieOrSerie.getSelectedItem().equals("Movie")){
+                    //remove that episode box;
+                }
+                else {
+                    EpisodeManager episodeManager = new EpisodeManager();
+                    EpisodeBox.setModel(new DefaultComboBoxModel(episodeManager.getAllEpisodesBySeriesId(((Serie) SerieOrMovieBox.getSelectedItem()).getId()).toArray()));
+                }
+            }
+        });
+
+        if(movieOrSerie.getItemCount() > 0)
+            movieOrSerie.setSelectedIndex(0);
+
+        //Fill
+
         JPasswordField password = new JPasswordField();
 
+        JSlider jSlider = new JSlider();
+        jSlider.setPaintTicks(true);
+        jSlider.setMajorTickSpacing(20);
+        jSlider.setMinorTickSpacing(5);
+        jSlider.setSnapToTicks(true);
+        jSlider.setPaintLabels(true);
 
-        final JComponent[] inputs = new JComponent[]{
-                new JLabel("First"),
-                firstName,
-                new JLabel("Last"),
-                lastName,
-                new JLabel("Password"),
-                password
+
+
+             inputs = new JComponent[]{
+                new JLabel("Select movie or serie first"),
+                movieOrSerie,
+                new JLabel("Selected the watched {PLACEHOLDER}"),
+                SerieOrMovieBox,
+                new JLabel("Select episode"),
+                EpisodeBox,
+                new JLabel("Watched percentage"),
+                jSlider
         };
+
+        //Remove
+        //inputs[3] = null;
+
+
 
         int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
-            System.out.println("You entered " +
-                    firstName.getText() + ", " +
-                    lastName.getText() + ", " +
-                    password.getPassword());
+            if (update){
+                //accountManager.updateAccount(parsedObj, (Account) accounts.getSelectedItem());
+            }
+            else {
+                WatchedManager watchedManager = new WatchedManager();
+                watchedManager.addWatched(new Watched(0, jSlider.getValue(), ((Episode)EpisodeBox.getSelectedItem()).getId(), ((Profile)profiles.getSelectedItem()).getId()));
+                updateCombobox();
+            }
+
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }

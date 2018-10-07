@@ -27,7 +27,7 @@ public class lForCreate implements ActionListener {
             } else if (managePanel.getManageType() == ManageType.PROFILE) {
                 managePanel.ManageProfile(false);
             } else if (managePanel.getManageType() == ManageType.WATCHED) {
-                managePanel.ManageWatched();
+                managePanel.ManageWatched(false);
             }
         }
     }

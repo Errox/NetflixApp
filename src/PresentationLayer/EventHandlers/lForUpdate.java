@@ -26,7 +26,7 @@ public class lForUpdate implements ActionListener {
             } else if (managePanel.getManageType() == ManageType.PROFILE) {
                 managePanel.ManageProfile(true);
             } else if (managePanel.getManageType() == ManageType.WATCHED) {
-                managePanel.ManageWatched();
+                managePanel.ManageWatched(true);
             }
         }
     }
