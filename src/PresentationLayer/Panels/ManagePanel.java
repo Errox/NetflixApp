@@ -201,6 +201,10 @@ public class ManagePanel extends JPanel {
             houseNumber.setText(account.getHouseNumber());
             place.setText(account.getPlace());
 
+            ProfileManager pfm
+                     = new ProfileManager();
+            Profile f = pfm.getProfileById(((Account)getSelectedObject()).getId());
+                birthday.setText(f.getBirthDate().toString());
         }
 
         final JComponent[] inputs = new JComponent[]{

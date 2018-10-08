@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class MovieWatchedPanel extends JPanel {
 
+    //6. Voor een door de gebruiker geselecteerde film, hoeveel kijkers hebben deze in z’n geheel bekeken
     public MovieWatchedPanel() {
-        //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
         setLayout(new GridLayout(10, 1, 10, 10));
         MovieManager movieManager = new MovieManager();
         JComboBox movie = new JComboBox();

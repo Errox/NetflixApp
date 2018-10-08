@@ -33,14 +33,14 @@ class SqlServerAccountDAOTest {
         Account retrievedFromDatabase = accountManager.getAccountById(storedAccountId);
 
 
-        boolean cleand = false;
+        boolean cleaned = false;
         //Cleanup from database.
             accountManager.deleteAccounts(retrievedFromDatabase);
             Account c = accountManager.getAccountById(retrievedFromDatabase.getId());
             if(c == null)
-                cleand = true;
+                cleaned = true;
 
-        Assertions.assertTrue(cleand);
+        Assertions.assertTrue(cleaned);
     }
 
 }

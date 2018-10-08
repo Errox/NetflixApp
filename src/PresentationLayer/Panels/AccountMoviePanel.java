@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.util.List;
 
 public class AccountMoviePanel extends JPanel {
+    //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
 
-    //6. Voor een door de gebruiker geselecteerde film, hoeveel kijkers hebben deze in z’n geheel bekeken
+
 
     public AccountMoviePanel() {
         AccountManager accountManager = new AccountManager();
