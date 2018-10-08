@@ -6,6 +6,7 @@ import DomainModelLayer.Account;
 import DomainModelLayer.Profile;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.color.ProfileDataException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,11 @@ import java.util.List;
 public class AccountPanel extends JPanel {
 
     public AccountPanel() {
+        //5. Geef de accounts met slechts 1 profiel.
+        setLayout(new GridLayout(10, 1, 10, 10));
+        Label l = new Label();
+        l.setText("This is a list with accounts that only have one profile.");
+        add(l);
         // To build model for JList
         DefaultListModel listModel = new DefaultListModel();
 

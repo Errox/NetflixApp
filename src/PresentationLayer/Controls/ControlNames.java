@@ -6,17 +6,17 @@ public class ControlNames {
 
     public static final String INFO_WIDGET_TEXT = "Informatica 2018/2019 Klas: 23VK  Ryan Groenewold, Dennis Blokland, Sjoerd Teunisse";
 
-    public static final String TAB_ACCCOUNT = "Accounts";
-    public static final String TAB_PROFILES= "Profiles";
-    public static final String TAB_WATCHED = "Watched";
+    public static final String TAB_ACCCOUNT = "Manage accounts";
+    public static final String TAB_PROFILES= "Manage profiles";
+    public static final String TAB_WATCHED = "Manage watched";
 
     public static final String TAB_SERIES_INFO = "Serie information";
     public static final String TAB_PROFILE_SERIE_INFO = "Profile series information";
-    public static final String TAB_ACCOUNT_MOVIE_INFO = "Account movie information";
+    public static final String TAB_ACCOUNT_MOVIE_INFO = "Movie watcher information";
 
-    public static final String TAB_MOVIE_INFO = "Movie information";
+    public static final String TAB_MOVIE_INFO = "Movie for age";
     public static final String TAB_ACCOUNT_INFO = "Account information";
-    public static final String TAB_MOVIE_WATCHED_INFO = "Movie watcher(s) information";
+    public static final String TAB_MOVIE_WATCHED_INFO = "Account movie information";
 
 
     public static final String MANAGE_BUTTON_CREATE = "CREATE";

@@ -8,6 +8,14 @@ import java.awt.*;
 public class MoviePanel extends JPanel {
 
     public MoviePanel(){
+        //4. Geef de accounts met slechts 1 profiel.
+
+        setLayout(new GridLayout(10, 1, 10, 10));
+
+        Label l = new Label();
+        l.setText("Select an age to find the longest movie for them to watch.");
+        add(l);
+
         JComboBox ageSelector = new JComboBox();
         JList list = new JList();
         ageSelector.addActionListener(new lForMovieList(ageSelector, list));

@@ -8,9 +8,8 @@ import java.util.List;
 
 public class AccountMoviePanel extends JPanel {
 
-//Op deze panel kan er een account worden gekozen er word dan weergegeven welke films er door dit account zijn bekeken
+    //6. Voor een door de gebruiker geselecteerde film, hoeveel kijkers hebben deze in z’n geheel bekeken
 
-    //AccountMoviePanel < Ryan
     public AccountMoviePanel() {
         AccountManager accountManager = new AccountManager();
 

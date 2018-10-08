@@ -7,7 +7,6 @@ import PresentationLayer.Controls.JCalendar;
 import PresentationLayer.Controls.JMaxLengthTextBox;
 import PresentationLayer.Controls.ManageType;
 import PresentationLayer.EventHandlers.*;
-import com.sun.deploy.util.ArrayUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +36,7 @@ public class ManagePanel extends JPanel {
         panel.add(manageLabel);
 
         //JLabel underManage = new JLabel("Selecteer een " + manageType.toString().toLowerCase() + " en druk onderaan de knop om te een nieuwe aan te maken, bijwerken of verwijderen");
-      //  panel.add(underManage);
+        //  panel.add(underManage);
 
         if (manageType == ManageType.ACCOUNT) {
             accounts = new JComboBox<>();
@@ -104,6 +103,7 @@ public class ManagePanel extends JPanel {
 
             if (profiles.getSelectedItem() != null) {
                 Profile profile = (Profile) profiles.getSelectedItem();
+                // Add serie - episode - movie to the boox, instead of their id's
                 watched.setModel(new DefaultComboBoxModel(new WatchedManager().getAllWatchedForProfile(profile).toArray()));
             }
         }
@@ -122,7 +122,7 @@ public class ManagePanel extends JPanel {
     }
 
     public void ManageProfile(boolean update) {
-        if( update && profiles.getSelectedItem() == null) {
+        if (update && profiles.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
             return;
         }
@@ -165,7 +165,7 @@ public class ManagePanel extends JPanel {
 
             } else {
                 int p = profileManager.getProfileCount((Account) accounts.getSelectedItem());
-                if ( p <= 4 ) {
+                if (p <= 4) {
                     System.out.println(profileManager.getProfileCount((Account) accounts.getSelectedItem()));
                     profileManager.addProfile(new Profile(0, fullName.getText(), birthDate.getDateValue(), ((Account) accounts.getSelectedItem()).getId()));
                     updateCombobox();
@@ -230,7 +230,7 @@ public class ManagePanel extends JPanel {
                 ProfileManager pfm = new ProfileManager();
                 int id = accountManager.addAccount(parsedObj);
 
-                pfm.addProfile(new Profile(0, fullName.getText(), birthday.getDateValue() , id));
+                pfm.addProfile(new Profile(0, fullName.getText(), birthday.getDateValue(), id));
             }
 
             updateCombobox();
@@ -243,7 +243,7 @@ public class ManagePanel extends JPanel {
     }
 
     public void ManageWatched(boolean update) {
-        if(profiles.getSelectedItem() == null) {
+        if (profiles.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE_WATCHED, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
             return;
         }
@@ -256,7 +256,7 @@ public class ManagePanel extends JPanel {
         JComboBox SerieOrMovieBox = new JComboBox();
         JComboBox EpisodeBox = new JComboBox();
 
-        if(update){
+        if (update) {
             //resolve this;
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
             defaultComboBoxModel.addElement("Movie");
@@ -264,18 +264,37 @@ public class ManagePanel extends JPanel {
             movieOrSerie.setModel(defaultComboBoxModel);
 
 
-                Watched c = (Watched) watched.getSelectedItem();
+            //We need to have the difference between the two, how do we segmentate this?
 
-                MovieManager movieManager = new MovieManager();
-                movieManager.getMovieById(c.getProgramId());
-
+            Watched c = (Watched) watched.getSelectedItem();
 
 
-        }else{
+            MovieManager movieManager = new MovieManager();
+            Movie m = movieManager.getMovieById(c.getProgramId());
+
+            if (m == null) {
+                EpisodeManager episodeManager = new EpisodeManager();
+                Episode e = episodeManager.getEpisodeById(c.getProgramId());
+
+                if (e == null) {
+                    Serie serie = new SerieManager().getSerieById(c.getProgramId());
+                    if (serie != null)
+                        movieOrSerie.setSelectedIndex(1);
+
+                    SerieOrMovieBox.setSelectedItem(serie);
+                }
+            } else {
+                movieOrSerie.setSelectedIndex(0);
+            }
+
+
+        } else {
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
             defaultComboBoxModel.addElement("Movie");
             defaultComboBoxModel.addElement("Serie");
             movieOrSerie.setModel(defaultComboBoxModel);
+
+
         }
 
         //Move to Class and use interface to use loos coupling
@@ -283,11 +302,11 @@ public class ManagePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(movieOrSerie.getSelectedItem().equals("Movie")){
+                if (movieOrSerie.getSelectedItem().equals("Movie")) {
                     MovieManager movieManager = new MovieManager();
                     SerieOrMovieBox.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
 
-                }else{
+                } else {
                     SerieManager serieManager = new SerieManager();
                     SerieOrMovieBox.setModel(new DefaultComboBoxModel(serieManager.getAllSeries().toArray()));
 
@@ -300,22 +319,20 @@ public class ManagePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
 
-                if(movieOrSerie.getSelectedItem().equals("Movie")){
+                if (movieOrSerie.getSelectedItem().equals("Movie")) {
                     //remove that episode box;
-                }
-                else {
+                } else {
                     EpisodeManager episodeManager = new EpisodeManager();
                     EpisodeBox.setModel(new DefaultComboBoxModel(episodeManager.getAllEpisodesBySeriesId(((Serie) SerieOrMovieBox.getSelectedItem()).getId()).toArray()));
                 }
             }
         });
 
-        if(movieOrSerie.getItemCount() > 0)
-            movieOrSerie.setSelectedIndex(0);
-
-        //Fill
-
-        JPasswordField password = new JPasswordField();
+        //Trigger set.
+        if (!update) {
+            if (movieOrSerie.getItemCount() > 0)
+                movieOrSerie.setSelectedIndex(0);
+        }
 
         JSlider jSlider = new JSlider();
         jSlider.setPaintTicks(true);
@@ -325,8 +342,7 @@ public class ManagePanel extends JPanel {
         jSlider.setPaintLabels(true);
 
 
-
-             inputs = new JComponent[]{
+        inputs = new JComponent[]{
                 new JLabel("Select movie or serie first"),
                 movieOrSerie,
                 new JLabel("Selected the watched {PLACEHOLDER}"),
@@ -341,16 +357,14 @@ public class ManagePanel extends JPanel {
         //inputs[3] = null;
 
 
-
         int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
-            if (update){
+            if (update) {
                 //accountManager.updateAccount(parsedObj, (Account) accounts.getSelectedItem());
-            }
-            else {
+            } else {
                 WatchedManager watchedManager = new WatchedManager();
-                watchedManager.addWatched(new Watched(0, jSlider.getValue(), ((Episode)EpisodeBox.getSelectedItem()).getId(), ((Profile)profiles.getSelectedItem()).getId()));
+                watchedManager.addWatched(new Watched(0, jSlider.getValue(), ((Episode) EpisodeBox.getSelectedItem()).getId(), ((Profile) profiles.getSelectedItem()).getId()));
                 updateCombobox();
             }
 

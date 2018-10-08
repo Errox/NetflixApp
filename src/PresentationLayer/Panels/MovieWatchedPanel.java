@@ -9,7 +9,8 @@ import java.awt.*;
 public class MovieWatchedPanel extends JPanel {
 
     public MovieWatchedPanel(){
-        this.setLayout(new GridLayout(10, 1, 10, 10));
+        //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
+        setLayout(new GridLayout(10, 1, 10, 10));
         MovieManager movieManager = new MovieManager();
         JComboBox movie = new JComboBox();
         JLabel label = new JLabel();

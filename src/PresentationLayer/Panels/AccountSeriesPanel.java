@@ -14,17 +14,19 @@ import java.util.List;
 
 public class AccountSeriesPanel extends JPanel {
 
-    //In dit panel word een account geselecteerd en serie per aflevering het gemiddeld bekeken % van de tijdsduur weergegeven
-
+    //1. Voor een door de gebruiker geselecteerde serie, geef per aflevering het gemiddeld bekeken % van de tijdsduur. Bij elke aflevering worden het volgnummer én titel getoond.
     private DefaultListModel defaultListModel;
     private JComboBox accountCombobox;
     private JComboBox serieComboBox;
     //Sjoerd
 
     public AccountSeriesPanel() {
-        setLayout(new FlowLayout());
+        setLayout(new GridLayout(10, 1, 10, 10));
 
-        //Get all accounts
+        Label l = new Label();
+        l.setText("Select an account to view their watched information for a serie");
+        add(l);
+        
         defaultListModel =  new DefaultListModel();
 
         AccountManager accountManager = new AccountManager();
