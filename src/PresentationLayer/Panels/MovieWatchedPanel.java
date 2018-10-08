@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class MovieWatchedPanel extends JPanel {
 
-    public MovieWatchedPanel(){
+    public MovieWatchedPanel() {
         //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
         setLayout(new GridLayout(10, 1, 10, 10));
         MovieManager movieManager = new MovieManager();

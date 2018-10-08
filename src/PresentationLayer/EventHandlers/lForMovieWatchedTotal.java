@@ -1,17 +1,11 @@
 package PresentationLayer.EventHandlers;
 
 import ApplicationLayer.MovieManager;
-import ApplicationLayer.ProgramManager;
-import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Movie;
-import DomainModelLayer.Profile;
-import DomainModelLayer.Watched;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class lForMovieWatchedTotal implements ActionListener {
 
@@ -23,6 +17,7 @@ public class lForMovieWatchedTotal implements ActionListener {
         this.jComboBox = jComboBox;
         this.label = label;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Movie movie = (Movie) jComboBox.getSelectedItem();

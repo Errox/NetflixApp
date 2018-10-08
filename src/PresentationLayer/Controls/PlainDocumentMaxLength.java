@@ -12,8 +12,8 @@ public class PlainDocumentMaxLength extends PlainDocument {
     }
 
     public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
-            if (!(getLength() + str.length() > maxLength)) {
-                super.insertString(offset, str, a);
-            }
+        if (!(getLength() + str.length() > maxLength)) {
+            super.insertString(offset, str, a);
+        }
     }
 }

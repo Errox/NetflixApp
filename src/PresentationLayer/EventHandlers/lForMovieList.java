@@ -13,7 +13,7 @@ public class lForMovieList implements ActionListener {
     private JList list;
 
     //To Interface
-    public lForMovieList(JComboBox comboBox, JList list){
+    public lForMovieList(JComboBox comboBox, JList list) {
         this.comboBox = comboBox;
         this.list = list;
     }
@@ -28,7 +28,7 @@ public class lForMovieList implements ActionListener {
 
         DefaultListModel listModel = new DefaultListModel();
 
-        if(movie != null)
+        if (movie != null)
             listModel.addElement(movie.toString());
 
         list.setModel(listModel);

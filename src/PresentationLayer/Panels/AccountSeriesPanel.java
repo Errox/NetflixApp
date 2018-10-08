@@ -1,15 +1,16 @@
 package PresentationLayer.Panels;
 
-import ApplicationLayer.*;
+import ApplicationLayer.AccountManager;
+import ApplicationLayer.EpisodeManager;
+import ApplicationLayer.SerieManager;
+import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Account;
 import DomainModelLayer.Episode;
 import DomainModelLayer.Serie;
 import PresentationLayer.EventHandlers.lForSelectingSerie;
-import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSeriesPanel extends JPanel {
@@ -26,15 +27,14 @@ public class AccountSeriesPanel extends JPanel {
         Label l = new Label();
         l.setText("Select an account to view their watched information for a serie");
         add(l);
-        
-        defaultListModel =  new DefaultListModel();
+
+        defaultListModel = new DefaultListModel();
 
         AccountManager accountManager = new AccountManager();
         accountCombobox = new JComboBox<>(accountManager.getAllAccounts().toArray());
 
         accountCombobox.addActionListener(new lForSelectingSerie(this));
         add(accountCombobox);
-
 
         JList list = new JList(defaultListModel);
 
@@ -52,31 +52,31 @@ public class AccountSeriesPanel extends JPanel {
 
     }
 
-    public void update(){
+    public void update() {
         EpisodeManager episodeManager = new EpisodeManager();
 
-        if(defaultListModel != null)
+        if (defaultListModel != null)
             defaultListModel.clear();
 
         List<Episode> episodes;
         episodes = episodeManager.getAllEpisodes();
 
         WatchedManager watchedManager = new WatchedManager();
-        List<Integer> watchedTimeForEpisodesBySerie = watchedManager.getWatchedTimeForEpisodesBySerie((Account)accountCombobox.getSelectedItem(),  (Serie)serieComboBox.getSelectedItem());
+        List<Integer> watchedTimeForEpisodesBySerie = watchedManager.getWatchedTimeForEpisodesBySerie((Account) accountCombobox.getSelectedItem(), (Serie) serieComboBox.getSelectedItem());
 
         //Assuming the list size is always the same and id is always filled
         for (int i = 0; i < episodes.size(); i++) {
             defaultListModel.addElement(episodes.get(i));
         }
 
-        for(int i = 0; i < watchedTimeForEpisodesBySerie.size(); i++){
-            if(watchedTimeForEpisodesBySerie.size() > episodes.size())
+        for (int i = 0; i < watchedTimeForEpisodesBySerie.size(); i++) {
+            if (watchedTimeForEpisodesBySerie.size() > episodes.size())
                 break;
 
-            if(watchedTimeForEpisodesBySerie.get(i) == null){
-                defaultListModel.set(i, defaultListModel.getElementAt(i) + " Hasn't watched yet" );
+            if (watchedTimeForEpisodesBySerie.get(i) == null) {
+                defaultListModel.set(i, defaultListModel.getElementAt(i) + " Hasn't watched yet");
             }
-            defaultListModel.set(i, defaultListModel.getElementAt(i) + ", Percentage completed: " +  watchedTimeForEpisodesBySerie.get(i));
+            defaultListModel.set(i, defaultListModel.getElementAt(i) + ", Percentage completed: " + watchedTimeForEpisodesBySerie.get(i));
         }
     }
 }

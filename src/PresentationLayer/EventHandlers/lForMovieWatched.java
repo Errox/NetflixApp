@@ -4,7 +4,6 @@ import ApplicationLayer.MovieManager;
 import ApplicationLayer.ProgramManager;
 import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Movie;
-import DomainModelLayer.MovieProgram;
 import DomainModelLayer.Profile;
 import DomainModelLayer.Watched;
 
@@ -24,6 +23,7 @@ public class lForMovieWatched implements ActionListener {
         this.jComboBox = jComboBox;
         this.list = list;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -33,8 +33,8 @@ public class lForMovieWatched implements ActionListener {
         List<Watched> watched = watchedManager.getAllWatchedForProfile(profile);
         ProgramManager programManager = new ProgramManager();
         List<Movie> movies = new ArrayList<Movie>();
-        for (Watched watch: watched) {
-          //  movies.add( movieManager.getMovieByProgramId(watch.getProgramId()));
+        for (Watched watch : watched) {
+            //  movies.add( movieManager.getMovieByProgramId(watch.getProgramId()));
         }
 
 

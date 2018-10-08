@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MoviePanel extends JPanel {
 
-    public MoviePanel(){
+    public MoviePanel() {
         //4. Geef de accounts met slechts 1 profiel.
 
         setLayout(new GridLayout(10, 1, 10, 10));
@@ -21,7 +21,7 @@ public class MoviePanel extends JPanel {
         ageSelector.addActionListener(new lForMovieList(ageSelector, list));
 
         //1-16 as age.
-        for ( int i = 1 ; i < 17; i++) {
+        for (int i = 1; i < 17; i++) {
             ageSelector.addItem(i);
         }
 

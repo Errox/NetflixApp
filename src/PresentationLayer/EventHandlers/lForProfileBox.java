@@ -2,7 +2,6 @@ package PresentationLayer.EventHandlers;
 
 import ApplicationLayer.ProfileManager;
 import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class lForProfileBox implements ActionListener {
 
         Object[] profileArrayList = profileManager.getProfilesFromOwner((Account) jComboBox.getSelectedItem()).toArray();
 
-        if(profileArrayList != null)
+        if (profileArrayList != null)
             jComboBoxTarget.setModel(new DefaultComboBoxModel(profileArrayList));
     }
 }

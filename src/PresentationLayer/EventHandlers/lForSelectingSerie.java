@@ -3,7 +3,6 @@ package PresentationLayer.EventHandlers;
 
 import PresentationLayer.Panels.AccountSeriesPanel;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
