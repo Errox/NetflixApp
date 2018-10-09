@@ -1,24 +1,33 @@
 package PresentationLayer.Panels;
 
 import ApplicationLayer.AccountManager;
+import ApplicationLayer.MovieManager;
 import DomainModelLayer.Account;
+import PresentationLayer.EventHandlers.lForMovieWatchedTotal;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class AccountMoviePanel extends JPanel {
+
     //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
 
 
-
     public AccountMoviePanel() {
-        AccountManager accountManager = new AccountManager();
 
-        List<Account> accountList = accountManager.getAllAccounts();
-        add(new JComboBox<>(accountList.toArray()));
+        setLayout(new GridLayout(10, 1, 10, 10));
+        MovieManager movieManager = new MovieManager();
+        JComboBox movie = new JComboBox();
+        JLabel label = new JLabel();
+        movie.addActionListener(new lForMovieWatchedTotal(movie, label));
 
 
-        JList list = new JList();
-        add(list);
+        movie.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
+
+        movie.setSelectedIndex(0);
+        add(movie);
+        add(label);
+
     }
 }
