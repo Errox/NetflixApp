@@ -9,3 +9,10 @@
 
 
 ## Installatie handleiding
+
+In Netflix Statistix\NetflixApp\src\DataStorageLayer\SqlServer set the first line to:
+
+jdbc:sqlserver://SERVERNAME;integratedSecurity=true
+
+WHERE Servername is your DB Server host.
+
