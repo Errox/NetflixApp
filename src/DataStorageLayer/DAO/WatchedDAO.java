@@ -1,9 +1,6 @@
 package DataStorageLayer.DAO;
 
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
-import DomainModelLayer.Serie;
-import DomainModelLayer.Watched;
+import DomainModelLayer.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,5 +19,6 @@ public interface WatchedDAO {
 
     void deleteWatched(Watched deleteWatch);
 
-    List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie);
+    List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie);
+    Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes);
 }

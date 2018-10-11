@@ -62,7 +62,7 @@ public class AccountSeriesPanel extends JPanel {
         episodes = episodeManager.getAllEpisodes();
 
         WatchedManager watchedManager = new WatchedManager();
-        List<Integer> watchedTimeForEpisodesBySerie = watchedManager.getWatchedTimeForEpisodesBySerie((Account) accountCombobox.getSelectedItem(), (Serie) serieComboBox.getSelectedItem());
+        List<Integer> watchedTimeForEpisodesBySerie = watchedManager.getWatchedTimeForEpisodesBySerieOfAccount((Account) accountCombobox.getSelectedItem(), (Serie) serieComboBox.getSelectedItem());
 
         //Assuming the list size is always the same and id is always filled
         for (int i = 0; i < episodes.size(); i++) {
