@@ -18,6 +18,22 @@ public class JCalendar extends JTextField {
 
     }
 
+    public void setDate(Date s){
+
+        SimpleDateFormat originalFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat iFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String formatted  = null;
+        try {
+            formatted = originalFormat.format(iFormatter.parse(s.toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        this.setText(formatted);
+    }
+
     public Date getDateValue() {
         String input = this.getText();
         Date date = new Date();

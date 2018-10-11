@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ManagePanel extends JPanel {
 
@@ -138,7 +139,7 @@ public class ManagePanel extends JPanel {
             profile = profileManager.getProfileById(((Profile) getSelectedObject()).getId());
 
         if (update) {
-            birthDate.setText(profile.getBirthDate().toString());
+            birthDate.setDate(profile.getBirthDate());
             fullName.setText(profile.getName());
         }
 
@@ -189,7 +190,6 @@ public class ManagePanel extends JPanel {
         JMaxLengthTextBox postalCode = new JMaxLengthTextBox(6);
         JMaxLengthTextBox houseNumber = new JMaxLengthTextBox(5);
         JMaxLengthTextBox place = new JMaxLengthTextBox(50);
-
         JCalendar birthday = new JCalendar(10);
 
         if (update && accounts.getSelectedItem() != null) {
@@ -207,22 +207,31 @@ public class ManagePanel extends JPanel {
                 birthday.setText(f.getBirthDate().toString());
         }
 
-        final JComponent[] inputs = new JComponent[]{
-                new JLabel(ControlNames.FULL_NAME),
-                fullName,
-                new JLabel(ControlNames.STREET_NAME),
-                streetName,
-                new JLabel(ControlNames.POSTAL_CODE),
-                postalCode,
-                new JLabel(ControlNames.HOUSE_NUMBER),
-                houseNumber,
-                new JLabel(ControlNames.PLACE),
-                place,
-                new JLabel(ControlNames.BIRTHDAY),
-                birthday
-        };
+        ArrayList<JComponent> jComponents = new ArrayList<JComponent>();
 
-        int result = JOptionPane.showConfirmDialog(null, inputs, ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
+        jComponents.add(new JLabel(ControlNames.FULL_NAME));
+        jComponents.add(fullName);
+        jComponents.add(new JLabel(ControlNames.STREET_NAME));
+        jComponents.add(streetName);
+        jComponents.add(  new JLabel(ControlNames.POSTAL_CODE));
+        jComponents.add( postalCode);
+        jComponents.add(new JLabel(ControlNames.HOUSE_NUMBER));
+        jComponents.add(houseNumber);
+        jComponents.add( new JLabel(ControlNames.PLACE));
+        jComponents.add(place);
+        jComponents.add(new JLabel(ControlNames.BIRTHDAY));
+        jComponents.add(birthday);
+
+        if(update){
+
+            int size = jComponents.size();
+           //Remove the Birthday elements
+           for(int i = 1; i < 3; i++){
+                jComponents.remove(size-i);
+          }
+        }
+
+        int result = JOptionPane.showConfirmDialog(null, jComponents.toArray(), ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
 

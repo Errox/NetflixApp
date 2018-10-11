@@ -25,12 +25,12 @@ public class ControlNames {
 
     public static final String MANAGE_LABEL = "Managing ";
 
-    public static final String FULL_NAME = "Volledige naam";
-    public static final String STREET_NAME = "Straatnaam";
-    public static final String POSTAL_CODE = "Postcode";
-    public static final String HOUSE_NUMBER = "Huisnummer";
-    public static final String PLACE = "Plaats";
-    public static final String BIRTHDAY = "Geboortedatum (mm-dd-yyy)";
+    public static final String FULL_NAME = "Full name";
+    public static final String STREET_NAME = "Street name";
+    public static final String POSTAL_CODE = "Postalcode";
+    public static final String HOUSE_NUMBER = "Housenumber";
+    public static final String PLACE = "Place";
+    public static final String BIRTHDAY = "Birthdate (dd-mm-yyy)";
 
     public static final String MAX_ACCOUNT_MESSAGE = "Een account mag maximaal 5 profielen bevatten";
     public static final String CONFIRM_FILL_ALL_FIELDS = "Vull a.u.b. alle velden in";
