@@ -76,10 +76,6 @@ public class WatchedManager implements WatchedDAO {
         watchedDAO.deleteWatched(deleteWatched);
     }
 
-    @Override
-    public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
-        return null;
-    }
 
     @Override
     public List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie) {
