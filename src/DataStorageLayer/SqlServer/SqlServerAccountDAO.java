@@ -4,10 +4,7 @@ import DataStorageLayer.DAO.AccountDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Account;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,15 +130,10 @@ public class SqlServerAccountDAO implements AccountDAO {
 
         //Finalize query
         try {
-            /*
-            * UPDATE       Accounts
-              SET  Name =, Street =, HouseNumber =, Place =, PostalCode =
-            */
 
             String sqlQuery = "UPDATE Accounts SET Name = ?, Street = ?, PostalCode = ?, HouseNumber = ?, Place = ? WHERE Id = ?";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
-            //Index 1 or 0?
             preparedStatement.setString(1, newAccount.getName());
             preparedStatement.setString(2, newAccount.getStreetName());
             preparedStatement.setString(3, newAccount.getPostalCode());

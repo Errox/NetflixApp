@@ -195,7 +195,6 @@ public class SqlServerWatchedDAO implements WatchedDAO {
         ResultSet resultSet = null;
         List<Integer> watchedList = new ArrayList<>();
 
-
         try {
 
             statement = connection.prepareStatement(
@@ -209,8 +208,6 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             statement.setInt(2, serie.getId());
 
             resultSet = statement.executeQuery();
-
-
 
             while (resultSet.next()) {
                 watchedList.add(resultSet.getInt("Percentage"));
@@ -234,8 +231,6 @@ public class SqlServerWatchedDAO implements WatchedDAO {
         ResultSet resultSet = null;
 
         Map<Episode,Integer> seriesPercentage = new HashMap<>();
-
-
 
         try {
             for (Episode episode: episodes) {

@@ -67,6 +67,4 @@ public class AccountManager implements AccountDAO {
     public void deleteAccounts(Account deleteAccount) {
         accountDAO.deleteAccounts(deleteAccount);
     }
-
-
 }
