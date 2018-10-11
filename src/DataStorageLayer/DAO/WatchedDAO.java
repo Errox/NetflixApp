@@ -19,6 +19,7 @@ public interface WatchedDAO {
 
     void deleteWatched(Watched deleteWatch);
 
-    List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie);
+    List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie);
+    Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes);
 
 }

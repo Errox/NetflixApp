@@ -77,6 +77,11 @@ public class WatchedManager implements WatchedDAO {
     }
 
     @Override
+    public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
+        return null;
+    }
+
+    @Override
     public List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie) {
         return watchedDAO.getWatchedTimeForEpisodesBySerieOfAccount(account, serie);
     }
