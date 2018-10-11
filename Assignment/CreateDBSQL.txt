@@ -1,0 +1,129 @@
+
+CREATE DATABASE [NetFlixStats];
+
+USE NetflixStats;
+
+CREATE TABLE [dbo].[Accounts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Street] [nvarchar](50) NULL,
+	[PostalCode] [nvarchar](6) NULL,
+	[HouseNumber] [nvarchar](5) NULL,
+	[Place] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Accounts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY];
+
+
+CREATE TABLE [dbo].[Episodes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[EpisodeNr] [int] NULL,
+	[SeasonNr] [int] NULL,
+	[SerieId] [int] NULL,
+	[ProgramId] [int] NOT NULL,
+ CONSTRAINT [PK_Episodes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[ProgramId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Movies](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AgeIndication] [int] NULL,
+	[Language] [nvarchar](50) NULL,
+	[Genre] [nvarchar](50) NULL,
+	[ProgramId] [int] NOT NULL,
+ CONSTRAINT [PK_Movies] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[ProgramId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Profiles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[BirthDate] [date] NULL,
+	[AccountId] [int] NULL,
+ CONSTRAINT [PK_Profiles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[Programs](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+	[Duration] [time](7) NULL,
+ CONSTRAINT [PK_Programs_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[Series](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NULL,
+	[Age] [int] NULL,
+	[Language] [nvarchar](50) NULL,
+	[Genre] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Series] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[Watched](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Percentage] [int] NULL,
+	[ProfileId] [int] NULL,
+	[ProgramId] [int] NULL,
+ CONSTRAINT [PK_Watched_1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Episodes]  WITH CHECK ADD  CONSTRAINT [FK_Episodes_Programs1] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+
+ALTER TABLE [dbo].[Episodes] CHECK CONSTRAINT [FK_Episodes_Programs1]
+
+ALTER TABLE [dbo].[Episodes]  WITH CHECK ADD  CONSTRAINT [FK_Episodes_Series] FOREIGN KEY([SerieId])
+REFERENCES [dbo].[Series] ([Id])
+
+ALTER TABLE [dbo].[Episodes] CHECK CONSTRAINT [FK_Episodes_Series]
+
+ALTER TABLE [dbo].[Movies]  WITH CHECK ADD  CONSTRAINT [FK_Movies_Programs] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+
+ALTER TABLE [dbo].[Movies] CHECK CONSTRAINT [FK_Movies_Programs]
+
+ALTER TABLE [dbo].[Profiles]  WITH CHECK ADD  CONSTRAINT [FK_Profiles_Accounts] FOREIGN KEY([AccountId])
+REFERENCES [dbo].[Accounts] ([Id])
+ON DELETE CASCADE
+
+ALTER TABLE [dbo].[Profiles] CHECK CONSTRAINT [FK_Profiles_Accounts]
+
+ALTER TABLE [dbo].[Watched]  WITH CHECK ADD  CONSTRAINT [FK_Watched_Profiles] FOREIGN KEY([ProfileId])
+REFERENCES [dbo].[Profiles] ([Id])
+ON DELETE CASCADE
+
+ALTER TABLE [dbo].[Watched] CHECK CONSTRAINT [FK_Watched_Profiles]
+
+ALTER TABLE [dbo].[Watched]  WITH CHECK ADD  CONSTRAINT [FK_Watched_Programs] FOREIGN KEY([ProgramId])
+REFERENCES [dbo].[Programs] ([Id])
+
+ALTER TABLE [dbo].[Watched] CHECK CONSTRAINT [FK_Watched_Programs]

@@ -161,16 +161,16 @@ GO
 
 /* Accounts */
 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Valérie', '14216 Rusk Avenue', null, '1633', 'Haixing'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-ève', '572 Transport Point', '337 01', '9', 'Rokycany'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Rébecca', '1 Mesta Drive', null, '2175', 'Menzel Jemil'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Estève', '7 Lakeland Hill', '4600-757', '4718', 'Casal'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-hélène', '92159 David Lane', null, '4', 'Garawati'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Görel', '2 Dakota Way', null, '2034', 'Bykhaw'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Laurélie', '7252 Schlimgen Drive', null, '754', 'Astanajapura'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('André', '7600 Ronald Regan Drive', null, '76', 'Pacaraos'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Léandre', '7538 Troy Place', null, '71', 'Makiv'); 
-insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Néhémie', '77 Brickson Park Circle', '200018', '3', 'Valledupar');
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Valï¿½rie', '14216 Rusk Avenue', null, '1633', 'Haixing'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-ï¿½ve', '572 Transport Point', '337 01', '9', 'Rokycany'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Rï¿½becca', '1 Mesta Drive', null, '2175', 'Menzel Jemil'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Estï¿½ve', '7 Lakeland Hill', '4600-757', '4718', 'Casal'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Marie-hï¿½lï¿½ne', '92159 David Lane', null, '4', 'Garawati'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Gï¿½rel', '2 Dakota Way', null, '2034', 'Bykhaw'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Laurï¿½lie', '7252 Schlimgen Drive', null, '754', 'Astanajapura'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Andrï¿½', '7600 Ronald Regan Drive', null, '76', 'Pacaraos'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Lï¿½andre', '7538 Troy Place', null, '71', 'Makiv'); 
+insert into Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Nï¿½hï¿½mie', '77 Brickson Park Circle', '200018', '3', 'Valledupar');
 
 /* Profiles */
 
@@ -197,7 +197,7 @@ insert into Programs (Title, Duration) values ('Mighty Joe Young', '11:19');
 insert into Programs (Title, Duration) values ('Return of Django (Son of Django) (Figlio di Django, Il)', '22:24'); 
 insert into Programs (Title, Duration) values ('Come Undone (Presque Rien)', '9:20'); 
 insert into Programs (Title, Duration) values ('Year One', '21:25'); 
-insert into Programs (Title, Duration) values ('Ambassador, The (Ambassadøren)', '8:43'); 
+insert into Programs (Title, Duration) values ('Ambassador, The (Ambassadï¿½ren)', '8:43'); 
 insert into Programs (Title, Duration) values ('Eat', '12:48'); 
 insert into Programs (Title, Duration) values ('Mrs. Pollifax-Spy', '13:52');
 insert into Programs (Title, Duration) values ('StreetDance 3D', '9:06'); 
@@ -206,8 +206,8 @@ insert into Programs (Title, Duration) values ('Hireling, The', '16:31');
 insert into Programs (Title, Duration) values ('Aces: Iron Eagle III', '18:28'); 
 insert into Programs (Title, Duration) values ('Genius Within: The Inner Life of Glenn Gould', '12:00'); 
 insert into Programs (Title, Duration) values ('Average Italian', '15:37'); 
-insert into Programs (Title, Duration) values ('Babette''s Feast (Babettes gæstebud)', '4:00'); 
-insert into Programs (Title, Duration) values ('Two Brothers (Deux frères)', '22:59'); 
+insert into Programs (Title, Duration) values ('Babette''s Feast (Babettes gï¿½stebud)', '4:00'); 
+insert into Programs (Title, Duration) values ('Two Brothers (Deux frï¿½res)', '22:59'); 
 insert into Programs (Title, Duration) values ('Far Out Isn''t Far Enough: The Tomi Ungerer Story', '15:26'); 
 insert into Programs (Title, Duration) values ('Frankie and Johnny', '18:59'); 
 insert into Programs (Title, Duration) values ('The Little Fox', '12:15'); 
@@ -231,13 +231,13 @@ insert into Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'Kurd
 insert into Series (Name, Age, Genre, Language) values ('Mega Shark vs. Giant Octopus', 16, 'Action|Horror', 'Amharic');
 insert into Series (Name, Age, Genre, Language) values ('Summertime', 16, 'Comedy', 'Dutch');
 insert into Series (Name, Age, Genre, Language) values ('Scorpion King 2: Rise of a Warrior, The', 16, 'Action|Adventure|Fantasy', 'Estonian');
-insert into Series (Name, Age, Genre, Language) values ('a/k/a Tommy Chong', 16, 'Documentary', 'Guaraní');
+insert into Series (Name, Age, Genre, Language) values ('a/k/a Tommy Chong', 16, 'Documentary', 'Guaranï¿½');
 insert into Series (Name, Age, Genre, Language) values ('Water', 16, 'Drama|Romance', 'New Zealand Sign Language');
 insert into Series (Name, Age, Genre, Language) values ('President''s Man: A Line in the Sand, The', 16, 'Action|Drama|Thriller', 'Arabic');
 insert into Series (Name, Age, Genre, Language) values ('Nothing Lasts Forever ', 16, 'Comedy|Fantasy|Sci-Fi', 'Northern Sotho');
 insert into Series (Name, Age, Genre, Language) values ('Hang ''Em High', 16, 'Crime|Drama|Western', 'Luxembourgish');
 insert into Series (Name, Age, Genre, Language) values ('Bloody Mama', 16, 'Crime|Drama', 'Romanian');
-insert into Series (Name, Age, Genre, Language) values ('Jönssonligans största kupp', 16, 'Comedy|Crime', 'Malayalam');
+insert into Series (Name, Age, Genre, Language) values ('Jï¿½nssonligans stï¿½rsta kupp', 16, 'Comedy|Crime', 'Malayalam');
 
 /* Episodes */
 
