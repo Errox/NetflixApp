@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+//Op deze panel kan er een account worden gekozen er word dan weergegeven welke films er door dit account zijn bekeken + percentage
+
 public class AccountMoviePanel extends JPanel {
 
     //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
@@ -31,3 +33,4 @@ public class AccountMoviePanel extends JPanel {
 
     }
 }
+

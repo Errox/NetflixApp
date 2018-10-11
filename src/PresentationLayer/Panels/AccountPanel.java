@@ -43,4 +43,28 @@ public class AccountPanel extends JPanel {
         JList listSingularAccounts = new JList(listModel);
         add(listSingularAccounts);
     }
+
+    //name street postalcode housenumber place
+
+    public JPanel SeriesContainer(String Name, String Street, String PostalCode, int HouseNumber, String Place ){
+        JPanel p = new JPanel();
+
+        p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+        p.setSize(new Dimension(200, 200));
+        p.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
+
+        JLabel name = new JLabel("Name : " + Name);
+        JLabel street = new JLabel("Street : " + Street);
+        JLabel postalcode = new JLabel("PostalCode : " + PostalCode);
+        JLabel housenumber = new JLabel("HouseNumber : " + HouseNumber);
+        JLabel place = new JLabel("Place : " + Place);
+
+        p.add(name);
+        p.add(street);
+        p.add(postalcode);
+        p.add(housenumber);
+        p.add(place);
+
+        return p;
+    }
 }
