@@ -19,6 +19,8 @@ public class lForWatchedBox implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        jComboBoxTarget.removeAll();
+
         if (jComboBox.getSelectedItem() != null)
             jComboBoxTarget.setModel(new DefaultComboBoxModel((new WatchedManager().getAllWatchedForProfile((Profile) jComboBox.getSelectedItem()).toArray())));
     }

@@ -14,9 +14,9 @@ public class MainPanel extends JPanel {
         tabPane = new JTabbedPane();
         SetVisualDetails();
 
-        tabPane.addTab(ControlNames.TAB_ACCCOUNT, new ManagePanel(ManageType.ACCOUNT));
-        tabPane.addTab(ControlNames.TAB_PROFILES, new ManagePanel(ManageType.PROFILE));
-        tabPane.addTab(ControlNames.TAB_WATCHED, new ManagePanel(ManageType.WATCHED));
+        tabPane.addTab(ControlNames.TAB_ACCCOUNT, new ManageAccount());
+        tabPane.addTab(ControlNames.TAB_PROFILES, new ManageProfile());
+        tabPane.addTab(ControlNames.TAB_WATCHED, new ManageWatched());
         tabPane.addTab(ControlNames.TAB_SERIES_INFO, new SeriesWatchedPanel());
         tabPane.addTab(ControlNames.TAB_PROFILE_SERIE_INFO, new AccountSeriesPanel());
         tabPane.addTab(ControlNames.TAB_ACCOUNT_MOVIE_INFO, new AccountMoviePanel());

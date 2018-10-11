@@ -92,6 +92,16 @@ public class ManagePanel extends JPanel {
         return panel;
     }
 
+    public Profile getSelectedProfile(){
+        if(profiles.getSelectedItem() != null){
+            return (Profile)profiles.getSelectedItem();
+        }
+        else{
+            return null;
+        }
+
+    }
+
     public void updateCombobox() {
         if (manageType == ManageType.ACCOUNT) {
             accounts.setModel(new DefaultComboBoxModel(new AccountManager().getAllAccounts().toArray()));

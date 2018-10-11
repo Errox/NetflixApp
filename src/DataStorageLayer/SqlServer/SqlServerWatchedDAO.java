@@ -170,13 +170,13 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     }
 
     @Override
-    public void deleteWatched(Watched deleteWatch) {
+    public void deleteWatched(Watched deleteWatch, Profile profile) {
         Connection connection = MSSQLDatabase.getConnection();
         Statement statement = null;
 
         //Finalize with parameter query
         try {
-            String sqlQuery = "DELETE FROM Watched WHERE subscriptionId " + deleteWatch.getId();
+            String sqlQuery = "DELETE FROM Watched WHERE ProfileId =" + profile.getId() + " AND Id = " + deleteWatch.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         } catch (Exception e) {

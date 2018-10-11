@@ -19,6 +19,8 @@ public class lForProfileBox implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        jComboBoxTarget.removeAll();
+
         ProfileManager profileManager = new ProfileManager();
 
         Object[] profileArrayList = profileManager.getProfilesFromOwner((Account) jComboBox.getSelectedItem()).toArray();

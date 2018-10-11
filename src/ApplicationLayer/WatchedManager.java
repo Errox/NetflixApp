@@ -72,8 +72,8 @@ public class WatchedManager implements WatchedDAO {
      * then representing both methods as maintainable"
      */
     @Override
-    public void deleteWatched(Watched deleteWatched) {
-        watchedDAO.deleteWatched(deleteWatched);
+    public void deleteWatched(Watched deleteWatch, Profile profile) {
+        watchedDAO.deleteWatched(deleteWatch, profile);
     }
 
 
