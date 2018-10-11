@@ -94,7 +94,7 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
         ResultSet resultSet = null;
 
         try {
-            statement = connection.prepareStatement("SELECT * FROM Episodes WHERE SerieId = ?");
+            statement = connection.prepareStatement("SELECT * FROM Episodes WHERE SerieId = ? ORDER BY SeasonNr, EpisodeNr ASC");
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
@@ -105,7 +105,7 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 int SeasonNr = resultSet.getInt("SeasonNr");
                 int ProgramId = resultSet.getInt("ProgramId");
                 int SerieId = resultSet.getInt("SerieId");
-                Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId));
+                Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, SerieId,ProgramId));
             }
 
         } catch (Exception e) {

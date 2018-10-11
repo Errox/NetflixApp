@@ -1,9 +1,6 @@
 package DataStorageLayer.DAO;
 
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
-import DomainModelLayer.Serie;
-import DomainModelLayer.Watched;
+import DomainModelLayer.*;
 
 import java.util.HashMap;
 import java.util.List;

@@ -2,10 +2,7 @@ package ApplicationLayer;
 
 import DataStorageLayer.DAO.WatchedDAO;
 import DataStorageLayer.Factories.DAOFactory;
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
-import DomainModelLayer.Serie;
-import DomainModelLayer.Watched;
+import DomainModelLayer.*;
 
 import java.util.List;
 import java.util.Map;
@@ -80,8 +77,13 @@ public class WatchedManager implements WatchedDAO {
     }
 
     @Override
-    public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
-        return watchedDAO.getWatchedTimeForEpisodesBySerie(account, serie);
+    public List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie) {
+        return watchedDAO.getWatchedTimeForEpisodesBySerieOfAccount(account, serie);
+    }
+
+    @Override
+    public Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
+        return watchedDAO.getWatchedTimeForEpisodes(episodes);
     }
     
 }

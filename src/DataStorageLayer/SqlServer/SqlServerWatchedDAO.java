@@ -1,11 +1,9 @@
 package DataStorageLayer.SqlServer;
 
+import ApplicationLayer.SerieManager;
 import DataStorageLayer.DAO.WatchedDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
-import DomainModelLayer.Serie;
-import DomainModelLayer.Watched;
+import DomainModelLayer.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -191,7 +189,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     }
 
     @Override
-    public List<Integer> getWatchedTimeForEpisodesBySerie(Account account, Serie serie) {
+    public List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie) {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -228,4 +226,41 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
         return watchedList;
     }
+
+    @Override
+    public Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
+        Connection connection = MSSQLDatabase.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        Map<Episode,Integer> seriesPercentage = new HashMap<>();
+
+
+
+        try {
+            for (Episode episode: episodes) {
+                statement = connection.prepareStatement(
+                        "SELECT avg(Watched.Percentage) as percentage FROM Episodes INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Programs.Id = Watched.ProgramId AND Programs.Id = Watched.ProgramId WHERE Episodes.ProgramId = ?");
+
+                statement.setInt(1, episode.getProgramId());
+
+                resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    seriesPercentage.put(episode, resultSet.getInt("percentage"));
+                }else{
+                    seriesPercentage.put(episode, 0);
+                }
+
+            }
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return seriesPercentage;
+    }
+
 }
