@@ -35,21 +35,24 @@ public class MovieManager implements MovieDAO {
      * -Returns Profile associated by the provided id, from the storage layer provided.
      */
     @Override
-    public Movie getMovieProgramId(int id) {
-        return movieDAO.getMovieProgramId(id);
-    }
-
-    /**
-     * -Returns Profile associated by the provided id, from the storage layer provided.
-     */
-    @Override
     public MovieProgram getLongestMovieForAge(int age) {
        return movieDAO.getLongestMovieForAge(age);
     }
 
+    /**
+     * -Returns int counted users that finished the selected movie 100%.
+     */
     @Override
     public int getFinishedCount(Movie movie) {
         return movieDAO.getFinishedCount(movie);
+    }
+
+    /**
+     * -Returns int counted users that are still watching a selected movie.
+     */
+    @Override
+    public int getStillWatchingCount(Movie movie) {
+        return movieDAO.getStillWatchingCount(movie);
     }
 
 

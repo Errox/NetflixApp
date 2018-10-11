@@ -16,17 +16,18 @@ public class MovieWatchedPanel extends JPanel {
     //6. Voor een door de gebruiker geselecteerde film, hoeveel kijkers hebben deze in z’n geheel bekeken
 
     public MovieWatchedPanel() {
-
-        WatchedManager watchedManager = new WatchedManager();
+        setLayout(new GridLayout(10, 1, 10, 10));
         MovieManager movieManager = new MovieManager();
+        JComboBox movie = new JComboBox();
+        JLabel labelFinished = new JLabel();
+        JLabel labelStillWatching = new JLabel();
+        movie.addActionListener(new lForMovieWatchedTotal(movie, labelFinished, labelStillWatching));
 
-        List<Movie> movieList = movieManager.getAllMovies();
-        add(new JComboBox<>(movieList.toArray()));
+        movie.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
 
-
-        //Use the watched manager to "gebruiker geselecteerde film, hoeveel kijkers hebben deze in z’n geheel bekeken"
-
-        JList list = new JList();
-        add(list);
+        movie.setSelectedIndex(0);
+        add(movie);
+        add(labelFinished);
+        add(labelStillWatching);
     }
 }

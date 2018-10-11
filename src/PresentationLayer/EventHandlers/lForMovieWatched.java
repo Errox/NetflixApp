@@ -26,6 +26,7 @@ public class lForMovieWatched implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         Profile profile = (Profile) jComboBox.getSelectedItem();
         MovieManager movieManager = new MovieManager();
         WatchedManager watchedManager = new WatchedManager();
@@ -36,11 +37,11 @@ public class lForMovieWatched implements ActionListener {
             //  movies.add( movieManager.getMovieByProgramId(watch.getProgramId()));
         }
 
+
         DefaultListModel listModel = new DefaultListModel();
+
         listModel.addElement(movies);
 
         list.setModel(listModel);
-
-        System.out.println(list);
     }
 }

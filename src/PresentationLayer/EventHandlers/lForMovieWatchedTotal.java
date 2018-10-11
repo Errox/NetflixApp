@@ -11,19 +11,26 @@ public class lForMovieWatchedTotal implements ActionListener {
 
 
     private final JComboBox jComboBox;
-    private JLabel label;
+    private JLabel labelFinished;
+    private JLabel labelStillWatching;
 
-    public lForMovieWatchedTotal(JComboBox jComboBox, JLabel label) {
+    public lForMovieWatchedTotal(JComboBox jComboBox, JLabel labelFinished, JLabel labelStillWatching) {
         this.jComboBox = jComboBox;
-        this.label = label;
+        this.labelFinished = labelFinished;
+        this.labelStillWatching = labelStillWatching;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Movie movie = (Movie) jComboBox.getSelectedItem();
         MovieManager movieManager = new MovieManager();
+
         int finishedCount = movieManager.getFinishedCount(movie);
-        DefaultListModel listModel = new DefaultListModel();
-        label.setText("Fully watched " + finishedCount + " Times");
+
+        int stillWatching = movieManager.getStillWatchingCount(movie);
+
+        labelFinished.setText("Fully watched " + finishedCount + " Times");
+        labelStillWatching.setText(stillWatching + " haven't finished it and are still watching");
+
     }
 }

@@ -22,14 +22,7 @@ public class SqlServerMovieDAO implements MovieDAO {
     public SqlServerMovieDAO() {
         this.MSSQLDatabase = new MSSQLHelper();
     }
-
-    //[MovieId] [int] NOT NULL,
-    //[AgeClassification] [int] NULL,
-    //[Language] [nvarchar](50) NULL,
-    //[Genre] [nvarchar](50) NULL,
-
     //ToDO; Redudant code to seperate methods.
-
     @Override
     public List<Movie> getAllMovies() {
         Connection connection = MSSQLDatabase.getConnection();
@@ -105,7 +98,6 @@ public class SqlServerMovieDAO implements MovieDAO {
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
 
-
         try {
             statement = connection.prepareStatement("SELECT TOP 1 Programs.Title,Programs.Duration, Programs.Id as ProgramId, Movies.AgeIndication, Movies.Genre, Movies.Id as MovieId, Movies.Language FROM Programs JOIN Movies ON Movies.ProgramId = Programs.Id " +
                     " WHERE AgeIndication <= ?" +
@@ -162,7 +154,32 @@ public class SqlServerMovieDAO implements MovieDAO {
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                count = resultSet.getInt("count");
+            }
 
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return count;
+    }
+
+    @Override
+    public int getStillWatchingCount(Movie movie) {
+        Connection connection = MSSQLDatabase.getConnection();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int count = 0;
+        try {
+            statement = connection.prepareStatement("SELECT count(Watched.Id) as count FROM  Movies INNER JOIN Programs ON Movies.ProgramId = Programs.Id INNER JOIN Watched ON Programs.Id = Watched.ProgramId AND Programs.Id = Watched.ProgramId WHERE Watched.Percentage < 100 and Movies.Id =?");
+            statement.setInt(1, movie.getId());
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
                 count = resultSet.getInt("count");
             }
 
