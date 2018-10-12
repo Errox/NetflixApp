@@ -20,27 +20,6 @@ public class MSSQLHelper {
         try {
             initializeGetConnectionString();
             setConnectionString();
-
-            if(suggestNoDatabaseExists()){
-                int dialogResult = JOptionPane.showConfirmDialog(null, "No database found on the DBServer, would u like to create it automatically?", "SQL Server (DB not found).", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    createDatabase();
-                    setConnectionString();
-                } else {
-                    System.exit(0);
-                }
-            }
-
-            if (suggestProvisionOnEmptyDB()) {
-
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like sample data?", "No data detected in DB", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == JOptionPane.YES_OPTION) {
-                    provision();
-                } else {
-                    System.exit(0);
-                }
-            }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error Occurred in MSSQLHelper", JOptionPane.ERROR_MESSAGE);
         }
@@ -49,6 +28,15 @@ public class MSSQLHelper {
     }
 
     private void setConnectionString(){
+        try {
+            connection = DriverManager.getConnection(connectionString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void setConnection() {
         try {
             connection = DriverManager.getConnection(connectionString);
         } catch (SQLException e) {
@@ -82,11 +70,14 @@ public class MSSQLHelper {
         }
     }
 
-    public boolean suggestProvisionOnEmptyDB() {
+    public static boolean suggestProvisionOnEmptyDB() {
         Statement statement = null;
         ResultSet resultSet = null;
+        //It was set again.
+       // initializeGetConnectionString();
+
         ArrayList<Integer> rowCount = new ArrayList<Integer>();
-        String DBSMDquery = "SELECT  [Name] = o.name " +
+        String DBSMDquery = "USE NetFlixStats; SELECT  [Name] = o.name " +
                 " , [RowCount]  = SUM(p.row_count)" +
                 " FROM    SYS.DM_DB_PARTITION_STATS p" +
                 " INNER JOIN" +
@@ -112,7 +103,7 @@ public class MSSQLHelper {
         return rowCount.stream().mapToInt(Integer::intValue).sum() == 0 ? true : false;
     }
 
-    public boolean suggestNoDatabaseExists() {
+    public static boolean suggestNoDatabaseExists() {
         Statement statement = null;
         ResultSet resultSet = null;
         ArrayList<Integer> rowCount = new ArrayList<Integer>();
@@ -146,7 +137,7 @@ public class MSSQLHelper {
     }
 
 
-    public void provision() {
+    public static void provision() {
         String provisionAccountSQL =
                 "INSERT INTO Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Edward Porter', '14216 Rusk Avenue', 1633, '1633', 'Haixing');" +
                         "INSERT INTO Accounts (Name, Street, PostalCode, HouseNumber, Place) values ('Oliver Spencer' , '14216 Rusk Avenue', 1633, '1633', 'Haixing');" +
@@ -301,7 +292,7 @@ public class MSSQLHelper {
         }
 
     }
-    public void executeSqlScript(Connection conn, File inputFile) {
+    public static void executeSqlScript(Connection conn, File inputFile) {
 
         // Delimiter
         String delimiter = ";";
@@ -342,7 +333,7 @@ public class MSSQLHelper {
         scanner.close();
     }
 
-    public void createDatabase(){
+    public static void createDatabase(){
         File f = new File("Assignment\\CreateDBSQL.txt");
 
         executeSqlScript(connection, f);
