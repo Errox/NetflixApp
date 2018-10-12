@@ -18,4 +18,4 @@ WHERE Servername is your DB Server host.
 
 ## Click to see setup wizzard large
 
-!(image)[https://imgur.com/pln7wL0.gif]
+![Alt Text](https://imgur.com/pln7wL0.gif)
