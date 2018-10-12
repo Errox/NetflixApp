@@ -11,9 +11,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class SqlServerMovieDAO implements MovieDAO {
 
@@ -193,4 +191,36 @@ public class SqlServerMovieDAO implements MovieDAO {
 
         return count;
     }
+
+    @Override
+    public Map<String, String> getMoviesByAccountId(int id) {
+        Connection connection = MSSQLDatabase.getConnection();
+        Map<String, String> ProfileMovie = new HashMap<>();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Integer count = 0;
+        try {
+            statement = connection.prepareStatement("SELECT DISTINCT Profiles.Name as Name, Programs.Title as Title FROM Accounts INNER JOIN Movies ON Accounts.Id = Movies.Id INNER JOIN Profiles ON Accounts.Id = Profiles.AccountId INNER JOIN Programs ON Movies.ProgramId = Programs.Id INNER JOIN Watched ON Profiles.Id = Watched.ProfileId where Profiles.AccountId = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String ProfileName = resultSet.getString("Name");
+                String MovieTitle = resultSet.getString("Title");
+                ProfileMovie.put(ProfileName, MovieTitle);
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return ProfileMovie;
+
+
+    }
+
 }

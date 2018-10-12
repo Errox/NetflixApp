@@ -4,6 +4,7 @@ import DomainModelLayer.Movie;
 import DomainModelLayer.MovieProgram;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MovieDAO {
     List<Movie> getAllMovies();
@@ -15,4 +16,6 @@ public interface MovieDAO {
     int getFinishedCount(Movie movie);
 
     int getStillWatchingCount(Movie movie);
+
+    Map<String, String> getMoviesByAccountId(int id);
 }
