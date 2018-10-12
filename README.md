@@ -16,3 +16,6 @@ jdbc:sqlserver://SERVERNAME;integratedSecurity=true
 
 WHERE Servername is your DB Server host.
 
+## Click to see setup wizzard large
+
+![Alt Text](https://media.giphy.com/media/2zoCLZdBH565PbWJgI/giphy.gif)
