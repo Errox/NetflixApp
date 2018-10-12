@@ -18,4 +18,7 @@ WHERE Servername is your DB Server host.
 
 ## Click to see setup wizzard large
 
+Don't worry about the red lines! They are for decoration purposes only.
+
 ![Alt Text](https://imgur.com/pln7wL0.gif)
+
