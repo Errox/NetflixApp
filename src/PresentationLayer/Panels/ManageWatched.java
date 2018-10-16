@@ -56,11 +56,12 @@ public class ManageWatched extends JPanel  implements SyncManager{
 
             return;
         }
-        System.out.println(w.getId());
 
-        WatchedManager watchedManager = new WatchedManager();
-        watchedManager.deleteWatched(w, (Profile)profiles.getSelectedItem());
-        updateCombobox();
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            WatchedManager watchedManager = new WatchedManager();
+            watchedManager.deleteWatched(w, (Profile) profiles.getSelectedItem());
+            updateCombobox();
+        }
     }
 
     public void updateCombobox() {
@@ -104,6 +105,7 @@ public class ManageWatched extends JPanel  implements SyncManager{
         defaultComboBoxModel.addElement("Serie");
         defaultComboBoxModel.addElement("Movie");
         movieOrSerie.setModel(defaultComboBoxModel);
+
         movieOrSerie.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,6 +136,7 @@ public class ManageWatched extends JPanel  implements SyncManager{
                 }
             }
         });
+
         if (update) {
             watched = (Watched) watchedComboBox.getSelectedItem();
             jSlider.setValue(watched.getPercentage());
