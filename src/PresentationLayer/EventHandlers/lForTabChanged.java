@@ -1,5 +1,6 @@
 package PresentationLayer.EventHandlers;
 
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -10,8 +11,12 @@ public class lForTabChanged implements ChangeListener {
     }
     @Override
     public void stateChanged(ChangeEvent e) {
-        for (SyncManager syncable: updatableCollection) {
-            syncable.update();
-        }
+
+        updatableCollection[((JTabbedPane)e.getSource()).getSelectedIndex()].update();
+
+// A loop would cause the main thread to be flooded with calls to update all Panels, which isn't needed at all.
+//        for (SyncManager syncable: updatableCollection) {
+//            syncable.update();
+//        }
     }
 }
