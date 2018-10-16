@@ -8,7 +8,7 @@
 
 
 
-## Installatie handleiding
+## Installation manual
 
 In Netflix Statistix\NetflixApp\src\DataStorageLayer\SqlServer set the first line to:
 
