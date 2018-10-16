@@ -14,7 +14,7 @@ public class lForTabChanged implements ChangeListener {
 
         updatableCollection[((JTabbedPane)e.getSource()).getSelectedIndex()].update();
 
-
+// A loop would cause the main thread to be flooded with calls to update all Panels, which isn't needed at all.
 //        for (SyncManager syncable: updatableCollection) {
 //            syncable.update();
 //        }
