@@ -1,5 +1,6 @@
 package PresentationLayer.EventHandlers;
 
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -10,8 +11,12 @@ public class lForTabChanged implements ChangeListener {
     }
     @Override
     public void stateChanged(ChangeEvent e) {
-        for (SyncManager syncable: updatableCollection) {
-            syncable.update();
-        }
+
+        updatableCollection[((JTabbedPane)e.getSource()).getSelectedIndex()].update();
+
+
+//        for (SyncManager syncable: updatableCollection) {
+//            syncable.update();
+//        }
     }
 }
