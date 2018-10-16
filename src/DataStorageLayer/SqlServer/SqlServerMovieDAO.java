@@ -88,6 +88,39 @@ public class SqlServerMovieDAO implements MovieDAO {
     }
 
     @Override
+    public Movie getMovieByProgramId(int id) {
+        Connection connection = MSSQLDatabase.getConnection();
+        Movie movie = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement("SELECT * FROM Movies WHERE ProgramId = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                int movieId = resultSet.getInt("Id");
+                int Age = resultSet.getInt("AgeIndication");
+                int programId = resultSet.getInt("ProgramId");
+                String Genre = resultSet.getString("Genre");
+                String language = resultSet.getString("Language");
+                movie = new Movie(movieId, Age, programId, Genre, language);
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return movie;
+    }
+
+    @Override
     public MovieProgram getLongestMovieForAge(int age) {
         Connection connection = MSSQLDatabase.getConnection();
         MovieProgram movieProgram = null;

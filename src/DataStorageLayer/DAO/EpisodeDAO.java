@@ -9,5 +9,7 @@ public interface EpisodeDAO {
 
     Episode getEpisodeById(int id);
 
+    Episode getEpisodeByProgramId(int id);
+
     List<Episode> getAllEpisodesBySeriesId(int id);
 }

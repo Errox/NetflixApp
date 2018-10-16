@@ -37,6 +37,11 @@ public class EpisodeManager implements EpisodeDAO {
         return episodeDAO.getEpisodeById(id);
     }
 
+    @Override
+    public Episode getEpisodeByProgramId(int id) {
+        return episodeDAO.getEpisodeByProgramId(id);
+    }
+
     /**
      * -Returns get All Episodes by series id , from the storage layer provided.
      */

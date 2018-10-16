@@ -87,6 +87,40 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
     }
 
     @Override
+    public Episode getEpisodeByProgramId(int id) {
+        Connection connection = MSSQLDatabase.getConnection();
+        Episode episode = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement("SELECT * FROM Episodes WHERE ProgramId = ?");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                int episodeId = resultSet.getInt("Id");
+                int EpisodeNr = resultSet.getInt("EpisodeNr");
+                int SeasonNr = resultSet.getInt("SeasonNr");
+                int ProgramId = resultSet.getInt("ProgramId");
+                int SerieId = resultSet.getInt("SerieId");
+
+                episode = new Episode(episodeId, EpisodeNr, SeasonNr, ProgramId, SerieId);
+            }
+
+        } catch (Exception e) {
+            //Print on error.
+            e.printStackTrace();
+        } finally {
+            //Clean our resources.
+            MSSQLDatabase.closeResources(resultSet, statement, connection);
+        }
+
+        return episode;
+    }
+
+    @Override
     public List<Episode> getAllEpisodesBySeriesId(int id) {
         Connection connection = MSSQLDatabase.getConnection();
         List<Episode> Episodes = new ArrayList<Episode>();

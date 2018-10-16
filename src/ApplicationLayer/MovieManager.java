@@ -32,6 +32,11 @@ public class MovieManager implements MovieDAO {
         return movieDAO.getMovieById(id);
     }
 
+    @Override
+    public Movie getMovieByProgramId(int id) {
+        return  movieDAO.getMovieByProgramId(id);
+    }
+
     /**
      * -Returns Profile associated by the provided id, from the storage layer provided.
      */

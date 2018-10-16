@@ -11,6 +11,8 @@ public interface MovieDAO {
 
     Movie getMovieById(int id);
 
+    Movie getMovieByProgramId(int id);
+
     MovieProgram getLongestMovieForAge(int age);
 
     int getFinishedCount(Movie movie);

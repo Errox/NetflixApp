@@ -105,7 +105,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
                 int Percentage = resultSet.getInt("Percentage");
                 int ProfileId = resultSet.getInt("ProfileId");
                 int ProgramId = resultSet.getInt("ProgramId");
-                watched.add(new Watched(id, Percentage, ProfileId, ProgramId));
+                watched.add(new Watched(id, Percentage, ProgramId, ProfileId));
             }
 
         } catch (Exception e) {
@@ -126,7 +126,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
         //Finalize query
         try {
-            String sqlQuery = "INSERT INTO Watched VALUES (?, ?, ?)";
+            String sqlQuery = "INSERT INTO Watched (Percentage, ProfileId, ProgramId) VALUES (?, ?, ?)";
             preparedStatement = connection.prepareStatement(sqlQuery);
 
             //Index 1 or 0?
