@@ -5,10 +5,9 @@
   * Ryan Groenewold (Student nummer 2128772)
   * Dennis Blokland (Student nummer 2136934)
   * Sjoerd Teunisse (Student nummer 2138921)
+  
 
-
-
-## Installatie handleiding
+## Installation manual
 
 In Netflix Statistix\NetflixApp\src\DataStorageLayer\SqlServer set the first line to:
 
