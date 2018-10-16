@@ -18,8 +18,13 @@ public class MainPanel extends JPanel {
         tabPane = new JTabbedPane();
         SetVisualDetails();
 
-        //store ref in array to pass to the Action listner.
-        JPanel[] panels  = new JPanel[]{new ManageAccount(), new ManageProfile(), new ManageWatched(), new SeriesWatchedPanel(), new AccountSeriesPanel(), new AccountMoviePanel(), new MoviePanel(), new AccountPanel(),new MovieWatchedPanel()};
+        //store ref in array to pass to the Action listener.
+        JPanel[] panels  = new JPanel[]{new ManageAccount(), new ManageProfile(),
+                                        new ManageWatched(), new SeriesWatchedPanel(),
+                                        new AccountSeriesPanel(), new AccountMoviePanel(),
+                                        new MoviePanel(), new AccountPanel(),
+                                        new MovieWatchedPanel()};
+
         //create an array of objects that implement SyncManager;
         syncable = new SyncManager[panels.length];
         //method that boxes object to syncable
