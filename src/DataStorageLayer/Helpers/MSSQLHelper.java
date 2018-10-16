@@ -203,14 +203,14 @@ public class MSSQLHelper {
         //Write a loop for this below.
 
         //Test this loop
-        String provisionString = "";
-        Random rnd = new Random();
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; i++) {
-                int c = rnd.nextInt(100);
-                provisionString += "insert INTO Watched (Percentage, ProfileId, ProgramId) values (" + c + ","+ j + ","+ i + ");";
-            }
-        }
+//        String provisionString = "";
+//        Random rnd = new Random();
+//        for(int i = 0; i < 10; i++){
+//            for(int j = 0; j < 10; i++) {
+//                int c = rnd.nextInt(100);
+//                provisionString += "insert INTO Watched (Percentage, ProfileId, ProgramId) values (" + c + ","+ j + ","+ i + ");";
+//            }
+//        }
 
         String provisionWatched =
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 1);" +
