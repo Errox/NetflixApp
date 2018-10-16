@@ -10,7 +10,7 @@ public class Movie {
     private String genre;
     private String language;
 
-    public Movie(int Id, int ageIndication, int progamId, String genre , String language) {
+    public Movie(int Id, int ageIndication, int progamId, String genre, String language) {
         this.Id = Id;
         this.ageIndication = ageIndication;
         this.progamId = progamId;
@@ -19,7 +19,7 @@ public class Movie {
     }
 
     public Movie(int ageIndication, int progamId, String genre, String language) {
-        this(0, ageIndication, progamId, genre,language);
+        this(0, ageIndication, progamId, genre, language);
     }
 
     public int getId() {
@@ -43,10 +43,10 @@ public class Movie {
     }
 
     public String getTitle() {
-        if(Id == 0) return "";
+        if (Id == 0) return "";
         ProgramManager programManager = new ProgramManager();
         String title = programManager.getProgramById(progamId).getTitle();
-        if(title == null) return "";
+        if (title == null) return "";
         return title;
     }
 

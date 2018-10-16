@@ -11,7 +11,7 @@ public class MovieProgram {
 
     private DateFormat dateFormat;
 
-    public MovieProgram(Movie movie, Program program){
+    public MovieProgram(Movie movie, Program program) {
         this.movie = movie;
         this.program = program;
 
