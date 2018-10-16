@@ -48,7 +48,7 @@ public class AccountMoviePanel extends JPanel implements SyncManager {
         Map<String, String> Movies = mm.getMoviesByAccountId(accountId);
 
         for(Map.Entry<String, String> entry : Movies.entrySet()) {
-            labelText = "User " + entry.getKey() + " watched " + "Movie" + entry.getValue() ;
+            labelText = "User " + entry.getKey() + " watched movie : " + entry.getValue() ;
             defaultListModel.addElement(labelText);
         }
 
