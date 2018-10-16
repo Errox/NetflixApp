@@ -1,6 +1,5 @@
 package DataStorageLayer.SqlServer;
 
-import ApplicationLayer.SerieManager;
 import DataStorageLayer.DAO.WatchedDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.*;
@@ -9,7 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SqlServerWatchedDAO implements WatchedDAO {
 
@@ -199,10 +201,10 @@ public class SqlServerWatchedDAO implements WatchedDAO {
 
             statement = connection.prepareStatement(
                     "SELECT Watched.Percentage FROM Programs" +
-                    " JOIN Episodes ON Episodes.ProgramId = Programs.Id" +
-                    " JOIN Profiles ON AccountId = Profiles.AccountId" +
-                    " JOIN Watched ON Watched.ProgramId = Programs.Id" +
-                    " WHERE Profiles.AccountId = ? AND SerieId = ?");
+                            " JOIN Episodes ON Episodes.ProgramId = Programs.Id" +
+                            " JOIN Profiles ON AccountId = Profiles.AccountId" +
+                            " JOIN Watched ON Watched.ProgramId = Programs.Id" +
+                            " WHERE Profiles.AccountId = ? AND SerieId = ?");
 
             statement.setInt(1, account.getId());
             statement.setInt(2, serie.getId());
@@ -225,15 +227,15 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     }
 
     @Override
-    public Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
+    public Map<Episode, Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        Map<Episode,Integer> seriesPercentage = new HashMap<>();
+        Map<Episode, Integer> seriesPercentage = new HashMap<>();
 
         try {
-            for (Episode episode: episodes) {
+            for (Episode episode : episodes) {
                 statement = connection.prepareStatement(
                         "SELECT avg(Watched.Percentage) as percentage FROM Episodes INNER JOIN Programs ON Episodes.ProgramId = Programs.Id INNER JOIN Watched ON Programs.Id = Watched.ProgramId AND Programs.Id = Watched.ProgramId WHERE Episodes.ProgramId = ?");
 
@@ -242,7 +244,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
                 resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     seriesPercentage.put(episode, resultSet.getInt("percentage"));
-                }else{
+                } else {
                     seriesPercentage.put(episode, 0);
                 }
 

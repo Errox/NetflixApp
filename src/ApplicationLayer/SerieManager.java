@@ -2,8 +2,6 @@ package ApplicationLayer;
 
 import DataStorageLayer.DAO.SerieDAO;
 import DataStorageLayer.Factories.DAOFactory;
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
 import java.util.List;
@@ -18,7 +16,6 @@ public class SerieManager implements SerieDAO {
      * -Read all
      * -Read by ID
      * -Get avg watch time ( for profile and serie )
-     *
      */
 
     public SerieManager() {

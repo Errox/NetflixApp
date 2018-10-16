@@ -2,18 +2,13 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.SerieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
-import DomainModelLayer.Account;
-import DomainModelLayer.Episode;
-import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SqlServerSerieDAO implements SerieDAO {
@@ -127,7 +122,6 @@ public class SqlServerSerieDAO implements SerieDAO {
 //
 //        return count / episodes.size();
 //    }
-
 
 
 }

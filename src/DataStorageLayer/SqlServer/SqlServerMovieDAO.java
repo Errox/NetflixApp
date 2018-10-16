@@ -2,7 +2,9 @@ package DataStorageLayer.SqlServer;
 
 import DataStorageLayer.DAO.MovieDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
-import DomainModelLayer.*;
+import DomainModelLayer.Movie;
+import DomainModelLayer.MovieProgram;
+import DomainModelLayer.Program;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +22,7 @@ public class SqlServerMovieDAO implements MovieDAO {
     public SqlServerMovieDAO() {
         this.MSSQLDatabase = new MSSQLHelper();
     }
+
     //ToDO; Redudant code to seperate methods.
     @Override
     public List<Movie> getAllMovies() {
@@ -40,7 +43,7 @@ public class SqlServerMovieDAO implements MovieDAO {
                 int progamId = resultSet.getInt("ProgramId");
                 String Genre = resultSet.getString("Genre");
                 String language = resultSet.getString("Language");
-                Movies.add(new Movie(id, Age, progamId, Genre,language));
+                Movies.add(new Movie(id, Age, progamId, Genre, language));
             }
 
         } catch (Exception e) {
@@ -178,7 +181,7 @@ public class SqlServerMovieDAO implements MovieDAO {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        int count =0;
+        int count = 0;
         try {
             statement = connection.prepareStatement("SELECT count(Watched.Id) as count FROM  Movies INNER JOIN Programs ON Movies.ProgramId = Programs.Id INNER JOIN Watched ON Programs.Id = Watched.ProgramId AND Programs.Id = Watched.ProgramId WHERE Watched.Percentage = 100 and Movies.Id =?");
             statement.setInt(1, movie.getId());

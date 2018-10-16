@@ -1,7 +1,5 @@
 package DataStorageLayer.DAO;
 
-import DomainModelLayer.Account;
-import DomainModelLayer.Profile;
 import DomainModelLayer.Serie;
 
 import java.util.List;

@@ -4,7 +4,10 @@ import DataStorageLayer.DAO.AccountDAO;
 import DataStorageLayer.Helpers.MSSQLHelper;
 import DomainModelLayer.Account;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +111,7 @@ public class SqlServerAccountDAO implements AccountDAO {
             preparedStatement.execute();
 
             ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()){
+            if (rs.next()) {
                 accountId = rs.getInt(1);
             }
 

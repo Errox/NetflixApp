@@ -171,7 +171,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
             preparedStatement.execute();
 
             ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()){
+            if (rs.next()) {
                 profileId = rs.getInt(1);
             }
 

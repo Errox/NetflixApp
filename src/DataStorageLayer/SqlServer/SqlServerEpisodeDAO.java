@@ -139,7 +139,7 @@ public class SqlServerEpisodeDAO implements EpisodeDAO {
                 int SeasonNr = resultSet.getInt("SeasonNr");
                 int ProgramId = resultSet.getInt("ProgramId");
                 int SerieId = resultSet.getInt("SerieId");
-                Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, SerieId,ProgramId));
+                Episodes.add(new Episode(episodeId, EpisodeNr, SeasonNr, SerieId, ProgramId));
             }
 
         } catch (Exception e) {

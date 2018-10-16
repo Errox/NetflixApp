@@ -34,7 +34,7 @@ public class MovieManager implements MovieDAO {
 
     @Override
     public Movie getMovieByProgramId(int id) {
-        return  movieDAO.getMovieByProgramId(id);
+        return movieDAO.getMovieByProgramId(id);
     }
 
     /**
@@ -42,7 +42,7 @@ public class MovieManager implements MovieDAO {
      */
     @Override
     public MovieProgram getLongestMovieForAge(int age) {
-       return movieDAO.getLongestMovieForAge(age);
+        return movieDAO.getLongestMovieForAge(age);
     }
 
     /**

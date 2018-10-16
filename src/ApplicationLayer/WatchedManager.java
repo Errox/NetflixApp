@@ -83,8 +83,8 @@ public class WatchedManager implements WatchedDAO {
     }
 
     @Override
-    public Map<Episode,Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
+    public Map<Episode, Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
         return watchedDAO.getWatchedTimeForEpisodes(episodes);
     }
-    
+
 }
