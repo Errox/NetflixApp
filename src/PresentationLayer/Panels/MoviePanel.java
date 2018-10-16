@@ -1,12 +1,14 @@
 package PresentationLayer.Panels;
 
+import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForMovieList;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MoviePanel extends JPanel {
+public class MoviePanel extends JPanel implements SyncManager {
 
+    private  JComboBox ageSelector;
     public MoviePanel() {
         //4. Geef de accounts met slechts 1 profiel.
 
@@ -16,7 +18,7 @@ public class MoviePanel extends JPanel {
         l.setText("Select an age to find the longest movie for them to watch.");
         add(l);
 
-        JComboBox ageSelector = new JComboBox();
+        ageSelector = new JComboBox();
         JList list = new JList();
         ageSelector.addActionListener(new lForMovieList(ageSelector, list));
 
@@ -30,5 +32,11 @@ public class MoviePanel extends JPanel {
 
         add(ageSelector);
         add(list);
+    }
+
+    @Override
+    public void update() {
+        //Will trigger the eventhandler.
+        ageSelector.setSelectedIndex(0);
     }
 }

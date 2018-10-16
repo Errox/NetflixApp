@@ -3,6 +3,7 @@ package PresentationLayer.Panels;
 import ApplicationLayer.AccountManager;
 import ApplicationLayer.MovieManager;
 import DomainModelLayer.Account;
+import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForAccountMovieWatched;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AccountMoviePanel extends JPanel {
+public class AccountMoviePanel extends JPanel implements SyncManager {
     //3. Welke films zijn er door een door de gebruiker geselecteerd account bekeken?
 
     private DefaultListModel<String> defaultListModel;

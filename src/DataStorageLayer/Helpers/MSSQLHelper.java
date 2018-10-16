@@ -10,31 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MSSQLHelper {
     private static String connectionString = "";
     private static Connection connection;
-
-    public Connection getConnection() {
-        try {
-            initializeGetConnectionString();
-            setConnectionString();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error Occurred in MSSQLHelper", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return connection;
-    }
-
-    private void setConnectionString(){
-        try {
-            connection = DriverManager.getConnection(connectionString);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public static void setConnection() {
         try {
@@ -74,7 +55,7 @@ public class MSSQLHelper {
         Statement statement = null;
         ResultSet resultSet = null;
         //It was set again.
-       // initializeGetConnectionString();
+        // initializeGetConnectionString();
 
         ArrayList<Integer> rowCount = new ArrayList<Integer>();
         String DBSMDquery = "USE NetFlixStats; SELECT  [Name] = o.name " +
@@ -120,9 +101,8 @@ public class MSSQLHelper {
             statement.execute(DBSMDquery);
             SQLWarning warning = statement.getWarnings();
 
-            while (warning != null)
-            {
-                if(warning.equals("db exists"))
+            while (warning != null) {
+                if (warning.equals("db exists"))
                     return true;
                 else
                     return false;
@@ -135,7 +115,6 @@ public class MSSQLHelper {
 
         return rowCount.stream().mapToInt(Integer::intValue).sum() == 0 ? true : false;
     }
-
 
     public static void provision() {
         String provisionAccountSQL =
@@ -221,6 +200,17 @@ public class MSSQLHelper {
                         "insert INTO Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'English', 'Action | Drama', 9);" +
                         "insert INTO Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'English', 'Action | War', 10);";
 
+        //Write a loop for this below.
+
+        //Test this loop
+        String provisionString = "";
+        Random rnd = new Random();
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; i++) {
+                int c = rnd.nextInt(100);
+                provisionString += "insert INTO Watched (Percentage, ProfileId, ProgramId) values (" + c + ","+ j + ","+ i + ");";
+            }
+        }
 
         String provisionWatched =
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 1);" +
@@ -272,7 +262,57 @@ public class MSSQLHelper {
                         "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7, 5);" +
                         "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 5);" +
                         "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 5);" +
-                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 5);";
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 5);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (39, 5, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (99, 6, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 6);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (39, 5, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (99, 6, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7,7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 7);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (39, 5, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (99, 6, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 8);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (39, 5, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (99, 6, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 9);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (39, 5, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (99, 6, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (100, 7, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (12, 8, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 10);" +
+                        "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 10);";
 
 
         Statement statement = null;
@@ -292,6 +332,7 @@ public class MSSQLHelper {
         }
 
     }
+
     public static void executeSqlScript(Connection conn, File inputFile) {
 
         // Delimiter
@@ -308,7 +349,7 @@ public class MSSQLHelper {
 
         // Loop through the SQL file statements
         Statement currentStatement = null;
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
 
             // Get statement
             String rawStatement = scanner.next() + delimiter;
@@ -333,7 +374,7 @@ public class MSSQLHelper {
         scanner.close();
     }
 
-    public static void createDatabase(){
+    public static void createDatabase() {
         File f = new File("Assignment\\CreateDBSQL.txt");
 
         executeSqlScript(connection, f);
@@ -368,6 +409,25 @@ public class MSSQLHelper {
             e.printStackTrace();
         }
 
+    }
+
+    public Connection getConnection() {
+        try {
+            initializeGetConnectionString();
+            setConnectionString();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error Occurred in MSSQLHelper", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return connection;
+    }
+
+    private void setConnectionString() {
+        try {
+            connection = DriverManager.getConnection(connectionString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeResources(ResultSet resultSet, Statement statement) {

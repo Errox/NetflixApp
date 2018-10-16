@@ -1,11 +1,12 @@
 package PresentationLayer.Panels;
 
 import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.EventHandlers.SyncManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class InfoPanel extends JPanel {
+public class InfoPanel extends JPanel implements SyncManager {
 
     public InfoPanel() {
         setLayout(new BorderLayout());
@@ -20,5 +21,10 @@ public class InfoPanel extends JPanel {
         title.setForeground(Color.lightGray);
         info.setForeground(Color.lightGray);
         setBackground(Color.gray.darker().darker().darker());
+    }
+
+    @Override
+    public void update() {
+        // Nothing to be updated.
     }
 }

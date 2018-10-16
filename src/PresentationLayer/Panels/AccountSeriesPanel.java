@@ -7,13 +7,14 @@ import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Account;
 import DomainModelLayer.Episode;
 import DomainModelLayer.Serie;
+import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForSelectingSerie;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class AccountSeriesPanel extends JPanel {
+public class AccountSeriesPanel extends JPanel implements SyncManager {
 
     //2. Voor een door de gebruiker geselecteerde account en serie, geef per aflevering het gemiddeld bekeken % van de tijdsduur.
     private DefaultListModel defaultListModel;

@@ -1,12 +1,13 @@
 package PresentationLayer.Panels;
 
 import PresentationLayer.Controls.ControlNames;
+import PresentationLayer.EventHandlers.SyncManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ManagePanelBase {
+public class ManagePanelBase implements SyncManager {
 
     public static JPanel InitializeButtonPane(ActionListener lForCreateButton, ActionListener lForUpdateButton, ActionListener lForDeleteButton ) {
         JPanel panel = new JPanel(new GridLayout(1, 3));
@@ -29,5 +30,10 @@ public class ManagePanelBase {
         deleteButton.addActionListener(lForDeleteButton);
 
         return panel;
+    }
+
+    @Override
+    public void update() {
+        //Nothing to be updated, for now.
     }
 }

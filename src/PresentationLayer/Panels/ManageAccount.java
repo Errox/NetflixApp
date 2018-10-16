@@ -7,6 +7,7 @@ import DomainModelLayer.Profile;
 import PresentationLayer.Controls.ControlNames;
 import PresentationLayer.Controls.JCalendar;
 import PresentationLayer.Controls.JMaxLengthTextBox;
+import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForCreateAccount;
 import PresentationLayer.EventHandlers.lForDeleteAccount;
 import PresentationLayer.EventHandlers.lForUpdateAccount;
@@ -15,7 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ManageAccount extends JPanel {
+public class ManageAccount extends JPanel implements SyncManager {
 
     private JComboBox accounts;
 
@@ -136,5 +137,10 @@ public class ManageAccount extends JPanel {
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
+    }
+
+    @Override
+    public void update() {
+        updateCombobox();
     }
 }

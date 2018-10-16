@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
 public class ManagePanel extends JPanel {
 
-    //todo; split to three seperate panels.
+    //Todo; This is old code, that was used to seperate classes. in different manage panels
+    //Code is only used for reference.
 
     private ManageType manageType;
     private JComboBox accounts, profiles, watched;

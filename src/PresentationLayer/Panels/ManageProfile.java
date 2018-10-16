@@ -12,7 +12,7 @@ import PresentationLayer.EventHandlers.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class ManageProfile extends JPanel {
+public class ManageProfile extends JPanel implements SyncManager {
     private JComboBox accounts, profiles;
 
     public ManageProfile() {
@@ -122,5 +122,10 @@ public class ManageProfile extends JPanel {
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
+    }
+
+    @Override
+    public void update() {
+        updateCombobox();
     }
 }

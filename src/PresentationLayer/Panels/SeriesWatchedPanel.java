@@ -2,13 +2,14 @@ package PresentationLayer.Panels;
 
 import ApplicationLayer.*;
 import DomainModelLayer.*;
+import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForSelectingSerieWatched;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
-public class SeriesWatchedPanel extends JPanel {
+public class SeriesWatchedPanel extends JPanel implements SyncManager {
     JComboBox serieBox = new JComboBox();
     private DefaultListModel defaultListModel;
 

@@ -162,7 +162,7 @@ public class SqlServerProfileDAO implements ProfileDAO {
         //Finalize query
         try {
             String sqlQuery = "INSERT INTO Profiles (Name, BirthDate, AccountId) VALUES ( ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 
             //Index 1 or 0?
             preparedStatement.setString(1, newProfiles.getName());

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManageWatched extends JPanel {
+public class ManageWatched extends JPanel  implements SyncManager{
 
     private JComboBox accounts, profiles, watched;
 
@@ -213,5 +213,10 @@ public class ManageWatched extends JPanel {
         } else {
             System.out.println("User canceled / closed the dialog, result = " + result);
         }
+    }
+
+    @Override
+    public void update() {
+        updateCombobox();
     }
 }
