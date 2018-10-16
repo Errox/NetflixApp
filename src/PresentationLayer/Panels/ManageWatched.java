@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManageWatched extends JPanel  implements SyncManager{
+public class ManageWatched extends JPanel implements SyncManager {
 
     private JComboBox accounts, profiles, watchedComboBox;
 
@@ -47,11 +47,11 @@ public class ManageWatched extends JPanel  implements SyncManager{
         return panel;
     }
 
-    public void handleDelete(){
+    public void handleDelete() {
         int dialogResult = JOptionPane.showConfirmDialog(null, ControlNames.CONFIRM_REMOVE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.YES_NO_OPTION);
 
         Watched w = (Watched) getSelectedObject();
-        if(w == null) {
+        if (w == null) {
             JOptionPane.showMessageDialog(null, "Select a watchedComboBox first", ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
 
             return;
@@ -84,7 +84,7 @@ public class ManageWatched extends JPanel  implements SyncManager{
             JOptionPane.showMessageDialog(null, ControlNames.CONFIRM_SELECT_PROFILE_WATCHED, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.OK_OPTION);
             return;
         }
-       // Watched watchedComboBox;
+        // Watched watchedComboBox;
         //Todo, make jcomponent array a list, and convert it back in the panel segment.
         // Do this so we can have a non-final element array
         Watched watched = null;
@@ -174,7 +174,7 @@ public class ManageWatched extends JPanel  implements SyncManager{
             movieOrSerie.setEnabled(false);
             SerieOrMovieBox.setEnabled(false);
             EpisodeBox.setEnabled(false);
-        }else{
+        } else {
             movieOrSerie.setSelectedItem("Movie");
         }
         //Move to Class and use interface to use loos coupling
@@ -206,15 +206,15 @@ public class ManageWatched extends JPanel  implements SyncManager{
         if (result == JOptionPane.OK_OPTION) {
             WatchedManager watchedManager = new WatchedManager();
             if (update) {
-                if(watched != null){
-                    watchedManager.updateWatched(new Watched(watched.getId(),jSlider.getValue(),watched.getProgramId(),watched.getProfileId()),watched);
+                if (watched != null) {
+                    watchedManager.updateWatched(new Watched(watched.getId(), jSlider.getValue(), watched.getProgramId(), watched.getProfileId()), watched);
                 }
 
             } else {
 
-                if(SerieOrMovieBox.getSelectedItem() instanceof Movie){
+                if (SerieOrMovieBox.getSelectedItem() instanceof Movie) {
                     watchedManager.addWatched(new Watched(0, jSlider.getValue(), ((Movie) SerieOrMovieBox.getSelectedItem()).getProgramId(), ((Profile) profiles.getSelectedItem()).getId()));
-                }else if(((Episode)EpisodeBox.getSelectedItem()) != null) {
+                } else if (((Episode) EpisodeBox.getSelectedItem()) != null) {
                     watchedManager.addWatched(new Watched(0, jSlider.getValue(), ((Episode) EpisodeBox.getSelectedItem()).getProgramId(), ((Profile) profiles.getSelectedItem()).getId()));
 
                 }

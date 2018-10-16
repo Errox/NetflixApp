@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class MoviePanel extends JPanel implements SyncManager {
 
-    private  JComboBox ageSelector;
+    private JComboBox ageSelector;
+
     public MoviePanel() {
         //4. Geef de accounts met slechts 1 profiel.
 

@@ -21,7 +21,7 @@ public class ManageProfile extends JPanel implements SyncManager {
         add(ManagePanelBase.InitializeButtonPane(
                 new lForCreateProfile(this),
                 new lForUpdateProfile(this),
-                new lForDeleteProfile(this) ), BorderLayout.SOUTH);
+                new lForDeleteProfile(this)), BorderLayout.SOUTH);
 
         add(createContentPanel(), BorderLayout.NORTH);
     }
@@ -52,7 +52,7 @@ public class ManageProfile extends JPanel implements SyncManager {
         return (Profile) profiles.getSelectedItem();
     }
 
-    public void handleDelete(){
+    public void handleDelete() {
         int dialogResult = JOptionPane.showConfirmDialog(null, ControlNames.CONFIRM_REMOVE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.YES_NO_OPTION);
 
         if (dialogResult == JOptionPane.YES_OPTION) {

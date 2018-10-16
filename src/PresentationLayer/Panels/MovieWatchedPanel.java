@@ -1,16 +1,11 @@
 package PresentationLayer.Panels;
 
-import ApplicationLayer.AccountManager;
 import ApplicationLayer.MovieManager;
-import ApplicationLayer.WatchedManager;
-import DomainModelLayer.Account;
-import DomainModelLayer.Movie;
 import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForMovieWatchedTotal;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class MovieWatchedPanel extends JPanel implements SyncManager {
 
@@ -42,7 +37,9 @@ public class MovieWatchedPanel extends JPanel implements SyncManager {
     @Override
     public void update() {
         Runnable runnable =
-                () -> { movie.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray())); };
+                () -> {
+                    movie.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
+                };
         runnable.run();
 
     }

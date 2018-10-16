@@ -1,7 +1,12 @@
 package PresentationLayer.Panels;
 
-import ApplicationLayer.*;
-import DomainModelLayer.*;
+import ApplicationLayer.EpisodeManager;
+import ApplicationLayer.ProgramManager;
+import ApplicationLayer.SerieManager;
+import ApplicationLayer.WatchedManager;
+import DomainModelLayer.Episode;
+import DomainModelLayer.Program;
+import DomainModelLayer.Serie;
 import PresentationLayer.EventHandlers.SyncManager;
 import PresentationLayer.EventHandlers.lForSelectingSerieWatched;
 
@@ -44,10 +49,10 @@ public class SeriesWatchedPanel extends JPanel implements SyncManager {
 
         WatchedManager watchedManager = new WatchedManager();
 
-        Map<Episode,Integer> episodesWatched = watchedManager.getWatchedTimeForEpisodes(episodes);
-        for (Episode episode: episodes) {
-            int avg =0;
-            if(episodesWatched.get(episode) != null){
+        Map<Episode, Integer> episodesWatched = watchedManager.getWatchedTimeForEpisodes(episodes);
+        for (Episode episode : episodes) {
+            int avg = 0;
+            if (episodesWatched.get(episode) != null) {
                 avg = episodesWatched.get(episode);
             }
 

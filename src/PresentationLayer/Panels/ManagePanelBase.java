@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class ManagePanelBase implements SyncManager {
 
-    public static JPanel InitializeButtonPane(ActionListener lForCreateButton, ActionListener lForUpdateButton, ActionListener lForDeleteButton ) {
+    public static JPanel InitializeButtonPane(ActionListener lForCreateButton, ActionListener lForUpdateButton, ActionListener lForDeleteButton) {
         JPanel panel = new JPanel(new GridLayout(1, 3));
 
         JButton createButton = new JButton("Create");

@@ -93,11 +93,10 @@ public class ManagePanel extends JPanel {
         return panel;
     }
 
-    public Profile getSelectedProfile(){
-        if(profiles.getSelectedItem() != null){
-            return (Profile)profiles.getSelectedItem();
-        }
-        else{
+    public Profile getSelectedProfile() {
+        if (profiles.getSelectedItem() != null) {
+            return (Profile) profiles.getSelectedItem();
+        } else {
             return null;
         }
 
@@ -213,9 +212,9 @@ public class ManagePanel extends JPanel {
             place.setText(account.getPlace());
 
             ProfileManager pfm
-                     = new ProfileManager();
-            Profile f = pfm.getProfileById(((Account)getSelectedObject()).getId());
-                birthday.setText(f.getBirthDate().toString());
+                    = new ProfileManager();
+            Profile f = pfm.getProfileById(((Account) getSelectedObject()).getId());
+            birthday.setText(f.getBirthDate().toString());
         }
 
         ArrayList<JComponent> jComponents = new ArrayList<JComponent>();
@@ -224,22 +223,22 @@ public class ManagePanel extends JPanel {
         jComponents.add(fullName);
         jComponents.add(new JLabel(ControlNames.STREET_NAME));
         jComponents.add(streetName);
-        jComponents.add(  new JLabel(ControlNames.POSTAL_CODE));
-        jComponents.add( postalCode);
+        jComponents.add(new JLabel(ControlNames.POSTAL_CODE));
+        jComponents.add(postalCode);
         jComponents.add(new JLabel(ControlNames.HOUSE_NUMBER));
         jComponents.add(houseNumber);
-        jComponents.add( new JLabel(ControlNames.PLACE));
+        jComponents.add(new JLabel(ControlNames.PLACE));
         jComponents.add(place);
         jComponents.add(new JLabel(ControlNames.BIRTHDAY));
         jComponents.add(birthday);
 
-        if(update){
+        if (update) {
 
             int size = jComponents.size();
-           //Remove the Birthday elements
-           for(int i = 1; i < 3; i++){
-                jComponents.remove(size-i);
-          }
+            //Remove the Birthday elements
+            for (int i = 1; i < 3; i++) {
+                jComponents.remove(size - i);
+            }
         }
 
         int result = JOptionPane.showConfirmDialog(null, jComponents.toArray(), ControlNames.CONFIRM_FILL_ALL_FIELDS, JOptionPane.DEFAULT_OPTION);

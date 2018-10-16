@@ -26,7 +26,7 @@ public class ManageAccount extends JPanel implements SyncManager {
         add(ManagePanelBase.InitializeButtonPane(
                 new lForCreateAccount(this),
                 new lForUpdateAccount(this),
-                new lForDeleteAccount(this) ), BorderLayout.SOUTH);
+                new lForDeleteAccount(this)), BorderLayout.SOUTH);
 
         add(createContentPanel(), BorderLayout.NORTH);
     }
@@ -53,7 +53,7 @@ public class ManageAccount extends JPanel implements SyncManager {
         return (Account) accounts.getSelectedItem();
     }
 
-    public void handleDelete(){
+    public void handleDelete() {
         int dialogResult = JOptionPane.showConfirmDialog(null, ControlNames.CONFIRM_REMOVE, ControlNames.CONFIRM_TITLE_WARNING, JOptionPane.YES_NO_OPTION);
 
         if (dialogResult == JOptionPane.YES_OPTION) {
