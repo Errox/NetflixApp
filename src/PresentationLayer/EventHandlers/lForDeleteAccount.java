@@ -10,7 +10,7 @@ public class lForDeleteAccount implements ActionListener {
 
     private ManageAccount manageAccount;
 
-    public lForDeleteAccount(ManageAccount manageAccount){
+    public lForDeleteAccount(ManageAccount manageAccount) {
         this.manageAccount = manageAccount;
     }
 

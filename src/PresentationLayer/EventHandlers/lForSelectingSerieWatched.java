@@ -1,7 +1,6 @@
 package PresentationLayer.EventHandlers;
 
 
-import PresentationLayer.Panels.AccountSeriesPanel;
 import PresentationLayer.Panels.SeriesWatchedPanel;
 
 import java.awt.event.ActionEvent;
