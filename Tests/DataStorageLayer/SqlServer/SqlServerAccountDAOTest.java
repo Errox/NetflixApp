@@ -45,7 +45,13 @@ class SqlServerAccountDAOTest {
         int storedAccountId = accountManager.addAccount(toBeAddedToDatabase);
 
         //Get the account by its stored Id
-        int retrievedFromDatabase = accountManager.getAccountById(storedAccountId).getId();
+        Account retrievedFromDatabase = accountManager.getAccountById(storedAccountId);
+
+        //Assert
+        Assertions.assertEquals(retrievedFromDatabase.getId(), storedAccountId);
+
+        //After cleanup.
+        cleanUpSuccessful(accountManager, retrievedFromDatabase);
     }
 
 
