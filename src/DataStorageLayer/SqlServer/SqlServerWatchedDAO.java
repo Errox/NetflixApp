@@ -122,20 +122,26 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     }
 
     @Override
-    public void addWatched(Watched newWatched) {
+    public int addWatched(Watched newWatched) {
         Connection connection = MSSQLDatabase.getConnection();
         PreparedStatement preparedStatement = null;
-
+        int watchedId = 0;
         //Finalize query
         try {
             String sqlQuery = "INSERT INTO Watched (Percentage, ProfileId, ProgramId) VALUES (?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 
             //Index 1 or 0?
             preparedStatement.setInt(1, newWatched.getPercentage());
             preparedStatement.setInt(2, newWatched.getProfileId());
             preparedStatement.setInt(3, newWatched.getProgramId());
             preparedStatement.execute();
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                watchedId = rs.getInt(1);
+            }
+
         } catch (Exception e) {
             //Print on error.
             e.printStackTrace();
@@ -143,6 +149,7 @@ public class SqlServerWatchedDAO implements WatchedDAO {
             //Release our resources.
             MSSQLDatabase.closeStatementResources(preparedStatement);
         }
+        return watchedId;
     }
 
     @Override
@@ -172,13 +179,13 @@ public class SqlServerWatchedDAO implements WatchedDAO {
     }
 
     @Override
-    public void deleteWatched(Watched deleteWatch, Profile profile) {
+    public void deleteWatched(Watched deleteWatch) {
         Connection connection = MSSQLDatabase.getConnection();
         Statement statement = null;
 
         //Finalize with parameter query
         try {
-            String sqlQuery = "DELETE FROM Watched WHERE ProfileId =" + profile.getId() + " AND Id = " + deleteWatch.getId();
+            String sqlQuery = "DELETE FROM Watched WHERE Id = " + deleteWatch.getId();
             statement = connection.createStatement();
             statement.execute(sqlQuery);
         } catch (Exception e) {

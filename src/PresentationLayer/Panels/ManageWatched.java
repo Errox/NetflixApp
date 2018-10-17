@@ -59,7 +59,7 @@ public class ManageWatched extends JPanel implements SyncManager {
 
         if (dialogResult == JOptionPane.YES_OPTION) {
             WatchedManager watchedManager = new WatchedManager();
-            watchedManager.deleteWatched(w, (Profile) profiles.getSelectedItem());
+            watchedManager.deleteWatched(w);
             updateCombobox();
         }
     }

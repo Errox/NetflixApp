@@ -51,8 +51,8 @@ public class WatchedManager implements WatchedDAO {
      * @param newWatched represents the new 'watched' that will be added to the Data storage
      */
     @Override
-    public void addWatched(Watched newWatched) {
-        watchedDAO.addWatched(newWatched);
+    public int addWatched(Watched newWatched) {
+       return watchedDAO.addWatched(newWatched);
     }
 
     /**
@@ -72,8 +72,8 @@ public class WatchedManager implements WatchedDAO {
      * then representing both methods as maintainable"
      */
     @Override
-    public void deleteWatched(Watched deleteWatch, Profile profile) {
-        watchedDAO.deleteWatched(deleteWatch, profile);
+    public void deleteWatched(Watched deleteWatch) {
+        watchedDAO.deleteWatched(deleteWatch);
     }
 
 
