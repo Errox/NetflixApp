@@ -11,7 +11,6 @@ Netflix statistx is a program made by Students of the Avans Hogeschool.:
 ## Requirements
  * Microsoft SQL Server 2017 (not yet tested with other versions)
  * IntelliJ IDEA
- * A healthy mind (others ones are okay too) 
 
 ## Preperations
 
