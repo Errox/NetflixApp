@@ -69,6 +69,4 @@ public class MovieManager implements MovieDAO {
     public Map<String, String> getMoviesByAccountId(int id) {
         return movieDAO.getMoviesByAccountId(id);
     }
-
-
 }

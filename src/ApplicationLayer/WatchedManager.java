@@ -86,5 +86,4 @@ public class WatchedManager implements WatchedDAO {
     public Map<Episode, Integer> getWatchedTimeForEpisodes(List<Episode> episodes) {
         return watchedDAO.getWatchedTimeForEpisodes(episodes);
     }
-
 }
