@@ -1,5 +1,9 @@
 package DomainModelLayer;
 
+import ApplicationLayer.EpisodeManager;
+import ApplicationLayer.MovieManager;
+import ApplicationLayer.ProgramManager;
+
 public class Watched {
 
     private int Id;
@@ -37,6 +41,18 @@ public class Watched {
 
     @Override
     public String toString() {
-        return getProgramId() + " Watched for " + getPercentage() + "";
+        if (Id == 0) return "";
+        ProgramManager programManager = new ProgramManager();
+        String title = programManager.getProgramById(getProgramId()).getTitle();
+        MovieManager movieManager = new MovieManager();
+        Movie m = movieManager.getMovieByProgramId(getProgramId());
+
+        if (m != null) {
+            return title + " Watched for " + getPercentage() + "%";
+        }else{
+            EpisodeManager episodeManager = new EpisodeManager();
+            Episode e = episodeManager.getEpisodeByProgramId(getProgramId());
+            return title + " se" + e.getSeasonNr() + "e" + e.getEpisodeNr() + " Watched for " + getPercentage() + "%";
+        }
     }
 }
