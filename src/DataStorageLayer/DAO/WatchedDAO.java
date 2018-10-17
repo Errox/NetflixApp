@@ -12,11 +12,11 @@ public interface WatchedDAO {
 
     List<Watched> getAllWatchedForProfile(Profile profile);
 
-    void addWatched(Watched newWatched);
+    int addWatched(Watched newWatched);
 
     void updateWatched(Watched oldWatched, Watched newWatched);
 
-    void deleteWatched(Watched deleteWatch, Profile profile);
+    void deleteWatched(Watched deleteWatch);
 
     List<Integer> getWatchedTimeForEpisodesBySerieOfAccount(Account account, Serie serie);
 

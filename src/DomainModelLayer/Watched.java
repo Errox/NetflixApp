@@ -4,6 +4,8 @@ import ApplicationLayer.EpisodeManager;
 import ApplicationLayer.MovieManager;
 import ApplicationLayer.ProgramManager;
 
+import java.util.Objects;
+
 public class Watched {
 
     private int Id;
@@ -54,5 +56,21 @@ public class Watched {
             Episode e = episodeManager.getEpisodeByProgramId(getProgramId());
             return title + " se" + e.getSeasonNr() + "e" + e.getEpisodeNr() + " Watched for " + getPercentage() + "%";
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Watched watched = (Watched) o;
+        return
+                profileId == watched.profileId &&
+                programId == watched.programId &&
+                percentage == watched.percentage;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, profileId, programId, percentage);
     }
 }

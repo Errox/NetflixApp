@@ -1,11 +1,13 @@
 package DataStorageLayer.SqlServer;
 
 import ApplicationLayer.AccountManager;
+import ApplicationLayer.WatchedManager;
 import DomainModelLayer.Account;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import DomainModelLayer.Watched;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SqlServerAccountDAOTest {
@@ -105,4 +107,37 @@ class SqlServerAccountDAOTest {
         return cleaned;
     }
 
+    public static class SqlServerWatchedDAOTest {
+
+        @Test
+        public void TestWatchedStoredMatchesObjectReturned() {
+
+            WatchedManager watchedManager = new WatchedManager();
+            Watched toBeAddedToDatabase = new Watched(0,99,1,1);
+
+           int id = watchedManager.addWatched(toBeAddedToDatabase);
+
+            Watched retrievedFromDatabase = watchedManager.getWatchedById(id);
+
+            //Won't evaluate as true, as the id is unknown on object creation, it is assigned by the dbs.
+            assertEquals(retrievedFromDatabase, toBeAddedToDatabase);
+
+        }
+
+        @Test
+        public void AccountCanBeDeletedFromDatabase() {
+
+            WatchedManager watchedManager = new WatchedManager();
+            Watched toBeAddedToDatabase = new Watched(0,99,1,1);
+
+            int id = watchedManager.addWatched(toBeAddedToDatabase);
+
+            Watched retrievedFromDatabase = watchedManager.getWatchedById(id);
+
+            watchedManager.deleteWatched(retrievedFromDatabase);
+            assertEquals(null, watchedManager.getWatchedById(id));
+
+
+        }
+    }
 }

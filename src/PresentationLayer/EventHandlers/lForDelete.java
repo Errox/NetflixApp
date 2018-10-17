@@ -58,7 +58,7 @@ public class lForDelete implements ActionListener {
                     System.out.println(w.getId());
 
                     WatchedManager watchedManager = new WatchedManager();
-                    watchedManager.deleteWatched(w, managePanel.getSelectedProfile());
+                    watchedManager.deleteWatched(w);
                     managePanel.updateCombobox();
                 }
             }
