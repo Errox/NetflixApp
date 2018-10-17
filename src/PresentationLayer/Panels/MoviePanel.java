@@ -37,7 +37,7 @@ public class MoviePanel extends JPanel implements SyncManager {
 
     @Override
     public void update() {
-        //Will trigger the eventhandler.
+        //Will trigger the event handler.
         ageSelector.setSelectedIndex(0);
     }
 }
