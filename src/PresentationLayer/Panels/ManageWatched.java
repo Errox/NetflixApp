@@ -106,26 +106,7 @@ public class ManageWatched extends JPanel implements SyncManager {
         defaultComboBoxModel.addElement("Movie");
         movieOrSerie.setModel(defaultComboBoxModel);
 
-        movieOrSerie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (movieOrSerie.getSelectedItem().equals("Movie")) {
-                    MovieManager movieManager = new MovieManager();
-                    SerieOrMovieBox.setModel(new DefaultComboBoxModel(movieManager.getAllMovies().toArray()));
-                    EpisodeBox.setVisible(false);
-                    episodesLabel.setVisible(false);
-
-                } else {
-                    SerieManager serieManager = new SerieManager();
-                    SerieOrMovieBox.setModel(new DefaultComboBoxModel(serieManager.getAllSeries().toArray()));
-                    EpisodeBox.setVisible(true);
-                    episodesLabel.setVisible(true);
-
-                }
-            }
-        });
-
+        movieOrSerie.addActionListener(new lForManageWatchedMovieOrSerie(movieOrSerie, SerieOrMovieBox, EpisodeBox, episodesLabel));
         SerieOrMovieBox.addActionListener(new lForManageWatchedSerieBox(movieOrSerie, EpisodeBox, SerieOrMovieBox));
 
         if (update) {

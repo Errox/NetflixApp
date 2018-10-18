@@ -110,8 +110,8 @@ public class SqlDemoData {
                 "insert INTO Movies (AgeIndication, Language, Genre, ProgramId) values (12, 'English', 'Action | War', 10);";
     }
 
-    public static String getWatchedDemoData(){
-        return     "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 1);" +
+    public static String getWatchedDemoData() {
+        return "insert INTO Watched (Percentage, ProfileId, ProgramId) values (13, 1, 1);" +
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (22, 2, 1);" +
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (35, 3, 1);" +
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (28, 4, 1);" +
@@ -212,5 +212,4 @@ public class SqlDemoData {
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (30, 9, 10);" +
                 "insert INTO Watched (Percentage, ProfileId, ProgramId) values (42, 10, 10);";
     }
-
 }
