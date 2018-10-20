@@ -39,5 +39,18 @@ class SqlServerWatchedDAOTest {
 
 
     }
+    @Test
+    public void UpdateWatchedWithCorrectOldWatched() {
+        WatchedManager watchedManager = new WatchedManager();
+        Watched toBeAddedToDatabase = new Watched(0, 99, 1, 1);
+
+        int id = watchedManager.addWatched(toBeAddedToDatabase);
+
+        Watched Updated = new Watched(0, 69, 1, 1);
+        watchedManager.updateWatched(Updated,toBeAddedToDatabase);
+        Watched retrievedFromDatabase = watchedManager.getWatchedById(id);
+
+        assertNotEquals(retrievedFromDatabase, Updated);
+    }
 
 }
