@@ -54,7 +54,12 @@ public class Watched {
         }else{
             EpisodeManager episodeManager = new EpisodeManager();
             Episode e = episodeManager.getEpisodeByProgramId(getProgramId());
-            return title + " se" + e.getSeasonNr() + "e" + e.getEpisodeNr() + " Watched for " + getPercentage() + "%";
+            if(e != null){
+                return title + " se" + e.getSeasonNr() + "e" + e.getEpisodeNr() + " Watched for " + getPercentage() + "%";
+            }
+            else{
+                return title;
+            }
         }
     }
 
