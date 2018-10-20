@@ -109,35 +109,6 @@ class SqlServerAccountDAOTest {
 
     public static class SqlServerWatchedDAOTest {
 
-        @Test
-        public void TestWatchedStoredMatchesObjectReturned() {
 
-            WatchedManager watchedManager = new WatchedManager();
-            Watched toBeAddedToDatabase = new Watched(0,99,1,1);
-
-           int id = watchedManager.addWatched(toBeAddedToDatabase);
-
-            Watched retrievedFromDatabase = watchedManager.getWatchedById(id);
-
-            //Won't evaluate as true, as the id is unknown on object creation, it is assigned by the dbs.
-            assertEquals(retrievedFromDatabase, toBeAddedToDatabase);
-
-        }
-
-        @Test
-        public void AccountCanBeDeletedFromDatabase() {
-
-            WatchedManager watchedManager = new WatchedManager();
-            Watched toBeAddedToDatabase = new Watched(0,99,1,1);
-
-            int id = watchedManager.addWatched(toBeAddedToDatabase);
-
-            Watched retrievedFromDatabase = watchedManager.getWatchedById(id);
-
-            watchedManager.deleteWatched(retrievedFromDatabase);
-            assertEquals(null, watchedManager.getWatchedById(id));
-
-
-        }
     }
 }
