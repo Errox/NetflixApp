@@ -23,7 +23,7 @@ Where SERVERNAME is your DB Server host.
 
 ## Instructions
 
-Don't worry about the red IDE error lines! They are for decoration purposes only.
+Don't worry about the red IDE error lines in the gif! They are for decoration purposes only.
 (They where a previous error of the last session. Don't worry) (Click image to extend) 
 
 ![Alt Text](https://imgur.com/pln7wL0.gif)
