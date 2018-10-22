@@ -106,9 +106,4 @@ class SqlServerAccountDAOTest {
 
         return cleaned;
     }
-
-    public static class SqlServerWatchedDAOTest {
-
-
-    }
 }
