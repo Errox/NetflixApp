@@ -32,12 +32,12 @@ public class ControlNames {
     public static final String PLACE = "Place";
     public static final String BIRTHDAY = "Birthdate (dd-mm-yyy)";
 
-    public static final String MAX_ACCOUNT_MESSAGE = "Een account mag maximaal 5 profielen bevatten";
-    public static final String CONFIRM_FILL_ALL_FIELDS = "Vull a.u.b. alle velden in";
-    public static final String CONFIRM_SELECT_PROFILE = "Selecteer eerst een profiel";
-    public static final String CONFIRM_SELECT_PROFILE_WATCHED = "Selecteer eerst een profiel en een bekeken item om te bewerken";
+    public static final String MAX_ACCOUNT_MESSAGE = "An account can only have 5 accounts at max";
+    public static final String CONFIRM_FILL_ALL_FIELDS = "Please fill in all fields";
+    public static final String CONFIRM_SELECT_PROFILE = "Select a profile first";
+    public static final String CONFIRM_SELECT_PROFILE_WATCHED = " Select a profile first and a watched item to edit";
     public static final String CONFIRM_TITLE_WARNING = "Warning";
     public static final String CONFIRM_TITLE_ERROR = "Error";
-    public static final String CONFIRM_REMOVE = "Weet u zeker dat u het record wilt verwijderen?";
+    public static final String CONFIRM_REMOVE = "Are you sure you want to remove the record?";
 
 }
