@@ -29,7 +29,7 @@ Don't worry about the red IDE error lines in the gif! They are for decoration pu
 ![Alt Text](https://imgur.com/pln7wL0.gif)
 
 Steps we took
- - Make sure you've edited connectionString.txt like asked in the preperations.
+ - Make sure you've edited connectionString.txt like asked in the prerequisite.
  - Open the project in InteliJ IDEA.
  - Make sure your SQL server is turned on. 
  - Setup JDK jar as shown in pdf above. (pdf explaining connection with mssql)
