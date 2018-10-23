@@ -32,7 +32,7 @@ public class ControlNames {
     public static final String PLACE = "Place";
     public static final String BIRTHDAY = "Birthdate (dd-mm-yyy)";
 
-    public static final String MAX_ACCOUNT_MESSAGE = "An account can only have 5 accounts at max";
+    public static final String MAX_ACCOUNT_MESSAGE = "An account can only have 5 profiles at max";
     public static final String CONFIRM_FILL_ALL_FIELDS = "Please fill in all fields";
     public static final String CONFIRM_SELECT_PROFILE = "Select a profile first";
     public static final String CONFIRM_SELECT_PROFILE_WATCHED = " Select a profile first and a watched item to edit";
