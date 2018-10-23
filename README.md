@@ -32,7 +32,7 @@ Steps we took
  - Make sure you've edited connectionString.txt like asked in the prerequisite.
  - Open the project in InteliJ IDEA.
  - Make sure your SQL server is turned on. 
- - Setup JDK jar as shown in pdf above. (pdf explaining connection with mssql)
+ - Setup mssql-jdbc-6.2.2.jre.jar as shown in pdf above. (pdf explaining connection with mssql)
  - Run the program from within InteliJ IDEA. 
  - The program will detect if there is a database available the application can use.
  - If the program detected there isn't a database available. It'll ask if you want the program to automaticlly generate the tables.
