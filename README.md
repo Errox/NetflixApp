@@ -3,10 +3,10 @@
 
 
 ## Assignment documents:
-UML: Assignment/Netflix App (Final).pdf
-DB Diagram: Assignment/DatabaseDiagram.png
-DB script: Assignment/CreateDBSQL.txt (Used by auto provision as shown below)
-Reflection: Netflixstatistix_Toelichting_Reflectie.docx
+* UML: Assignment/Netflix App (Final).pdf
+* DB Diagram: Assignment/DatabaseDiagram.png
+* DB script: Assignment/CreateDBSQL.txt (Used by auto provision as shown below)
+* Reflection: Netflixstatistix_Toelichting_Reflectie.docx
 
 ## Made by:
 Netflix statistx is a program made by Students of the Avans Hogeschool.: 
