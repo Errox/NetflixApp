@@ -1,6 +1,11 @@
 
 # Netflix Statistix
 
+## Made by:
+Netflix statistx is a program made by Students of the Avans Hogeschool.: 
+ * Ryan Groenewold (Student nummer 2128772)
+ * Dennis Blokland (Student nummer 2136934)
+ * Sjoerd Teunisse (Student nummer 2138921)
 
 ## Assignment documents:
 * UML: Assignment/Netflix App (Final).pdf
@@ -8,12 +13,6 @@
 * DB script: Assignment/CreateDBSQL.txt (Used by auto provision as shown below)
 * Reflection: Netflixstatistix_Toelichting_Reflectie.docx
 
-## Made by:
-Netflix statistx is a program made by Students of the Avans Hogeschool.: 
- * Ryan Groenewold (Student nummer 2128772)
- * Dennis Blokland (Student nummer 2136934)
- * Sjoerd Teunisse (Student nummer 2138921)
-  
 ## Requirements
  * Microsoft SQL Server 2017 (not yet tested with other versions)
  * IntelliJ IDEA
