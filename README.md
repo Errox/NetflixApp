@@ -11,7 +11,7 @@ Netflix statistx is a program made by Students of the Avans Hogeschool.:
 * UML: Assignment/Netflix App (Final).pdf
 * DB Diagram: Assignment/DatabaseDiagram.png
 * DB script: Assignment/CreateDBSQL.txt (Used by auto provision as shown below)
-* Reflection: Netflixstatistix_Toelichting_Reflectie.docx
+* Reflection: Assignment/Netflixstatistix_Toelichting_Reflectie.docx
 
 ## Requirements
  * Microsoft SQL Server 2017 (not yet tested with other versions)
