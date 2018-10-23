@@ -8,8 +8,8 @@ Netflix statistx is a program made by Students of the Avans Hogeschool.:
  * Sjoerd Teunisse (Student nummer 2138921)
 
 ## Assignment documents:
-* UML: Assignment/Netflix App (Final).pdf
-* DB Diagram: Assignment/DatabaseDiagram.png
+* UML: Assignment/Netflix App (Final).pdf (View localy for optimal resolution)
+* DB Diagram: Assignment/DatabaseDiagram.png (View localy for optimal resolution)
 * DB script: Assignment/CreateDBSQL.txt (Used by auto provision as shown below)
 * Reflection: Assignment/Netflixstatistix_Toelichting_Reflectie.docx
 
