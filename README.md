@@ -12,7 +12,7 @@ Netflix statistx is a program made by Students of the Avans Hogeschool.:
  * Microsoft SQL Server 2017 (not yet tested with other versions)
  * IntelliJ IDEA
 
-## Preperations
+## Prerequisite
 
 In Netflix Statistix\NetflixApp\src\DataStorageLayer\SqlServer\connectionString.txt set the first line to:
 
