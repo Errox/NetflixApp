@@ -1,1 +1,1 @@
-jdbc:sqlserver://AXR;integratedSecurity=true
+jdbc:sqlserver://SERVERNAME;integratedSecurity=true
